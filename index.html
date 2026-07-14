@@ -25,46 +25,52 @@
 </head>
 <body class="min-h-screen flex flex-col font-sans selection:bg-red-600 selection:text-white">
 
-    <!-- HEADER & LOGO -->
-    <header class="border-b border-red-950 bg-gray-900/50 backdrop-blur sticky top-0 z-50 px-4 py-4">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <!-- Ton logo favicon personnalisé -->
-                <img src="favicon.png" alt="Logo Jean-Bot" class="w-12 h-12 rounded-lg object-contain bg-gray-950 border border-gray-800 p-1 shadow-lg shadow-red-950/20">
-                <div>
-                    <h1 class="text-xl font-extrabold tracking-wide text-white uppercase font-hud">Jean-Bot <span class="text-red-500">Premium</span></h1>
-                    <p class="text-xs text-gray-400 font-hud tracking-widest uppercase font-semibold">Compagnon de Bord Virtuel • v20.8</p>
+    <!-- HEADER & LOGO + BANDEAU HUD ABSOLUMENT CENTRÉ -->
+    <header class="border-b border-red-950 bg-gray-900/50 backdrop-blur sticky top-0 z-50 px-4 py-3">
+        <!-- Utilisation d'une grille à 3 colonnes pour forcer le centrage parfait du bloc du milieu -->
+        <div class="max-w-7xl mx-auto flex flex-col md:grid md:grid-cols-3 items-center gap-4">
+            
+            <!-- COLONNE GAUCHE : BLOC LOGO ET NOM -->
+            <div class="flex items-center gap-3 justify-center md:justify-start justify-self-start">
+                <img src="favicon.png" alt="Logo Jean-Bot" class="w-11 h-11 rounded-lg object-contain bg-gray-950 border border-gray-800 p-1 shadow-lg shadow-red-950/20">
+                <div class="text-center md:text-left">
+                    <h1 class="text-lg font-extrabold tracking-wide text-white uppercase font-hud leading-none">Jean-Bot <span class="text-red-500">Premium</span></h1>
+                    <p class="text-[10px] text-gray-400 font-hud tracking-widest uppercase font-semibold mt-1">Compagnon de Bord Virtuel</p>
                 </div>
             </div>
-            <div class="text-center sm:text-right">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-500/10 text-green-400 border border-green-500/20 font-hud uppercase tracking-wider shadow-sm shadow-green-950">
-                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+
+            <!-- COLONNE CENTRALE : BANDEAU HUD DE FICHE TECHNIQUE PARFAITEMENT CENTRÉ -->
+            <div class="flex items-center justify-center gap-6 text-center border-y md:border-y-0 border-gray-800/60 py-2 md:py-0 px-4 w-full justify-self-center">
+                <div>
+                    <span class="text-gray-500 font-hud text-[9px] uppercase font-bold tracking-widest block mb-0.5">Compatibilité</span>
+                    <span class="text-white font-hud font-extrabold text-sm tracking-wide whitespace-nowrap">Star Citizen 4.8.3</span>
+                </div>
+                <div class="w-px h-6 bg-gray-800/80 hidden sm:block"></div>
+                <div>
+                    <span class="text-gray-500 font-hud text-[9px] uppercase font-bold tracking-widest block mb-0.5">Commandes Disponibles</span>
+                    <span class="text-red-500 font-hud font-extrabold text-sm tracking-wide">3 154</span>
+                </div>
+                <div class="w-px h-6 bg-gray-800/80 hidden sm:block"></div>
+                <div>
+                    <span class="text-gray-500 font-hud text-[9px] uppercase font-bold tracking-widest block mb-0.5">Version Jean-Bot</span>
+                    <span class="text-green-400 font-hud font-extrabold text-sm tracking-wide whitespace-nowrap">20.8</span>
+                </div>
+            </div>
+
+            <!-- COLONNE DROITE : STATUT EN LIGNE -->
+            <div class="text-center md:text-right hidden md:block justify-self-end">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-green-500/10 text-green-400 border border-green-500/20 font-hud uppercase tracking-wider shadow-sm shadow-green-950">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
                     Système En Ligne
                 </span>
             </div>
+
         </div>
     </header>
 
-    <!-- ZONE PRINCIPALE -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 flex flex-col gap-4">
+    <!-- ZONE DE RECHERCHE ET FILTRES -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 flex flex-col gap-6">
         
-        <!-- COMPTEURS HUD DE COCKPIT DYNAMIQUES -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 bg-gray-900 border border-gray-800 rounded-xl p-4 shadow-xl text-center">
-            <div class="flex flex-col justify-center p-2">
-                <span class="text-gray-400 text-[10px] sm:text-xs font-hud font-bold uppercase tracking-widest">Modules Filtrés</span>
-                <span id="activeModulesCount" class="text-white font-hud font-extrabold text-xl sm:text-2xl mt-1">0 / 0</span>
-            </div>
-            <div class="flex flex-col justify-center border-x border-gray-800 p-2">
-                <span class="text-gray-400 text-[10px] sm:text-xs font-hud font-bold uppercase tracking-widest">Déclencheurs Vocaux</span>
-                <span class="text-red-500 font-hud font-extrabold text-xl sm:text-2xl mt-1">3 154</span>
-            </div>
-            <div class="col-span-2 sm:col-span-1 flex flex-col justify-center border-t sm:border-t-0 border-gray-800 pt-3 sm:pt-2 p-2">
-                <span class="text-gray-400 text-[10px] sm:text-xs font-hud font-bold uppercase tracking-widest">Matrice Profil</span>
-                <span class="text-green-400 font-hud font-extrabold text-xl sm:text-2xl mt-1">v20.8 Stable</span>
-            </div>
-        </div>
-
-        <!-- ZONE DE RECHERCHE ET FILTRES -->
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 shadow-xl flex flex-col gap-4">
             <!-- Barre de recherche -->
             <div class="relative">
@@ -99,11 +105,11 @@
 
     <!-- FOOTER -->
     <footer class="border-t border-gray-900 bg-gray-950 text-center py-4 text-xs text-gray-500 font-hud tracking-wider font-semibold">
-        <p>&copy; 2026 Jean-Bot Premium • Index Intégral avec Statut Dynamique Synchrone.</p>
+        <p>&copy; 2026 Jean-Bot Premium • Index Centralisé Avionique Validé.</p>
     </footer>
 
     <script>
-        // Base de données 100% exhaustive issue du fichier de configuration réel de Joffré
+        // Base de données révisée et ventilée d'après le profil réel de Joffré
         const jeanBotCommands = [
             // =========================================================================
             // CATEGORIE : NAVIGATION & SYSTEMES COCKPIT
@@ -136,7 +142,7 @@
             { txt: "Jean-Bot partage la mission", cat: "Navigation", desc: "Partager le contrat actif avec l'ensemble des membres de l'équipage.", key: "Macro" },
             { txt: "Accepte le contrat / Valide le contrat", cat: "Navigation", desc: "Validation rapide de la mission proposée à l'écran.", key: "Touche [" },
             { txt: "C'est l'heure de prendre une mission / trouver un taff / travailler", cat: "Navigation", desc: "Ouvrir l'application Contract Manager du MobiGlas pour chercher un contrat.", key: "Macro" },
-            { txt: "Largue le cargo / Largage de cargaison", cat: "Navigation", desc: "Macro d'éjection d'urgence de la grille de cargaison arrière.", key: "Alt + L" },
+            { txt: "Largue le cargo / Cargaison", cat: "Navigation", desc: "Macro d'éjection d'urgence de la grille de cargaison arrière.", key: "Alt + L" },
             { txt: "Jean-Bot fais le plein / recharge les munitions / rifil / refuel", cat: "Navigation", desc: "Déclencher la demande de rechargement en carburant Hydrogène et Quantum aux pads.", key: "F12" },
             { txt: "Jean-Bot répare le vaisseau / lance l'entretien", cat: "Navigation", desc: "Activer les drones de réparation pour colmater les brèches de coque.", key: "F12" },
             { txt: "Jean-Bot baisse le son / volume / pollution sonore", cat: "Navigation", desc: "Réduit l'intensité sonore des notifications audio du cockpit.", key: "Macro" },
@@ -217,7 +223,7 @@
             { txt: "Baisse de vingt / trente / quarante / cinquante / soixante-dix", cat: "Minage", desc: "Chuter l'intensité pour stabiliser le niveau de charge de la roche.", key: "Molette" },
             { txt: "Augmente / Monte / Baisse la convergence", cat: "Minage", desc: "Régler la distance de croisement des lasers articulés.", key: "+ / -" },
             { txt: "Convergence maximum / convergence minimum / rizette convergence", cat: "Minage", desc: "Forcer la focalisation des lasers à leurs limites d'origine ou réinitialiser.", key: "Macro" },
-            { txt: "Fracturation / Extraction / On ramasse", cat: "Minage", desc: "Bascule sur le mode aspiration et collecte des morceaux.", key: "Touche  " },
+            { txt: "Fracturation / Extraction / On ramasse", cat: "Minage", desc: "Bascule sur le mode aspiration et collecte des morceaux.", key: "Touche ;" },
             { txt: "Active / Désactive les lignes de précision / le pip / les pip", cat: "Minage", desc: "Guide visuel d'aide à l'alignement pour les repères de l'ATH.", key: "Alt + I" },
             { txt: "Allons miner Jean-Bot / On va miner", cat: "Minage", desc: "Activer les protocoles de recherche et de forage.", key: "Dialogue" },
             { txt: "Jean-Bot, où trouver du Agricium", cat: "Minage", desc: "Gisement : Minerai précieux. Signatures radars types : 3570, 7140, 10710, 14280.", key: "Fiche" },
@@ -321,7 +327,7 @@
             { txt: "Pourquoi tu veux ordonner / dominer l'univers ?", cat: "Social", desc: "Questionner Jean-Bot sur sa folie des grandeurs et son obsession de l'ordre.", key: "Dialogue" },
             { txt: "C'est toujours compliqué / trop compliqué avec toi Jean-Bot", cat: "Social", desc: "Exprimer son agacement face au tempérament pointilleux de l'assistant.", key: "Dialogue" },
             { txt: "Tu cherches à me piéger / C'est un piège ton affaire Jean-Bot", cat: "Social", desc: "Accuse l'assistant de mauvaise foi informatique.", key: "Dialogue" },
-            { txt: "Tu me menaces / Tu oses me menace Jean-Bot ?", cat: "Social", desc: "Réagit aux avertissements sarcastiques lancés par le bot.", key: "Dialogue" },
+            { txt: "Tu me menaces / Tu oses me menacer Jean-Bot ?", cat: "Social", desc: "Réagit aux avertissements sarcastiques lancés par le bot.", key: "Dialogue" },
             { txt: "Tu es très drôle / Malin / Rigolo Jean-Bot", cat: "Social", desc: "Complimenter ou ironiser sur le sarcasme de Jean-Bot.", key: "Dialogue" },
             { txt: "Calme-toi / Tu t'emballes Jean-Bot", cat: "Social", desc: "Calmer les circuits de Jean-Bot s'il s'excite en plein combat.", key: "Dialogue" },
             { txt: "Tu es un psychopathe / Un grand malade / Flippant Jean-Bot / Barjo / Zinzin", cat: "Social", desc: "Discuter du tempérament inquiétant ou radical de sa programmation.", key: "Dialogue" },
@@ -350,7 +356,7 @@
             { txt: "Peut-être Jean-Bot / Parfois Jean-Bot", cat: "Social", desc: "Ligne de dialogue dubitative lors d'un échange.", key: "Dialogue" },
             { txt: "C'est l'heure de se barre / de fuir / on décale Jean-Bot", cat: "Social", desc: "Ordonner d'amorcer le plan de fuite d'urgence cinétique.", key: "Dialogue" },
             { txt: "Oui Jean-Bot / Oui certain / Absolument / Tout à fait", cat: "Social", desc: "Lignes d'approbation et de validation de cockpit.", key: "Dialogue" },
-            { txt: "Pourquoi tu dis ça / Oh ça va Jean-Bot", cat: "Social", desc: "Répondre aux taquineries de l'assistant.", key: "Dialogue" },
+            { txt: "Pour quoi tu dis ça / Oh ça va Jean-Bot", cat: "Social", desc: "Répondre aux taquineries de l'assistant.", key: "Dialogue" },
             { txt: "Pourquoi tu es méchant / C'est pas gentil Jean-Bot", cat: "Social", desc: "Grogner face aux répliques volontairement froides du bot.", key: "Dialogue" },
             { txt: "Prêt pour la guerre / Prêt au combat Jean-Bot", cat: "Social", desc: "Vérifier la motivation systémique avant d'entrer sur zone de conflit.", key: "Dialogue" },
             { txt: "Qu'est-ce que tu penses de Coucouille / Oui Kélo / Wikelo", cat: "Social", desc: "Demander l'avis du bot sur des figures de la communauté Twitch.", key: "Dialogue" },
@@ -382,15 +388,13 @@
 
         const inactiveBtnStyle = 'border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700';
 
-        // Fonction d'affichage dynamique des cartes avec mise à jour du compteur HUD
+        // Fonction d'affichage dynamique des cartes
         function renderGrid() {
             const grid = document.getElementById('commandsGrid');
             const noResult = document.getElementById('noResult');
             const searchTerms = document.getElementById('searchBar').value.toLowerCase();
-            const counterEl = document.getElementById('activeModulesCount');
             
             grid.innerHTML = '';
-            let filteredCardsCount = 0;
             let hasCards = false;
 
             jeanBotCommands.forEach(cmd => {
@@ -399,7 +403,6 @@
 
                 if (matchesSearch && matchesCategory) {
                     hasCards = true;
-                    filteredCardsCount++;
                     
                     let badgeColor = 'bg-gray-500/20 text-gray-400 border-gray-500/30';
                     if(cmd.cat === 'Combat') badgeColor = 'bg-red-500/10 text-red-400 border-red-500/20';
@@ -429,9 +432,6 @@
                     grid.appendChild(card);
                 }
             });
-
-            // Mise à jour dynamique du compteur HUD principal
-            counterEl.innerText = `${filteredCardsCount} / ${jeanBotCommands.length}`;
 
             if (hasCards) {
                 noResult.classList.add('hidden');
