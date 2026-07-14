@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-gray-950 text-gray-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEAN-BOT PREMIUM - Tableau de Bord Commandes</title>
+    <!-- Tailwind CSS pour un design pro et responsive -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome pour les petites icônes sympa -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Petite touche de style pour la barre de défilement */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0f19; }
+        ::-webkit-scrollbar-thumb { background: #991b1b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ef4444; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-red-600 selection:text-white">
+
+    <!-- HEADER & LOGO -->
+    <header class="border-b border-red-950 bg-gray-900/50 backdrop-blur sticky top-0 z-50 px-4 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <!-- Remplacer 'placeholder.png' par le vrai logo plus tard -->
+                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-between shadow-lg shadow-red-900/30">
+                    <i class="fa-solid fa-robot text-white text-2xl m-auto animate-pulse"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black tracking-wider text-white uppercase">Jean-Bot <span class="text-red-500">Premium</span></h1>
+                    <p class="text-xs text-gray-400">Assistant Vocal Intelligent • v20.8</p>
+                </div>
+            </div>
+            <div class="text-center sm:text-right">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                    Mode Compagnon Mobile
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ZONE DE RECHERCHE ET FILTRES -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 flex flex-col gap-6">
+        
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 shadow-xl flex flex-col gap-4">
+            <!-- Barre de recherche -->
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-gray-500"></i>
+                <input type="text" id="searchBar" placeholder="Rechercher une commande vocale (ex: alerte, scan...)" 
+                    class="w-full bg-gray-950 border border-gray-800 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors">
+            </div>
+
+            <!-- Filtres par catégorie -->
+            <div class="flex flex-wrap gap-2" id="filterContainer">
+                <button onclick="filterCategory('Tous')" id="btn-Tous" class="cat-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-red-600 text-white shadow-lg shadow-red-900/20">Tous</button>
+                <button onclick="filterCategory('Combat')" id="btn-Combat" class="cat-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-gray-950 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700">Combat</button>
+                <button onclick="filterCategory('Exploration')" id="btn-Exploration" class="cat-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-gray-950 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700">Exploration</button>
+                <button onclick="filterCategory('Navigation')" id="btn-Navigation" class="cat-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-gray-950 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700">Navigation</button>
+                <button onclick="filterCategory('Social')" id="btn-Social" class="cat-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-gray-950 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700">Social</button>
+                <button onclick="filterCategory('Fun')" id="btn-Fun" class="cat-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-gray-950 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700">Fun</button>
+            </div>
+        </div>
+
+        <!-- Notification de copie -->
+        <div id="copyToast" class="fixed bottom-6 right-6 bg-red-600 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+            <i class="fa-solid fa-circle-check"></i> Commande copiée dans le presse-papiers !
+        </div>
+
+        <!-- GRILLE DE COMMANDES -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="commandsGrid">
+            <!-- Les cartes de commandes vont s'injecter ici via JavaScript -->
+        </div>
+
+        <!-- Message "Aucun résultat" -->
+        <div id="noResult" class="hidden text-center py-12 flex flex-col gap-3">
+            <i class="fa-solid fa-robot text-gray-700 text-5xl"></i>
+            <p class="text-gray-400 font-medium">Bip Boop... Aucune commande ne correspond à votre recherche.</p>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-gray-900 bg-gray-950 text-center py-4 text-xs text-gray-500">
+        <p>&copy; 2026 Jean-Bot Premium • Conçu pour fluidifier l'expérience utilisateur.</p>
+    </footer>
+
+    <!-- LOGIQUE DE RECHERCHE ET SIMULATION DE DONNÉES -->
+    <script>
+        // 1. Échantillon de fausses commandes (Mock Data) pour ton Laptop
+        // Tu auras juste à remplir ce tableau avec les vraies données plus tard !
+        const jeanBotCommands = [
+            { txt: "Jean-Bot, alerte rouge !", cat: "Combat", desc: "Active immédiatement les boucliers d'urgence et déploie l'armement lourd." },
+            { txt: "Jean-Bot, scan de zone", cat: "Exploration", desc: "Lance une analyse radar complète à 360° des environs du vaisseau." },
+            { txt: "Jean-Bot, verrouille la cible", cat: "Combat", desc: "Focalise les capteurs tactiques sur la menace la plus proche." },
+            { txt: "Jean-Bot, cap sur la station", cat: "Navigation", desc: "Calcule le vecteur d'approche et programme le saut vers l'avant-poste." },
+            { txt: "Jean-Bot, passe en hyper-espace", cat: "Navigation", desc: "Engage le moteur de distorsion après alignement des coordonnées." },
+            { txt: "Jean-Bot, salue le tchat", cat: "Social", desc: "Jean-Bot envoie un message vocal de bienvenue personnalisé pour les viewers Twitch." },
+            { txt: "Jean-Bot, raconte-moi une blague", cat: "Fun", desc: "Active le module d'humour de niveau 2 (ironie et sarcasme garantis)." },
+            { txt: "Jean-Bot, autodestruction !", cat: "Fun", desc: "Déclenche un compte à rebours anxiogène... pour rire (ou pas)." },
+            { txt: "Jean-Bot, demande d'arrimage", cat: "Navigation", desc: "Contacte la tour de contrôle pour obtenir un couloir d'atterrissage automatique." }
+        ];
+
+        let currentCategory = 'Tous';
+
+        // 2. Fonction d'affichage dynamique des cartes
+        function renderGrid() {
+            const grid = document.getElementById('commandsGrid');
+            const noResult = document.getElementById('noResult');
+            const searchTerms = document.getElementById('searchBar').value.toLowerCase();
+            
+            grid.innerHTML = '';
+            let hasCards = false;
+
+            jeanBotCommands.forEach(cmd => {
+                // Filtre par texte et par bouton catégorie
+                const matchesSearch = cmd.txt.toLowerCase().includes(searchTerms) || cmd.desc.toLowerCase().includes(searchTerms);
+                const matchesCategory = currentCategory === 'Tous' || cmd.cat === currentCategory;
+
+                if (matchesSearch && matchesCategory) {
+                    hasCards = true;
+                    
+                    // Détermination de la couleur du badge selon la catégorie
+                    let badgeColor = 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+                    if(cmd.cat === 'Combat') badgeColor = 'bg-red-500/10 text-red-400 border-red-500/20';
+                    if(cmd.cat === 'Exploration') badgeColor = 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20';
+                    if(cmd.cat === 'Navigation') badgeColor = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
+                    if(cmd.cat === 'Social') badgeColor = 'bg-purple-500/10 text-purple-400 border-purple-500/20';
+                    if(cmd.cat === 'Fun') badgeColor = 'bg-green-500/10 text-green-400 border-green-500/20';
+
+                    // Création de l'élément HTML de la carte
+                    const card = document.createElement('div');
+                    card.className = "bg-gray-900 border border-gray-800 hover:border-red-600/50 rounded-xl p-4 flex flex-col justify-between gap-4 transition-all duration-200 cursor-pointer group shadow-md hover:shadow-red-950/10";
+                    card.onclick = () => copyToClipboard(cmd.txt);
+                    
+                    card.innerHTML = `
+                        <div class="flex flex-col gap-2">
+                            <div class="flex justify-between items-start">
+                                <span class="px-2 py-0.5 text-[10px] font-bold uppercase rounded border ${badgeColor}">${cmd.cat}</span>
+                                <i class="fa-regular fa-copy text-gray-600 group-hover:text-red-400 transition-colors text-sm"></i>
+                            </div>
+                            <h3 class="text-white font-mono font-bold text-md leading-snug group-hover:text-red-400 transition-colors mt-1">"${cmd.txt}"</h3>
+                        </div>
+                        <p class="text-gray-400 text-xs border-t border-gray-800/60 pt-3">${cmd.desc}</p>
+                    `;
+                    grid.appendChild(card);
+                }
+            });
+
+            // Affichage ou masquage du message "aucun résultat"
+            if (hasCards) {
+                noResult.classList.add('hidden');
+            } else {
+                noResult.classList.remove('hidden');
+            }
+        }
+
+        // 3. Gestion du changement de catégorie
+        function filterCategory(category) {
+            currentCategory = category;
+            
+            // Mise à jour visuelle des boutons
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-gray-950 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700";
+            });
+            
+            const activeBtn = document.getElementById(`btn-${category}`);
+            activeBtn.className = "cat-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-red-600 text-white shadow-lg shadow-red-900/20";
+            
+            renderGrid();
+        }
+
+        // 4. Système "Click to Copy" interactif
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('copyToast');
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                
+                setTimeout(() => {
+                    toast.addList = toast.classList.add('translate-y-20', 'opacity-0');
+                }, 2000);
+            });
+        }
+
+        // 5. Écouteur sur la barre de recherche pour filtrer en temps réel
+        document.getElementById('searchBar').addEventListener('input', renderGrid);
+
+        // Lancement initial de la grille au chargement de la page
+        renderGrid();
+    </script>
+</body>
+</html>
