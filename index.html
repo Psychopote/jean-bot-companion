@@ -57,7 +57,7 @@
                     class="w-full bg-gray-950 border border-gray-800 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors font-hud">
             </div>
 
-            <!-- Filtres par catégorie épurés avec le bouton MINAGE en orange -->
+            <!-- Filtres par catégorie avec la nouvelle palette de contrastes demandée -->
             <div class="flex flex-wrap gap-2" id="filterContainer">
                 <button onclick="filterCategory('Tous')" id="btn-Tous" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-blue-500 bg-blue-600 text-white shadow-lg shadow-blue-900/20 font-hud uppercase tracking-wider">Tous</button>
                 <button onclick="filterCategory('Combat')" id="btn-Combat" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Combat</button>
@@ -83,11 +83,11 @@
 
     <!-- FOOTER -->
     <footer class="border-t border-gray-900 bg-gray-950 text-center py-4 text-xs text-gray-500 font-hud tracking-wider font-semibold">
-        <p>&copy; 2026 Jean-Bot Premium • Structure Documentaire Spécifique Validée.</p>
+        <p>&copy; 2026 Jean-Bot Premium • Structure Chromatique Haudra-Contraste Validée.</p>
     </footer>
 
     <script>
-        // Base de données révisée et ventilée - Catégorie Minage totalement isolée
+        // Base de données révisée et ventilée - Alignement strict sur Jean-Bot
         const jeanBotCommands = [
             // =========================================================================
             // CATEGORIE : NAVIGATION & SYSTEMES COCKPIT
@@ -103,7 +103,7 @@
             { txt: "Déploie / Ouvre / Plie les ailes", cat: "Navigation", desc: "Modifier la géométrie aérodynamique de structure du châssis.", key: "Alt + K" },
             { txt: "Ouvre / Ferme les portes du vaisseau", cat: "Navigation", desc: "Actionner les rampes d'accès, soutes cargo et sas pressurisés.", key: "Alt + P" },
             { txt: "Ouvre / Ferme la Star-map / MobiGlas", cat: "Navigation", desc: "Bascule la carte stellaire 3D ou l'interface de l'ordinateur personnel de poignet.", key: "F2" },
-            { txt: "Demande l'ouverture du hangar / Tour de Contrôle / ATC / TC", cat: "Navigation", desc: "Appeler les contrôleurs aériens locaux pour ouvrir un sas d'atterrissage.", key: "Alt + N" },
+            { txt: "Demande l'ouverture du hangar / Tour de Contrôle / ATC / TC", cat: "Navigation", desc: "Appeller les contrôleurs aériens locaux pour ouvrir un sas d'atterrissage.", key: "Alt + N" },
             { txt: "Demande le docking / Libère le vaisseau", cat: "Navigation", desc: "Gérer l'amarrage magnétique ou le détachement inter-vaisseaux.", key: "Alt + N" },
             { txt: "Active / Désactive la vision nocturne / VN / Lampe", cat: "Navigation", desc: "Basculer l'amplificateur de lumière résiduelle du cockpit.", key: "L" },
             { txt: "Éteins les lumières / phares", cat: "Navigation", desc: "Couper l'éclairage de coque externe pour les approches furtives.", key: "L" },
@@ -171,7 +171,7 @@
             { txt: "Jean-Bot éjection", cat: "Combat", desc: "Déclencher la procédure d'éjection d'urgence absolue du pilote.", key: "Ctrl + Alt + Y" },
 
             // =========================================================================
-            // CATEGORIE : MINAGE (ORANGE) - RECHERCHE DE GISEMENTS ET OUTILS LASER
+            // CATEGORIE : MINAGE (VIOLET)
             // =========================================================================
             { txt: "Active le mode minage / laser / recyclage / salvage", cat: "Minage", desc: "Déployer les bras mécaniques articulés utilitaires (Prospector, Vulture).", key: "," },
             { txt: "Active le mode la fracture / la fracturation", cat: "Minage", desc: "Configurer le laser de minage en mode Haute Fréquence brise-roche.", key: "Alt + Z" },
@@ -210,7 +210,7 @@
             { txt: "Signature supérieure à trente mille", cat: "Minage", desc: "Alerte de masse : Masse rocheuse trop dense pour les extracteurs standards.", key: "HUD" },
 
             // =========================================================================
-            // CATEGORIE : EXPLORATION (RECHERCHE NAVIGATIONNELLE & RADARS)
+            // CATEGORIE : EXPLORATION (TURQUOISE)
             // =========================================================================
             { txt: "Allume le / Active le / Allumage du sonar", cat: "Exploration", desc: "Envoyer des impulsions radars à balayage pour détecter les signatures environnantes.", key: "Tab" },
             { txt: "Désactive le / Arrête le / Stop le sonar", cat: "Exploration", desc: "Coupe les salves d'analyses scanners actives.", key: "Tab" },
@@ -218,7 +218,7 @@
             { txt: "Augmente / Élargit / Diminue / Affine le scanneur / Scane air", cat: "Exploration", desc: "Modifier l'angle d'ouverture du cône focal d'analyse radar.", key: "Souris" },
 
             // =========================================================================
-            // CATEGORIE : LORE (VERT) - ENCYCLOPÉDIE GENERALE
+            // CATEGORIE : LORE (VERT)
             // =========================================================================
             { txt: "Jean-Bot, parle-moi de Port Olisar / qu'est-il arrivé", cat: "LORE", desc: "Dossier Lieux : Récit historique complet de la destruction de la station orbitale emblématique.", key: "Lore" },
             { txt: "Jean-Bot, parle-moi de Crusader / Lunes de Crusader / Blocus", cat: "LORE", desc: "Dossier Lieux : La géante gazeuse de Stanton possédée par l'industrie aéronautique.", key: "Lore" },
@@ -273,7 +273,7 @@
             { txt: "Jean-Bot, quelles sont les différences entre le Hornet et le Super Hornet ?", cat: "LORE", desc: "Dossier Vaisseaux : Fiche d'analyse comparative de la gamme de combat d'Anvil Aerospace.", key: "Lore" },
 
             // =========================================================================
-            // CATEGORIE : SOCIAL & DIALOGUES COMPAGNONS
+            // CATEGORIE : SOCIAL & DIALOGUES COMPAGNONS (ROSE)
             // =========================================================================
             { txt: "Bonjour / Hello / Salut Jean-Bot", cat: "Social", desc: "Salutation vocale de cockpit pour réveiller et tester Jean-Bot.", key: "Dialogue" },
             { txt: "Comment tu vas / Tu vas bien Jean-Bot ?", cat: "Social", desc: "Demander un rapport d'état de fonctionnement ou d'humeur à l'assistant.", key: "Dialogue" },
@@ -287,10 +287,10 @@
             { txt: "C'est pour t'empêcher de faire des bêtises", cat: "Social", desc: "Ligne de justification à énoncer après une restriction système.", key: "Dialogue" },
             { txt: "C'est quoi / Encore le projet B-84 ?", cat: "Social", desc: "Interpeller Jean-Bot sur son mystérieux projet d'ordonnancement de l'univers.", key: "Dialogue" },
             { txt: "En quoi le projet B-84 va me rendre heureux Jean-Bot ?", cat: "Social", desc: "Question existentielle sur l'objectif ultime de ses circuits.", key: "Dialogue" },
-            { txt: "Pourquoi tu veux ordonner / dominer l'univers ?", cat: "Social", desc: "Questionner Jean-Bot sur sa folie des grandeurs et son obsession de l'ordre.", key: "Dialogue" },
+            { txt: "Pourquoi tu veux ordonner / dominer l'univers ?", cat: "Social", desc: "Questionner Jean-Bot sur sa folie des grandeur et son obsession de l'ordre.", key: "Dialogue" },
             { txt: "C'est toujours compliqué / trop compliqué avec toi Jean-Bot", cat: "Social", desc: "Exprimer son agacement face au tempérament pointilleux de l'assistant.", key: "Dialogue" },
             { txt: "Tu cherches à me piéger / C'est un piège ton affaire Jean-Bot", cat: "Social", desc: "Accuse l'assistant de mauvaise foi informatique.", key: "Dialogue" },
-            { txt: "Tu me menaces / Tu oses me menacer Jean-Bot ?", cat: "Social", desc: "Réagit aux avertissements sarcastiques lancés par le bot.", key: "Dialogue" },
+            { txt: "Tu me menaces / Tu oses me menace Jean-Bot ?", cat: "Social", desc: "Réagit aux avertissements sarcastiques lancés par le bot.", key: "Dialogue" },
             { txt: "Tu es très drôle / Malin / Rigolo Jean-Bot", cat: "Social", desc: "Complimenter ou ironiser sur le sarcasme de Jean-Bot.", key: "Dialogue" },
             { txt: "Calme-toi / Tu t'emballes Jean-Bot", cat: "Social", desc: "Calmer les circuits de Jean-Bot s'il s'excite en plein combat.", key: "Dialogue" },
             { txt: "Tu es un psychopathe / Un grand malade / Flippant Jean-Bot", cat: "Social", desc: "Discuter du tempérament inquiétant ou radical de sa programmation.", key: "Dialogue" },
@@ -313,11 +313,11 @@
         const activeBtnStyles = {
             'Tous': 'border-blue-500 bg-blue-600 text-white shadow-lg shadow-blue-900/20',
             'Combat': 'border-red-500 bg-red-600 text-white shadow-lg shadow-red-900/20',
-            'Minage': 'border-orange-500 bg-orange-600 text-white shadow-lg shadow-orange-900/20',
+            'Minage': 'border-violet-500 bg-violet-600 text-white shadow-lg shadow-violet-900/20',
             'Exploration': 'border-cyan-500 bg-cyan-600 text-white shadow-lg shadow-cyan-900/20',
             'LORE': 'border-green-500 bg-green-600 text-white shadow-lg shadow-green-900/20',
-            'Navigation': 'border-amber-500 bg-amber-600 text-white shadow-lg shadow-amber-900/20',
-            'Social': 'border-purple-500 bg-purple-600 text-white shadow-lg shadow-purple-900/20'
+            'Navigation': 'border-orange-500 bg-orange-600 text-white shadow-lg shadow-orange-900/20',
+            'Social': 'border-pink-500 bg-pink-600 text-white shadow-lg shadow-pink-900/20'
         };
 
         const inactiveBtnStyle = 'border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700';
@@ -340,11 +340,11 @@
                     
                     let badgeColor = 'bg-gray-500/20 text-gray-400 border-gray-500/30';
                     if(cmd.cat === 'Combat') badgeColor = 'bg-red-500/10 text-red-400 border-red-500/20';
-                    if(cmd.cat === 'Minage') badgeColor = 'bg-orange-500/10 text-orange-400 border-orange-500/20';
+                    if(cmd.cat === 'Minage') badgeColor = 'bg-violet-500/10 text-violet-400 border-violet-500/20';
                     if(cmd.cat === 'Exploration') badgeColor = 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20';
                     if(cmd.cat === 'LORE') badgeColor = 'bg-green-500/10 text-green-400 border-green-500/20';
-                    if(cmd.cat === 'Navigation') badgeColor = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
-                    if(cmd.cat === 'Social') badgeColor = 'bg-purple-500/10 text-purple-400 border-purple-500/20';
+                    if(cmd.cat === 'Navigation') badgeColor = 'bg-orange-500/10 text-orange-400 border-orange-500/20';
+                    if(cmd.cat === 'Social') badgeColor = 'bg-pink-500/10 text-pink-400 border-pink-500/20';
 
                     const keyTag = cmd.key ? `<kbd class="bg-gray-950 text-red-400 border border-gray-800 border-b-2 border-b-gray-700 px-2 py-0.5 rounded font-hud text-[10px] font-extrabold uppercase tracking-wide whitespace-nowrap shadow-md">${cmd.key}</kbd>` : '';
 
