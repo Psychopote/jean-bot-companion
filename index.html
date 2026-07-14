@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JEAN-BOT PREMIUM - Tableau de Bord Commandes</title>
-    <!-- Tailwind CSS pour un design pro et responsive -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- FontAwesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Importation de la police "Exo 2" (Futuriste & Haute Visibilité) -->
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* Défilement personnalisé style cockpit */
@@ -25,7 +22,6 @@
 </head>
 <body class="min-h-screen flex flex-col font-sans selection:bg-red-600 selection:text-white">
 
-    <!-- HEADER & LOGO -->
     <header class="border-b border-red-950 bg-gray-900/50 backdrop-blur sticky top-0 z-50 px-4 py-4">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
@@ -46,264 +42,251 @@
         </div>
     </header>
 
-    <!-- ZONE DE RECHERCHE ET FILTRES -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 flex flex-col gap-6">
         
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 shadow-xl flex flex-col gap-4">
-            <!-- Barre de recherche -->
             <div class="relative">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-gray-500"></i>
-                <input type="text" id="searchBar" placeholder="Rechercher une commande vocale (ex: alerte, scan...)" 
+                <input type="text" id="searchBar" placeholder="Rechercher un ordre, un minerai, une lune ou un dossier de Lore..." 
                     class="w-full bg-gray-950 border border-gray-800 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors font-hud">
             </div>
 
-            <!-- Filtres par catégorie épurés (Le cadre noir du compteur a été retiré) -->
             <div class="flex flex-wrap gap-2" id="filterContainer">
                 <button onclick="filterCategory('Tous')" id="btn-Tous" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-blue-500 bg-blue-600 text-white shadow-lg shadow-blue-900/20 font-hud uppercase tracking-wider">Tous</button>
                 <button onclick="filterCategory('Combat')" id="btn-Combat" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Combat</button>
                 <button onclick="filterCategory('Exploration')" id="btn-Exploration" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Exploration</button>
+                <button onclick="filterCategory('LORE')" id="btn-LORE" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Lore</button>
                 <button onclick="filterCategory('Navigation')" id="btn-Navigation" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Navigation</button>
                 <button onclick="filterCategory('Social')" id="btn-Social" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Social</button>
-                <button onclick="filterCategory('Fun')" id="btn-Fun" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Fun</button>
             </div>
         </div>
 
-        <!-- GRILLE DE COMMANDES -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="commandsGrid">
-            <!-- Injecté via JS -->
-        </div>
+            </div>
 
-        <!-- Message "Aucun résultat" -->
         <div id="noResult" class="hidden text-center py-12 flex flex-col gap-3">
             <i class="fa-solid fa-robot text-gray-700 text-5xl"></i>
             <p class="text-gray-400 font-semibold font-hud">Bip Boop... Aucune commande ne correspond à votre recherche.</p>
         </div>
     </main>
 
-    <!-- FOOTER -->
     <footer class="border-t border-gray-900 bg-gray-950 text-center py-4 text-xs text-gray-500 font-hud tracking-wider font-semibold">
-        <p>&copy; 2026 Jean-Bot Premium • Conçu pour fluidifier l'expérience utilisateur.</p>
+        <p>&copy; 2026 Jean-Bot Premium • Structure Documentaire de Cockpit Validée.</p>
     </footer>
 
     <script>
-        // Base de données officielle Jean-Bot Premium v20.8 (189 cartes groupées)
+        // Base de données révisée et ventilée avec la nouvelle catégorie LORE
         const jeanBotCommands = [
             // =========================================================================
-            // COLONNE 1 : ORDRES & ACTIONS VAISSEAU
+            // CATEGORIE : NAVIGATION & SYSTEMES COCKPIT
             // =========================================================================
-            { txt: "Active/Désactive les V-Tol", cat: "Navigation", desc: "Bascule la configuration des propulseurs verticaux.", key: "K" },
-            { txt: "Active/Désactive les lignes de précision", cat: "Navigation", desc: "Affiche ou masque les aides à l'alignement.", key: "" },
-            { txt: "Allume le système", cat: "Navigation", desc: "Initialise l'alimentation générale.", key: "R" },
-            { txt: "Active/Désactive le sonar", cat: "Navigation", desc: "Envoie des impulsions de scan régulières.", key: "Tab" },
-            { txt: "Allume/Éteins le vaisseau", cat: "Navigation", desc: "Gestion de l'alimentation générale du réacteur.", key: "U" },
-            { txt: "Allume/Éteins le ressort caméra", cat: "Navigation", desc: "Bascule le comportement de la caméra.", key: "Menu + Souris" },
-            { txt: "Active/Allume les boucliers", cat: "Combat", desc: "Alimente et lève les générateurs de boucliers.", key: "Alt + O" },
-            { txt: "Éteins les boucliers", cat: "Combat", desc: "Coupe l'alimentation des boucliers.", key: "Alt + P" },
-            { txt: "Allume/Coupe les moteurs", cat: "Navigation", desc: "Active ou désactive la poussée des propulseurs.", key: "I" },
-            { txt: "Augmente/Renforce le bouclier (droit-gauche-avant-arrière)", cat: "Combat", desc: "Redirige l'énergie des générateurs vers une face grandiose ou spécifique.", key: "" },
-            { txt: "Reboot/Réinitialise les boucliers", cat: "Combat", desc: "Force un redémarrage d'urgence complet des boucliers.", key: "Num 8" },
-            { txt: "Bouclier arrière puissance maximale", cat: "Combat", desc: "Maximise la protection sur les propulseurs arrière.", key: "" },
-            { txt: "Lance le saut quantique", cat: "Navigation", desc: "Engage le moteur Quantum vers le point sélectionné.", key: "*" },
-            { txt: "Envoie une balise de ravitaillement", cat: "Navigation", desc: "Demande un ravitaillement en carburant ou munitions.", key: "Menu + Souris" },
-            { txt: "< caméra s ou Vue > par défaut", cat: "Navigation", desc: "Bascule sur la caméra standard du cockpit.", key: "F4 + Num 1" },
-            { txt: "< caméra s ou Vue > de la soute", cat: "Navigation", desc: "Bascule la vue sur la zone de cargaison arrière.", key: "F4 + Num 3" },
-            { txt: "< caméra s ou Vue > 3 - 5 - 6 - 8", cat: "Navigation", desc: "Contrôle les angles de caméra fixes.", key: "" },
-            { txt: "< caméra s ou Vue > extérieure", cat: "Navigation", desc: "Bascule en vue externe orbitale.", key: "F4 + Num 4" },
-            { txt: "< caméra s ou Vue > proche", cat: "Navigation", desc: "Rapproche la caméra externe du châssis.", key: "F4 + Num 7" },
-            { txt: "< caméra s ou Vue > zoom", cat: "Navigation", desc: "Zoom optique maximal sur la caméra active.", key: "F4 + Num 9" },
-            { txt: "Trace une route vers...", cat: "Navigation", desc: "Calcule l'itinéraire dans la Starmap.", key: "Menu + Souris" },
-            { txt: "Je confirme", cat: "Navigation", desc: "Validation finale d'un itinéraire tracé.", key: "R" },
-            { txt: "Annule la route", cat: "Navigation", desc: "Efface l'itinéraire en cours de suivi.", key: "Menu + Souris" },
-            { txt: "Désactive les boucliers", cat: "Combat", desc: "Bascule d'urgence de la protection passive.", key: "Alt + P" },
-            { txt: "Demande/Libère le docking", cat: "Navigation", desc: "Gère la procédure d'amarrage.", key: "Alt + N" },
-            { txt: "Ouvre/Ferme les portes/docking", cat: "Navigation", desc: "Bascule l'ouverture des accès du vaisseau.", key: "Alt + G" },
-            { txt: "Ouvre/Ferme la Star-map/Mobiglas", cat: "Navigation", desc: "Bascule l'affichage de l'interface personnelle.", key: "" },
-            { txt: "Contre mesure", cat: "Combat", desc: "Leurre le verrouillage des missiles ennemis.", key: "Ctrl Droit + J" },
-            { txt: "Jean-bot fais le plein", cat: "Navigation", desc: "Ouvre le menu des services de ravitaillement.", key: "Menu + Souris" },
-            { txt: "Jean-bot répare le vaisseau", cat: "Navigation", desc: "Lance la réparation d'urgence de la coque.", key: "Menu + Souris" },
-            { txt: "Jean-bot baisse le son", cat: "Fun", desc: "Réduit le volume global des effets de Jean-Bot.", key: "Menu + Souris" },
-            { txt: "Jean-bot remonte le son", cat: "Fun", desc: "Augmente le volume global des effets de Jean-Bot.", key: "Menu + Souris" },
-            { txt: "Jean-bot éjection", cat: "Combat", desc: "Procédure d'éjection d'urgence du pilote.", key: "Ctrl + Chiffre + Y" },
-            { txt: "C'est l'heure de prendre une mission jean-bot", cat: "Navigation", desc: "Ouvre le gestionnaire de contrats.", key: "Menu + Souris" },
-            { txt: "Aller on descend/descend", cat: "Navigation", desc: "Active la descente verticale vers le sol.", key: "Touche Y" },
-            { txt: "Jean-bot augmente le champ de vision / le FOV", cat: "Navigation", desc: "Élargit le champ visuel du pilote.", key: "" },
-            { txt: "Jean-bot reset la caméra", cat: "Navigation", desc: "Réaligne la caméra dans l'axe de la coque.", key: "" },
-            { txt: "Jean-bot recule la caméra", cat: "Navigation", desc: "Éloigne le point de vue arrière.", key: "" },
-            { txt: "Jean-bot avance la caméra", cat: "Navigation", desc: "Rapproche le point de vue avant.", key: "" },
-            { txt: "Caméra missile", cat: "Combat", desc: "Bascule sur le point de vue du projectile tiré.", key: "" },
-            { txt: "Verrouille / déverrouille les portes du vaisseau", cat: "Navigation", desc: "Sécurise la coque contre les intrusions extérieures.", key: "" },
-
-            // MINAGE & SIGNATURES (BOITE JAUNE DE COLONNE 1)
-            { txt: "Dire : Signature 3170 ou 8340", cat: "Exploration", desc: "Donne des détails sur ce type de gisement de minage.", key: "" },
-            { txt: "Toutes les signatures sont dispo jusqu'à 30 000", cat: "Exploration", desc: "Analyse générale du spectre de détection.", key: "" },
-            { txt: "Jean-bot ou trouver de : Agridum", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Aluminium", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Astatite", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Béryl", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Béralite", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Borase", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Copper", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Corundum", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Gold", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Hephaestanite", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Ice ou glace", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Iron ou Fer", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Laranite", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Lindinite", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Ouratite", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Quantanium", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Quartz", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Riccite", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Savrillium", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Silicon", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Stileron", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Taranite", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Tin", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Titanium", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Torite", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
-            { txt: "Jean-bot ou trouver de : Tungsten", cat: "Exploration", desc: "Donne la localisation et la signature de ce matériau.", key: "" },
+            { txt: "Allumage / Activation du système", cat: "Navigation", desc: "Mettre sous tension l'ordinateur de bord et initialiser le HUD général.", key: "R" },
+            { txt: "Allume le / Éteins le / Active le vaisseau", cat: "Navigation", desc: "Gérer l'alimentation générale des réacteurs d'énergie principaux.", key: "U" },
+            { txt: "Active / Coupe / Arrêt des moteurs", cat: "Navigation", desc: "Couper ou initialiser l'alimentation des propulseurs principaux.", key: "I" },
+            { txt: "Active / Désactive le mode croisière", cat: "Navigation", desc: "Engager le maintien automatique du vecteur de poussée cinétique.", key: "Alt + C" },
+            { txt: "Active le limiteur", cat: "Navigation", desc: "Brider la vitesse maximale autorisée pour sécuriser les manœuvres de précision.", key: "Alt + [" },
+            { txt: "Désactive le limiteur", cat: "Navigation", desc: "Libère la vitesse maximale autorisée par le châssis.", key: "Alt + ]" },
+            { txt: "Active / Désactive les VTOL", cat: "Navigation", desc: "Basculer l'orientation des tuyères de sustentation verticale.", key: "K" },
+            { txt: "Désactive / Enlève le mode découplé", cat: "Navigation", desc: "Réengager les compensateurs automatiques d'inertie vectorielle (Mode Coupled).", key: "Alt + M" },
+            { txt: "Déploie / Ouvre / Plie les ailes", cat: "Navigation", desc: "Modifier la géométrie aérodynamique de structure du châssis.", key: "Alt + K" },
+            { txt: "Ouvre / Ferme les portes du vaisseau", cat: "Navigation", desc: "Actionner les rampes d'accès, soutes cargo et sas pressurisés.", key: "Alt + P" },
+            { txt: "Ouvre / Ferme la Star-map / MobiGlas", cat: "Navigation", desc: "Bascule la carte stellaire 3D ou l'interface de l'ordinateur personnel de poignet.", key: "F2" },
+            { txt: "Demande l'ouverture du hangar / Tour de Contrôle / ATC / TC", cat: "Navigation", desc: "Appeler les contrôleurs aériens locaux pour ouvrir un sas d'atterrissage.", key: "Alt + N" },
+            { txt: "Demande le docking / Libère le vaisseau", cat: "Navigation", desc: "Gérer l'amarrage magnétique ou le détachement inter-vaisseaux.", key: "Alt + N" },
+            { txt: "Active / Désactive la vision nocturne / VN / Lampe", cat: "Navigation", desc: "Basculer l'amplificateur de lumière résiduelle du cockpit.", key: "L" },
+            { txt: "Éteins les lumières / phares", cat: "Navigation", desc: "Couper l'éclairage de coque externe pour les approches furtives.", key: "L" },
+            { txt: "Trace / Calcule une route vers [Destination]", cat: "Navigation", desc: "Inscrit l'itinéraire automatique (Hurston, Crusader, ArcCorp, MicroTech...) dans le système de navigation.", key: "Auto" },
+            { txt: "Je valide / Je confirme", cat: "Navigation", desc: "Confirmer la trajectoire de vol sélectionnée dans le système de navigation.", key: "R" },
+            { txt: "Validation impossible", cat: "Navigation", desc: "Retour système de Jean-Bot en cas d'échec de verrouillage ou d'alignement.", key: "Dialogue" },
+            { txt: "Validation confirmée / Confirmation validée", cat: "Navigation", desc: "Mémoriser et verrouiller l'ordre système en cours.", key: "Macro" },
+            { txt: "En avant marche Jean-Bot / Marche avant", cat: "Navigation", desc: "Maintenir l'axe de poussée linéaire continue en mode FPS ou EVA dans le vide.", key: "Z" },
+            { txt: "Sors / Rentre les trains d'atterrissage / papattes / pattes", cat: "Navigation", desc: "Déployer ou rétracter les patins de train d'atterrissage.", key: "N" },
+            { txt: "Met les gaz au maximum / à fond", cat: "Navigation", desc: "Pousse la manette des gaz virtuelle à sa butée maximale.", key: "Z" },
+            { txt: "Ouvre le portail", cat: "Navigation", desc: "Exécuter la macro d'accès rapide aux commandes de porte de hangar.", key: "Macro" },
+            { txt: "Jean-Bot partage la mission", cat: "Navigation", desc: "Partager le contrat actif avec l'ensemble des membres de l'équipage.", key: "Macro" },
+            { txt: "C'est l'heure de prendre une mission / trouver un taff / travailler", cat: "Navigation", desc: "Ouvrir l'application Contract Manager du MobiGlas pour chercher un contrat.", key: "Macro" },
+            { txt: "Jean-Bot fais le plein / recharge les munitions / rifil / refuel", cat: "Navigation", desc: "Déclencher la demande de rechargement en carburant Hydrogène et Quantum aux pads.", key: "F12" },
+            { txt: "Jean-Bot répare le vaisseau / lance l'entretien", cat: "Navigation", desc: "Activer les drones de réparation pour colmater les brèches de coque.", key: "F12" },
+            { txt: "Jean-Bot baisse le son / volume / pollution sonore", cat: "Navigation", desc: "Réduit l'intensité sonore des notifications audio du cockpit.", key: "Macro" },
+            { txt: "Jean-Bot rizette / rebout / remonte le son / volume", cat: "Navigation", desc: "Réinitialise le volume sonore des retours vocaux.", key: "Macro" },
 
             // =========================================================================
-            // COLONNE 2 : DISCUSSIONS INTERACTIVES
+            // NAVIGATION : CAMÉRAS & INTERFACE
             // =========================================================================
-            { txt: "À quoi tu penses jean-bot ?", cat: "Social", desc: "Engage la conversation sur les pensées de Jean-Bot.", key: "" },
-            { txt: "Aller ça dégage", cat: "Social", desc: "Ligne de réplique après l'élimination d'un ennemi.", key: "" },
-            { txt: "Allons miner jean-bot", cat: "Exploration", desc: "Configure Jean-Bot en mode détection de minerais.", key: "" },
-            { txt: "Bonsoir jean-bot / Bonjour jean-bot", cat: "Social", desc: "Salutation vocale interactive d'accueil.", key: "" },
-            { txt: "C'est toujours compliqué avec toi jean-bot", cat: "Social", desc: "Réponse d'agacement face à l'ironie de Jean-Bot.", key: "" },
-            { txt: "Tu me menace jean-bot ?", cat: "Social", desc: "Interpelle Jean-Bot sur son comportement parfois agressif.", key: "" },
-            { txt: "Tu es très drôle jean-bot / Tu en penses quoi jean-bot ?", cat: "Social", desc: "Discussions de fond variées.", key: "" },
-            { txt: "Qu'est ce qui t'arrive jean-bot ?", cat: "Social", desc: "Prend des nouvelles de l'état système de Jean-Bot.", key: "" },
-            { txt: "La route marche pas / Pourquoi ça marche pas ?", cat: "Social", desc: "Demande de l'aide à Jean-Bot en cas de bug d'itinéraire.", key: "" },
-            { txt: "Pourquoi tu veux ordonner l'univers ?", cat: "Social", desc: "Discussion métaphysique avec Jean-Bot.", key: "" },
-            { txt: "Jean-bot raconte une blague / Fais en une autre", cat: "Fun", desc: "Déclenche le module de blagues aléatoires.", key: "" },
-            { txt: "Jean-bot pose une devinette", cat: "Fun", desc: "Déclenche le module interactif de devinettes.", key: "" },
-            { txt: "Jean-bot raconte moi plein de blagues", cat: "Fun", desc: "Active une série ininterrompue de blagues.", key: "" },
-            { txt: "Merci pour les blagues", cat: "Fun", desc: "Désactive le module d'humour de Jean-Bot.", key: "" },
-            { txt: "Jean-bot raconte moi plein de devinettes", cat: "Fun", desc: "Active une série ininterrompue de devinettes.", key: "" },
-            { txt: "Merci pour les devinettes", cat: "Fun", desc: "Désactive le module de devinettes.", key: "" },
-            { txt: "Dans quel état est le vaisseau ?", cat: "Social", desc: "Rapport d'état si le vaisseau est endommagé.", key: "" },
-            { txt: "Quel est le bilan de la bataille ?", cat: "Social", desc: "Rapport d'état si le vaisseau est intact après combat.", key: "" },
-            { txt: "Heureusement que tu es là jean-bot", cat: "Social", desc: "Remerciement chaleureux pour débloquer une réponse polie.", key: "" },
-            { txt: "Je peux te poser une question jean-bot ?", cat: "Social", desc: "Permet d'ouvrir le module de questions ouvertes.", key: "" },
-            { txt: "Calme toi jean-bot", cat: "Social", desc: "Calme les ardeurs ou les sarcasmes de Jean-Bot.", key: "" },
-            { txt: "Jean-bot parle moi du projet B-84 / Le projet B-84 c'est quoi ?", cat: "Social", desc: "Lore secret sur l'origine cybernétique de Jean-Bot.", key: "" },
-            { txt: "En quoi le projet B-84 va me rendre heureux jean-bot ?", cat: "Social", desc: "Question existentielle sur le projet B-84.", key: "" },
-            { txt: "Tu le fais exprès jean-bot ?", cat: "Social", desc: "Réprimande vocale en cas de bêtise de Jean-Bot.", key: "" },
-            { txt: "Jean-bot tu es là ? ou ! Tu dorm jean-bot ?", cat: "Social", desc: "Vérifie si Jean-Bot est toujours à l'écoute.", key: "" },
-            { txt: "Tu abuses la jean-bot !", cat: "Social", desc: "Réprimande en cas d'excès d'ironie.", key: "" },
-            { txt: "Tu comprend rien jean-bot !", cat: "Social", desc: "Réprimande d'incompréhension.", key: "" },
-            { txt: "Je vois que tu sais être raisonnable jean-bot", cat: "Social", desc: "Félicitation ironique.", key: "" },
-            { txt: "Je ne te parle pas jean-bot / Je ne te crois pas jean-bot", cat: "Social", desc: "Discussions de boudage.", key: "" },
-            { txt: "Qu'est ce que je vais faire de toi jean-bot ?", cat: "Social", desc: "Réflexion sur le sort de Jean-Bot.", key: "" },
-            { txt: "Je t'emmerde jean-bot !!!", cat: "Social", desc: "Invective directe pour déclencher une réplique cinglante.", key: "" },
-            { txt: "Tu es motivé jean-bot ? / Qu'est ce que tu en penses jean-bot ?", cat: "Social", desc: "Demande d'avis général.", key: "" },
-            { txt: "Un problème jean-bot ?", cat: "Social", desc: "Demande si Jean-Bot rencontre un souci technique.", key: "" },
-            { txt: "Ce n'est pas une réponse jean-bot / Ce n'est pas une raison jean-bot", cat: "Social", desc: "Rétorque face à une déviation de Jean-Bot.", key: "" },
-            { txt: "Je vais te détruire jean-bot", cat: "Social", desc: "Menace de suppression pour voir sa réaction.", key: "" },
-            { txt: "Oui jean-bot / Non jean-bot / Peut-être jean-bot", cat: "Social", desc: "Réponses courtes interactives.", key: "" },
-            { txt: "Stop - ferme la - arrêtes", cat: "Social", desc: "Ordonne le silence immédiat à Jean-Bot.", key: "" },
-            { txt: "On a eu chaud !", cat: "Social", desc: "Célèbre une fuite ou un combat tendu.", key: "" },
-            { txt: "J'ai failli péter !", cat: "Social", desc: "Phrase de soulagement humoristique.", key: "" },
-            { txt: "Peut on se caché ici jean-bot ? / On va se planquer ici !", cat: "Social", desc: "Active la détection de furtivité thermique.", key: "" },
-            { txt: "On va péter jean-bot !!! / C'heure de se barrer jean-bot !", cat: "Social", desc: "Phrases d'évacuation d'urgence.", key: "" },
-            { txt: "Sois gentils jean-bot / Ton scanner marche pas jean-bot", cat: "Social", desc: "Discussions d'ajustement.", key: "" },
-            { txt: "Tu ne me casse les couilles [les chiens] jean-bot", cat: "Social", desc: "Formule fleurie pour calmer Jean-Bot.", key: "" },
-            { txt: "Quel est ta fonction jean-bot", cat: "Social", desc: "Demande la liste officielle de ses protocoles.", key: "" },
-            { txt: "Que cela ne se reproduise pas jean-bot / Pourquoi tu dig ça jean-bot ?", cat: "Social", desc: "Ajustements de comportement.", key: "" },
-            { txt: "Prêt pour la guerre jean-bot ? / Alors c'est parti !!!", cat: "Combat", desc: "Lignes d'encouragement avant un assaut.", key: "" },
-            { txt: "Je ne parlais pas jean-bot", cat: "Social", desc: "Indique que la commande n'était pas pour lui.", key: "" },
-            { txt: "Jean-bot tu peux parlais avec une voix plus féminine ?", cat: "Social", desc: "Demande humoristique de changement de voix.", key: "" },
-            { txt: "Comment tu vas jean-bot / On va s'occuper du client jean-bot", cat: "Social", desc: "Lancement des hostilités.", key: "" },
+            { txt: "Caméra / Vue par défaut / Standard / Un", cat: "Navigation", desc: "Basculer sur la vue à la première personne à l'intérieur du cockpit.", key: "F4 + Num 1" },
+            { txt: "Caméra de la soute / Vue 2 / Vue 3", cat: "Navigation", desc: "Afficher le flux vidéo de surveillance de la baie de chargement cargo.", key: "F4 + Num 2/3" },
+            { txt: "Caméra de près / proche / Vue 7", cat: "Navigation", desc: "Rapprocher le point de vue externe orbital des structures du châssis.", key: "F4 + Num 7" },
+            { txt: "Caméra extérieure / de loin / Vue 4", cat: "Navigation", desc: "Basculer sur la caméra orbitale externe libre.", key: "F4 + Num 4" },
+            { txt: "Caméra zoom / zoomée / Vue 9", cat: "Navigation", desc: "Focaliser l'optique externe sur la cible radar verrouillée.", key: "F4 + Num 9" },
+            { txt: "Caméra cynq / six / huit", cat: "Navigation", desc: "Basculer sur les angles de caméras fixes externes correspondants.", key: "F4 + Num" },
+            { txt: "Jean-Bot reset caméra", cat: "Navigation", desc: "Réinitialiser instantanément l'orientation de la caméra dans l'axe de vol.", key: "Num *" },
+            { txt: "Zoom / Dézoom cockpit", cat: "Navigation", desc: "Ajuster manuellement le niveau de zoom interior sur le tableau de bord.", key: "Souris" },
+            { txt: "Allume / Active le ressort caméra", cat: "Navigation", desc: "Basculer l'inertie fluide de mouvement de la caméra externe.", key: "Z" },
+            { txt: "Éteins / Désactive le ressort caméra", cat: "Navigation", desc: "Verrouiller rigidement l'axe de la caméra externe sur la cellule.", key: "Z" },
+            { txt: "Jean-Bot augmente / diminue le FOV", cat: "Navigation", desc: "Modifier la largeur du champ visuel focalisé de l'écran.", key: "Macro" },
+            { txt: "Jean-Bot active / désactive les sous-titres", cat: "Navigation", desc: "Afficher ou masquer les transcriptions textuelles des retours de Jean-Bot.", key: "Macro" },
 
             // =========================================================================
-            // COLONNE 3 : LORE SC (PLANÈTE, LUNE, STATION, VILLES, SYSTÈMES & HISTOIRE)
+            // CATEGORIE : COMBAT
             // =========================================================================
-            { txt: "Qu'est il arrivé à Port Olisar ?", cat: "Exploration", desc: "Lore : Histoire de la destruction de la station mythique.", key: "" },
-            { txt: "Jean-bot parle moi de Crusader / en détails de Crusader", cat: "Exploration", desc: "Lore : La géante gazeuse de Stanton.", key: "" },
-            { txt: "Jean-bot parle moi de Yela / Céline / Daymar", cat: "Exploration", desc: "Lore : Les trois lunes principales de Crusader.", key: "" },
-            { txt: "Jean-bot parle moi de Séraphim station / Kanta / Grim hex", cat: "Exploration", desc: "Lore : Les bases orbitales et repaires de pirates.", key: "" },
-            { txt: "Jean-bot parle moi de Hurston / en detail de hurston / les dunes de hurston", cat: "Exploration", desc: "Lore : La planète industrielle polluée.", key: "" },
-            { txt: "Jean-bot parle moi de ita / Magda / Arial / Aberdeen", cat: "Exploration", desc: "Lore : Les lunes minières de Hurston.", key: "" },
-            { txt: "Jean-bot parle moi de Klesher / Everus harbor", cat: "Exploration", desc: "Lore : La prison automatisée et sa station orbitale.", key: "" },
-            { txt: "Jean-bot parle moi de Microtech / en détails de Microtech", cat: "Exploration", desc: "Lore : La planète de glace technologique.", key: "" },
-            { txt: "Jean-bot parle moi de calliope / clio / euterpe", cat: "Exploration", desc: "Lore : Les lunes gelées de Microtech.", key: "" },
-            { txt: "Jean-bot parle moi de port tressler", cat: "Exploration", desc: "Lore : La station orbitale de Microtech.", key: "" },
-            { txt: "Jean-bot parle moi de Arcorp / en détails de Arcorp / les dunes de arcorp", cat: "Exploration", desc: "Lore : La planète-cité ocre.", key: "" },
-            { txt: "Jean-bot parle moi de Lyria / Wala / Baijini point", cat: "Exploration", desc: "Lore : Les lunes de glace/soufre et la station d'ArcCorp.", key: "" },
-            { txt: "Jean-bot parle moi de Lorville / Newbabbage / Area 18 / Orison", cat: "Exploration", desc: "Lore Villes : Les secrets des quatre mégapoles.", key: "" },
-            { txt: "Jean-bot parle moi du système Pyro / Ruin station / Obituary / Checkmate", cat: "Exploration", desc: "Lore Systèmes : Le système anarchique hors-la-loi.", key: "" },
-            { txt: "Jean-bot parle moi du système Nyx / Levski", cat: "Exploration", desc: "Lore Systèmes : Le refuge des indépendants de Delamar.", key: "" },
-            { txt: "Jean-bot parle moi du système Stanton / Sol / Terra / Caliban / Virgil", cat: "Exploration", desc: "Lore Systèmes : Les grands systèmes de l'empire.", key: "" },
-            { txt: "Jean-bot parle moi de L'advocacy", cat: "Exploration", desc: "Lore : La police fédérale de l'UEE.", key: "" },
-            { txt: "Jean-bot parle moi des races alien / Xian / Banu / Vanduul / Tevarin", cat: "Exploration", desc: "Lore : Les espèces intelligentes de la galaxie.", key: "" },
-            { txt: "Jean-bot parle moi des Origines de L'UEE / de l'UEE moderne", cat: "Exploration", desc: "Lore : L'évolution politique de l'humanité.", key: "" },
-            { txt: "Jean-bot parle moi du moteur quantique / de l'exploration spatiale", cat: "Exploration", desc: "Lore : Technologie et grandes découvertes.", key: "" },
-            { txt: "Jean-bot parle moi des Jump Point / de la CDP / de la xeno traite", cat: "Exploration", desc: "Lore : Failles de saut, défense civile et trafics criminels.", key: "" },
-            { txt: "Jean-bot parle moi du premier impérator / Ivar Messer / la dynastie Messer", cat: "Exploration", desc: "Lore : L'ère dictatoriale sombre de l'humanité.", key: "" },
-            { txt: "Jean-bot parle moi de L'Initiative Overdrive / de la famille Hurston", cat: "Exploration", desc: "Lore : Guerres corporatistes et événements récents.", key: "" },
-            { txt: "Jean-bot parle moi des Mega-Corpo (Arcorp, Crusader, Hurston, Microtech)", cat: "Exploration", desc: "Lore : Les entreprises surpuissantes qui possèdent Stanton.", key: "" },
-            { txt: "Jean-bot parle moi des milices de Pyro / des head hunter / de Rough and ready", cat: "Exploration", desc: "Lore factions : Les gangs criminels qui se disputent Pyro.", key: "" },
-            { txt: "Jean-bot parle moi de Citizen for Prosperity / des Nine Tails", cat: "Exploration", desc: "Lore factions : Groupes d'intérêts et syndicats criminels.", key: "" },
+            { txt: "Active / Allume les boucliers / Shield", cat: "Combat", desc: "Alimenter et lève la grille des générateurs défensifs généraux.", key: "Alt + O" },
+            { txt: "Éteins / Désactive les boucliers / Shield", cat: "Combat", desc: "Coupe l'attribution d'énergie de la matrice défensive passive.", key: "Alt + P" },
+            { txt: "Reset / Réinitialise / Équilibre les boucliers", cat: "Combat", desc: "Rééquilibrer instantanément la puissance à 25% équitablement sur les 4 faces.", key: "Num 8" },
+            { txt: "Augmente / Renforce le bouclier avant / arrière", cat: "Combat", desc: "Surcharger la face choisie en redirigeant l'énergie des générateurs.", key: "Flèche Haut / Bas" },
+            { txt: "Augmente / Renforce le bouclier droit / gauche", cat: "Combat", desc: "Surcharger le flanc choisi en redirigeant l'énergie des générateurs.", key: "Flèche Droite / Gauche" },
+            { txt: "Bouclier arrière puissance maximale", cat: "Combat", desc: "Surcharger instantanément et au maximum la protection de la poupe.", key: "Flèche Bas" },
+            { txt: "Active / Désactive les armes / l'armement", cat: "Combat", desc: "Basculer la sécurité physique des tourelles, canons et répéteurs.", key: "P" },
+            { txt: "Reboot / Redémarre / Reset des armes", cat: "Combat", desc: "Forcer un cycle de redémarrage des condensateurs de tir.", key: "P (Maintien)" },
+            { txt: "Change de mode / Master Mode [Quantum / Arme]", cat: "Combat", desc: "Permuter la configuration de coque entre vol SCM (Combat) et NAV (Vitesse).", key: "B" },
+            { txt: "Active / Désactive le lag pipe", cat: "Combat", desc: "Basculer l'indicateur de visée prédictif du HUD (Lead ou Lag pip).", key: "Alt + /" },
+            { txt: "Lock / Cible / Verrouille la cible principale", cat: "Combat", desc: "Acquérir la signature radar du vaisseau ennemi situé en face.", key: "T" },
+            { txt: "Lock / Cible / Verrouille la cible 1 / 2 / 3", cat: "Combat", desc: "Sélectionner un des vaisseaux mémorisés dans la liste prioritaire.", key: "1 / 2 / 3" },
+            { txt: "Marque / Pin / Épingle la cible", cat: "Combat", desc: "Épingler un adversaire pour conserver son affichage ATH permanent.", key: "219" },
+            { txt: "Marque la cible une / Épingle le un / Épingle un", cat: "Combat", desc: "Attribuer le marqueur prioritaire numéro 1 à l'appareil ciblé.", key: "Macro" },
+            { txt: "Verrouille / Lock le sous-système", cat: "Combat", desc: "Focaliser le calcul des tourelles sur un composant précis (Moteurs, Générateur).", key: "R" },
+            { txt: "Active la tourelle un / deux / trois / Gimbal", cat: "Combat", desc: "Engager l'articulation motorisée ou le suivi automatique des tourelles.", key: "G" },
+            { txt: "Désactive la tourelle / le Gimbal", cat: "Combat", desc: "Verrouiller les tourelles en axe fixe vers l'avant.", key: "G" },
+            { txt: "Bloque / Débloque la tourelle", cat: "Combat", desc: "Serrer ou libérer les freins moteurs de rotation de la tourelle.", key: "G" },
+            { txt: "Enlève les pin / marqueurs", cat: "Combat", desc: "Effacer l'ensemble des cibles épinglées à l'écran.", key: "Macro" },
+            { txt: "Allié / Attaquant / Cible / Ennemi suivant", cat: "Combat", desc: "Permuter le radar sur la menace ou la signature suivante.", key: "T / H" },
+            { txt: "Contre-mesure", cat: "Combat", desc: "Déployer un leurre thermique ou électromagnétique contre les missiles.", key: "Ctrl + J" },
+            { txt: "Augmente les armes / moteurs au maximum / à fond", cat: "Combat", desc: "Surcharger le répartiteur (Power Triangle) à 100% sur le pôle choisi.", key: "F5 / F7" },
+            { txt: "Augmente / Monte / Diminue les armes / moteurs / boucliers", cat: "Combat", desc: "Ajuster par incréments réguliers le triangle de puissance énergétique.", key: "F5/F6/F7" },
+            { txt: "Diminue les armes / moteurs / boucliers au minimum", cat: "Combat", desc: "Vider entièrement l'attribution de puissance du composant énoncé.", key: "F5/F6/F7" },
+            { txt: "Quantum Snare (Intercepteur de saut / interdire le quantum)", cat: "Combat", desc: "Déployer le champ de distorsion d'interdiction quantique (RSI Mantis).", key: "Alt + 7" },
+            { txt: "Brouilleur quantique", cat: "Combat", desc: "Activer le module de brouillage pour empêcher la fuite des vaisseaux proches.", key: "Alt + 7" },
+            { txt: "Caméra / Active la vue missile", cat: "Combat", desc: "Suit balistiquement la trajectoire du missile tiré.", key: "Alt + V" },
+            { txt: "Jean-Bot éjection", cat: "Combat", desc: "Déclencher la procédure d'éjection d'urgence absolue du pilote.", key: "Ctrl + Alt + Y" },
 
             // =========================================================================
-            // COLONNE 4 : ITINÉRAIRES ENREGISTRÉS & PLAYLIST DE JOFFRE
+            // CATEGORIE : EXPLORATION TACTIQUE (GAMEPLAY)
             // =========================================================================
-            // ITINÉRAIRES
-            { txt: "Itinéraire : levski", cat: "Navigation", desc: "Sélectionne le trajet direct vers la colonie minière de Delamar.", key: "" },
-            { txt: "Itinéraire : orison", cat: "Navigation", desc: "Sélectionne le trajet vers la cité des nuages de Crusader.", key: "" },
-            { txt: "Itinéraire : ruin station", cat: "Navigation", desc: "Sélectionne le trajet vers la station pirate du système Pyro.", key: "" },
-            { txt: "Itinéraire : SCD", cat: "Navigation", desc: "Sélectionne le trajet vers l'un des Shubin Celestial Outposts.", key: "" },
-            { txt: "Itinéraire : seer's canyon", cat: "Navigation", desc: "Sélectionne le trajet vers le canyon de course de Daymar.", key: "" },
-            { txt: "Itinéraire : stanton gateway pyro", cat: "Navigation", desc: "Sélectionne le trajet vers le point de saut vers Pyro.", key: "" },
-            { txt: "Itinéraire : deakins / nibigateway / pirogatedway / terminus / la mission / grim hex", cat: "Navigation", desc: "Coordonnées de saut enregistrées dans la mémoire de Jean-Bot.", key: "" },
-
-            // MUSIQUE DE JOFFRE
-            { txt: "Janbotte lance une musique de Joffre", cat: "Fun", desc: "Sélectionne et joue une piste aléatoire composée par Joffre.", key: "" },
-            { txt: "Jean-bot lance : Bidan hurlorage", cat: "Fun", desc: "Joue la musique 'Bidan hurlorage' composée par Joffre.", key: "" },
-            { txt: "Jean-bot lance : au besoin d'analth", cat: "Fun", desc: "Joue la musique 'au besoin d'analth' composée par Joffre.", key: "" },
-            { txt: "Jean-bot lance : Bienvenue sur archimonde", cat: "Fun", desc: "Joue la musique 'Bienvenue sur archimonde' composée par Joffre.", key: "" },
-            { txt: "Jean-bot lance : Bordel / C'était mieux avant", cat: "Fun", desc: "Joue ces morceaux cultes composés par Joffre.", key: "" },
-            { txt: "Jean-bot lance : Chasse troll", cat: "Fun", desc: "Joue la musique 'Chasse troll' composée par Joffre.", key: "" },
-            { txt: "Jean-bot lance : Créature de milheur", cat: "Fun", desc: "Joue la musique 'Créature de milheur' composée par Joffre.", key: "" },
-            { txt: "Jean-bot lance : Dégage boulet / démo drood", cat: "Fun", desc: "Joue ces thèmes instrumentaux composés par Joffre.", key: "" },
-            { txt: "Jean-bot lance : Dota / Druide et voleur", cat: "Fun", desc: "Joue ces morceaux inspirés de l'univers gaming par Joffre.", key: "" },
-            { txt: "Jean-bot lance : Hissons nos couleurs", cat: "Fun", desc: "Joue l'hymne pirate 'Hissons nos couleurs' par Joffre.", key: "" },
-            { txt: "Jean-bot lance : J'ai toujours préféré au healer les dealer", cat: "Fun", desc: "Joue cette piste d'humour musical par Joffre.", key: "" },
-            { txt: "Jean-bot lance : je me suis fait tout petit devant des PK", cat: "Fun", desc: "Joue cette parodie musicale composée par Joffre.", key: "" },
-            { txt: "Jean-bot lance : je suis un roxor / la princesse flamboyante", cat: "Fun", desc: "Joue ces thèmes fantastiques composés par Joffre.", key: "" },
-            { txt: "Jean-bot lance : l'hymne gobelin / l'hymne gnome / l'hymne humain / l'hymne nain", cat: "Fun", desc: "Joue les compositions d'hymnes de factions par Joffre.", key: "" },
-            { txt: "Jean-bot lance : l'hymne night / l'hymne orc / l'hymne troll / l'hymne troll version CD", cat: "Fun", desc: "Joue les thèmes tribaux composés par Joffre.", key: "" },
-            { txt: "Jean-bot lance : l'hymne des réprouvés / l'hymne des elfs de sang", cat: "Fun", desc: "Joue les hymnes de la Horde composés par Joffre.", key: "" },
-            { txt: "Jean-bot lance : le cabale horde alliance / le désoriente / le druide / le guerrier / le paladin / le prêtre", cat: "Fun", desc: "Joue la série d'hymnes de classes par Joffre.", key: "" },
-            { txt: "Jean-bot lance : le vaudou troll / le whine du oazu / les chansons / les cons du net", cat: "Fun", desc: "Joue ces thèmes insolites par Joffre.", key: "" },
-            { txt: "Jean-bot lance : les elfs de sang à la taverne / les trolls ont la ales", cat: "Fun", desc: "Joue ces mélodies d'ambiance de taverne par Joffre.", key: "" },
-            { txt: "Jean-bot lance : les trolls sont les papas / démoniste et succube (et version studio)", cat: "Fun", desc: "Joue ces morceaux cultes par Joffre.", key: "" },
-            { txt: "Jean-bot lance : mais mon healer / moi je suis un dk / ne déguise pas / noman's whine", cat: "Fun", desc: "Joue ces parodies de classe MMO par Joffre.", key: "" },
-            { txt: "Jean-bot lance : on est des rogues (et nouvelle version) / pique nique troll", cat: "Fun", desc: "Joue ces pistes rythmiques composées par Joffre.", key: "" },
-            { txt: "Jean-bot lance : quand tu prend un backstab / voleur et druide (et nouvelle version)", cat: "Fun", desc: "Joue ces hymnes dédiés à la discrétion par Joffre.", key: "" },
+            { txt: "Allume le / Active le / Allumage du sonar", cat: "Exploration", desc: "Envoyer des impulsions radars à balayage pour détecter les signatures.", key: "Tab" },
+            { txt: "Désactive le / Arrête le / Stop le sonar", cat: "Exploration", desc: "Coupe les salves d'analyses scanners actives.", key: "Tab" },
+            { txt: "Active / Désactive les lignes de précision / le pip", cat: "Exploration", desc: "Guide visuel d'aide à l'alignement pour les lasers.", key: "Alt + I" },
+            { txt: "Active le mode minage / laser / recyclage / salvage", cat: "Exploration", desc: "Déployer les bras mécaniques articulés utilitaires (Prospector, Vulture).", key: "," },
+            { txt: "Active le mode la fracture / la fracturation", cat: "Exploration", desc: "Configurer le laser de minage en mode Haute Fréquence brise-roche.", key: "Alt + Z" },
+            { txt: "Désactive la fracture / la fracturation", cat: "Exploration", desc: "Désengager le mode de destruction thermique.", key: "Alt + Z" },
+            { txt: "Active la désintégration / On le mange / Récupération", cat: "Exploration", desc: "Activer les têtes d'aspiration pour racler les coques métalliques (Salvage).", key: "Alt + S" },
+            { txt: "Désactive la désintégration / l'aspiration / la récupération", cat: "Exploration", desc: "Arrêter les têtes de collecte moléculaire.", key: "Alt + S" },
+            { txt: "Change de tête / Changement de tête / Switch de tête / Bascule", cat: "Exploration", desc: "Permuter le module utilitaire actif sur les bras de récolte.", key: "Alt + R" },
+            { txt: "Tête de droite / Tête de gauche", cat: "Exploration", desc: "Sélectionner le bras utilitaire gauche ou droit à contrôler.", key: "Molette Click" },
+            { txt: "Active le module un / deux / trois", cat: "Exploration", desc: "Déclencher un consommable équipé sur la tête de minage (Surge, Optimax...).", key: "Alt + Chiffre" },
+            { txt: "Les deux têtes / Toutes les têtes / Double tête", cat: "Exploration", desc: "Engager l'ensemble des lasers utilitaires simultanément.", key: "Macro" },
+            { txt: "Augmente / Baisse la puissance de [1 à 10]", cat: "Exploration", desc: "Ajustement de précision de l'intensité du laser.", key: "Molette" },
+            { txt: "Augmente / Baisse la puissance de [20 à 100]", cat: "Exploration", desc: "Surcharges majeures ou chutes d'intensité pour stabiliser la charge.", key: "Molette" },
+            { txt: "Augmente / Élargit / Diminue / Affine le scanneur / Scane air", cat: "Exploration", desc: "Modifier l'angle d'ouverture du cône focal d'analyse radar.", key: "Souris" },
+            { txt: "Augmente / Monte / Baisse la convergence", cat: "Exploration", desc: "Régler la distance de croisement des lasers articulés.", key: "+ / -" },
+            { txt: "Convergence maximum / convergence minimum / rizette", cat: "Exploration", desc: "Forcer la focalisation des lasers à leurs limites d'usine.", key: "Macro" },
 
             // =========================================================================
-            // COLONNE 5 : LORE DES CONSTRUCTEURS & DES CHÂSSIS DE VAISSEAUX
+            // CATEGORIE : LORE (VERT) - ENCYCLOPÉDIE ET RECHERCHE DE CONNAISSANCES
             // =========================================================================
-            // CONSTRUCTEURS
-            { txt: "Jean-bot parle moi des constructeur de vaisseaux", cat: "Social", desc: "Lore : Introduction générale sur l'industrie aérospatiale.", key: "" },
-            { txt: "Jean-bot parle moi du constructeur Aegis dynamics / Aegis", cat: "Social", desc: "Lore : Histoire de la marque militaire de l'ère Messer.", key: "" },
-            { txt: "Jean-bot parle moi du constructeur Consolidated outland", cat: "Social", desc: "Lore : Histoire du constructeur excentrique fondé par Silas Koerner.", key: "" },
-            { txt: "Jean-bot parle moi du constructeur crusader industry / Drake interplanetary", cat: "Social", desc: "Lore : Histoire des géants du transport et de la piraterie.", key: "" },
-            { txt: "Jean-bot parle moi du constructeur Anvil aerospace / Esperia", cat: "Social", desc: "Lore : Histoire du chasseur d'élite de l'UEE et du spécialiste de la réplique alternative.", key: "" },
-            { txt: "Jean-bot parle moi du constructeur Gatac manufacture / grey's market", cat: "Social", desc: "Lore : Histoire de la marque de fret Xi'an et de l'industrie civile.", key: "" },
-            { txt: "Jean-bot parle moi du constructeur Kruger intergalactique / Mirai / Misc", cat: "Social", desc: "Lore : Constructeurs secondaires, division performance et géant industriel.", key: "" },
-            { txt: "Jean-bot parle moi du constructeur Origin Jumpworks / RSI", cat: "Social", desc: "Lore : Histoire de la marque de luxe et du pionnier historique Roberts Space Industries.", key: "" },
-            { txt: "Jean-bot parle moi du constructeur Tumbril / Vanduul / Aopoas / Argo", cat: "Social", desc: "Lore : Véhicules terrestres, menace extraterrestre, vaisseaux Xi'an civils et utilitaires.", key: "" },
+            { txt: "Jean-Bot, où trouver du Agricium", cat: "LORE", desc: "Gisement : Minerai précieux. Signatures radars types : 3570, 7140, 10710, 14280.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Béryl", cat: "LORE", desc: "Gisement : Roche standard. Signatures radars types : 3200, 6400.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Borase", cat: "LORE", desc: "Gisement : Matériau rare. Signatures radars types : 3540, 7080, 10620, 14160.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Cuivre / Copper", cat: "LORE", desc: "Gisement : Métal commun. Signatures radars types : 3370, 6740, 10110.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Corindon / Corundum", cat: "LORE", desc: "Gisement : Pierre basique. Signatures radars types : 3385, 6770, 10155.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Hephaestanite", cat: "LORE", desc: "Gisement : Commun. Signatures radars types : 3400, 6800, 10200.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Or / Gold", cat: "LORE", desc: "Gisement : Métal précieux. Signatures radars types : 3855, 7710, 11565, 15420, 19275.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Glace / Ice", cat: "LORE", desc: "Gisement : Élément basique. Signatures radars : 3000, 9000, 15000, 21000, 27000.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Fer / Iron", cat: "LORE", desc: "Gisement : Métal industriel. Signatures radars types : 3555, 7110, 10665, 14220.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Lindinite", cat: "LORE", desc: "Gisement : Matériau très rare. Signatures radars : 4210, 8420, 12630, 16840, 21050, 25260.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Quantanium", cat: "LORE", desc: "Gisement : Matière volatile et ultra-précieuse. Signatures : 4225, 8450, 12675, 16900, 21125, 25350.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Riccite", cat: "LORE", desc: "Gisement : Roche de structure. Signatures radars types : 3185, 6370.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Savrilium", cat: "LORE", desc: "Gisement : Matériau rare. Signatures radars : 3900, 7800, 11700, 15600, 19500.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Stiléron", cat: "LORE", desc: "Gisement : Roche sédimentaire. Signatures radars types : 3585, 7170, 10755, 14340.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Étain / Tin", cat: "LORE", desc: "Gisement : Élément basique. Signatures radars types : 3600, 7200, 10800, 14400.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Titane / Titanium / Aluminium", cat: "LORE", desc: "Gisement : Métal industriel. Signatures radars types : 4240, 8480, 12720, 16960, 21200, 25440.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Aslarite / Bexalite / Laranite / Ouratite / Quartz", cat: "LORE", desc: "Gisement : Liste exhaustive des signatures de roches précieuses de l'Empire.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Silicium / Taranite / Torite / Tungstène", cat: "LORE", desc: "Gisement : Liste exhaustive des signatures de matériaux lourds pour le forage.", key: "Fiche" },
+            { txt: "Signatures radars [Tableau complet de 2 000 à 30 000]", cat: "LORE", desc: "Aide-mémoire technique complet pour décoder la pureté d'une roche au radar.", key: "HUD" },
+            { txt: "Signature supérieure à trente mille", cat: "LORE", desc: "Alerte de masse : Masse rocheuse trop dense pour les extracteurs standards.", key: "HUD" },
+            { txt: "Jean-Bot, parle-moi de Port Olisar / qu'est-il arrivé", cat: "LORE", desc: "Dossier Lieux : Récit historique complet de la destruction de la station orbitale emblématique.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Crusader / Lunes de Crusader / Blocus", cat: "LORE", desc: "Dossier Lieux : La géante gazeuse de Stanton possédée par l'industrie aéronautique.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Celline / Yela / Daymar / Grim Hex", cat: "LORE", desc: "Dossier Lieux : Fiches orbitales des trois lunes de Crusader et du repaire pirate.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Hurston / Lorville / Lunes de Hurston", cat: "LORE", desc: "Dossier Lieux : Planète industrielle polluée possédée par la dynastie Hurston.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Aberdeen / Arial / Ita / Magda / Everus / Klesher", cat: "LORE", desc: "Dossier Lieux : Les lunes minières de Hurston, sa station et son centre de réhabilitation automatisé.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de MicroTech / New Babbage / Lunes de MicroTech", cat: "LORE", desc: "Dossier Lieux : La planète technologique glacée de l'Empire.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Clio / Calliope / Euterpe / Port Tressler", cat: "LORE", desc: "Dossier Lieux : Les trois lunes gelées de MicroTech et sa base orbitale principale.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de ArcCorp / Area 18 / Lunes d'ArcCorp", cat: "LORE", desc: "Dossier Lieux : La planète-cité ocre recouverte intégralement de structures corporatistes.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Lyria / Wala / Baijini Point", cat: "LORE", desc: "Dossier Lieux : Les lunes d'ArcCorp et sa station orbitale de transit.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Pyro / Système Pyro / Factions / Gangs", cat: "LORE", desc: "Dossier Lieux : Le système anarchique hors-la-loi contrôlé par des milices brutales.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Ruin Station / Checkmate / Obituary", cat: "LORE", desc: "Dossier Lieux : Les points chauds, stations délabrées et bases de Pyro.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Delamar / Levski / Kareah", cat: "LORE", desc: "Dossier Lieux : L'astéroïde Levski indépendant et la station de sécurité de Stanton.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Sol / Terra / Caliban / Virgil / Chute de Virgil", cat: "LORE", desc: "Dossier Lieux : Histoire des grands systèmes de l'Empire et de l'invasion extraterrestre Vanduul.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du système Hades", cat: "LORE", desc: "Dossier Lieux : Le système mort d'Hades, cimetière d'une ancienne civilisation éteinte.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Rock Breaker Quarry / Ator Aberdeen / Ator Daymar", cat: "LORE", desc: "Dossier Lieux : Fiches géographiques sur les comptoirs d'extractions planétaires.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Onyx Facility / Installations Onyx / Piam Industrie", cat: "LORE", desc: "Dossier Lieux : Fiches techniques sur les hangars et complexes de stockage de marchandises.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de l'Advocacy / Campagnes anti-Vanduul", cat: "LORE", desc: "Dossier Factions : Rapport historique sur la police fédérale de l'UEE et la guerre alien.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de la CDF / Civilian Defense Force", cat: "LORE", desc: "Dossier Factions : La milice civile mobilisée lors des crises de Stanton.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi des Citizens for Prosperity / CFP", cat: "LORE", desc: "Dossier Factions : Le syndicat politique œuvrant pour l'expansion des corpos.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi des Nine Tails / Headhunters", cat: "LORE", desc: "Dossier Factions : Les syndicats du crime organisé qui terrorisent Stanton et Pyro.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de la Xenotraite / Xénotraite", cat: "LORE", desc: "Dossier Factions : Le groupe terroriste anti-aliens basé dans le système Pyro.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de l'Initiative Overdrive", cat: "LORE", desc: "Dossier Histoire : Opération conjointe de la CFP et de l'Empire contre les vagues terroristes.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de l'opération Hunt Frontier Fighter", cat: "LORE", desc: "Dossier Histoire : Récit sur les guerres de factions de la bordure pirate.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi des Mégacorporations / Mégacorpo", cat: "LORE", desc: "Dossier Économie : L'histoire des quatre géants industriels possédant Stanton.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Covalex / Independent Contractor / Shipping", cat: "LORE", desc: "Dossier Économie : Le leader galactique du fret et de la logistique de livraison.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Eckart Security / Foxwell Enforcement", cat: "LORE", desc: "Dossier Économie : Les milices de sécurité privées opérant pour le compte des corpos.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de la Famille Ling / Northrock / Red Wing / Shubin", cat: "LORE", desc: "Dossier Économie : Fiches corporatistes sur les employeurs majeurs du secteur industriel.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Vaughn / Ruto / Vaughn Noeud", cat: "LORE", desc: "Dossier Factions : Profil des donneurs de missions clandestines et illégales de Stanton.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de Rayari / Wikelo / Dead Saints / Adagio", cat: "LORE", desc: "Dossier Économie : Fiches corporatistes secondaires de la bordure.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de ASD (Associated Science and Development)", cat: "LORE", desc: "Dossier Économie : Le pôle de recherche scientifique secret de l'Empire.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi des races aliens Banu / Xi'An / Vanduul / Tevarin / Kreutak", cat: "LORE", desc: "Dossier Histoire : Étude anthropologique et diplomatique des espèces extraterrestres connues.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du moteur quantique / voyage quantique", cat: "LORE", desc: "Dossier Tech : Histoire de l'invention technologique qui a permis l'expansion humaine.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi des Jump Points / Trous de ver", cat: "LORE", desc: "Dossier Tech : Les failles gravitationnelles permettant de sauter entre les systèmes.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de la crise de la régénération / de l'overdrive", cat: "LORE", desc: "Dossier Tech : Invention des implants de clonage et éthique de l'immortalité.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du Premier Impérator / Messer / Ivar Messer", cat: "LORE", desc: "Dossier Histoire : L'ère dictatoriale sombre qui a corrompu l'Empire pendant des siècles.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi d'Amélia Boyd / Logan Jorrit", cat: "LORE", desc: "Dossier Histoire : Fiches biographiques sur les grandes figures de la science spatiale.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi de la journée du premier contact / 12 juin", cat: "LORE", desc: "Dossier Histoire : Célébration du premier échange pacifique avec la race Banu.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du jour de la grande libération / UEE moderne", cat: "LORE", desc: "Dossier Histoire : La chute des Messer et la transition vers la démocratie moderne.", key: "Lore" },
+            { txt: "Jean-Bot, donne-moi la liste des constructeurs de vaisseaux", cat: "LORE", desc: "Dossier Vaisseaux : Guide global de l'industrie de l'Empire.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du constructeur Aegis / Anvil / RSI / Drake", cat: "LORE", desc: "Dossier Vaisseaux : Histoire des quatre piliers de la construction aéronautique de l'Empire.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du constructeur MISC / Origin / Mirai / Argo", cat: "LORE", desc: "Dossier Vaisseaux : Fiches sur l'utilitaire lourd, le luxe, la performance et l'industrie.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du constructeur Consolidated Outland / Tumbril / Kruger", cat: "LORE", desc: "Dossier Vaisseaux : Histoire des marques indépendantes et terrestres.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du constructeur Aopoa / Gatac / Esperia", cat: "LORE", desc: "Dossier Vaisseaux : Fiches sur les technologies d'origine alien et leurs répliques humaines.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du constructeur Grey's Market", cat: "LORE", desc: "Dossier Vaisseaux : Dossier sur le marché noir et la revente de pièces alternatives.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du Hammerhead / Javelin / Bengal / UEES Warhammer", cat: "LORE", desc: "Dossier Vaisseaux : Spécificités tactiques des destroyers et corvettes de l'armée.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du Corsair / Hawk / Hurricane / Ares Ion", cat: "LORE", desc: "Dossier Vaisseaux : Caractéristiques des chasseurs lourds et d'interception célèbres.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du Titan / Warlock / Châssis Avenger", cat: "LORE", desc: "Dossier Vaisseaux : Étude de la cellule polyvalente d'Aegis Dynamics (Cargo / EMP).", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du Fury / Fury MX / Fury LX", cat: "LORE", desc: "Dossier Vaisseaux : Les chasseurs légers embarqués de nouvelle génération de Mirai.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du Zeus MK1 / Zeus MK2 / Aurora MK2 / M80 / Meteor", cat: "LORE", desc: "Dossier Vaisseaux : Dossiers techniques sur les navettes d'exploration et de transport.", key: "Lore" },
+            { txt: "Jean-Bot, parle-moi du Pitbull / Tiburon", cat: "LORE", desc: "Dossier Vaisseaux : Véhicules terrestres et snubs utilitaires.", key: "Lore" },
 
-            // VAISSEAUX
-            { txt: "Jean-bot parle moi du HammerHead / Hawk / Bengal / Corsair", cat: "Social", desc: "Lore Châssis : Spécificités tactiques et rôles de ces vaisseaux célèbres.", key: "" },
-            { txt: "Jean-bot parle moi du F7A / F7C / F7C-M / Hornet historique", cat: "Social", desc: "Lore Châssis : La grande lignée des chasseurs embarqués d'Anvil.", key: "" },
-            { txt: "Jean-bot quelles sont les différence entre le hornet et le super hornet ?", cat: "Social", desc: "Lore Châssis : Analyse comparative des fiches techniques.", key: "" },
-            { txt: "Jean-bot parle moi du Fury / Fury MX / Fury LX", cat: "Social", desc: "Lore Châssis : Les snubs de combat, de bombardement et de course de Mirai.", key: "" },
-            { txt: "Jean-bot parle moi du M-50 / Pitbull / Thuron / Météor", cat: "Social", desc: "Lore Châssis : Chasseurs d'interception et d'attaque rapides.", key: "" },
-            { txt: "Jean-bot parle moi du Titan / warlock", cat: "Social", desc: "Lore Châssis : Les versions Cargo et EMP du célèbre Avenger d'Aegis.", key: "" }
+            // =========================================================================
+            // CATEGORIE : SOCIAL & DIALOGUES COMPAGNONS
+            // =========================================================================
+            { txt: "Bonjour / Hello / Salut Jean-Bot", cat: "Social", desc: "Salutation vocale de cockpit pour réveiller et tester Jean-Bot.", key: "Dialogue" },
+            { txt: "Comment tu vas / Tu vas bien Jean-Bot ?", cat: "Social", desc: "Demander un rapport d'état de fonctionnement ou d'humeur à l'assistant.", key: "Dialogue" },
+            { txt: "Je vais bien / Je t'aime / Je t'admire Jean-Bot", cat: "Social", desc: "Lignes d'échanges affectifs pour débloquer ses réponses de politesse.", key: "Dialogue" },
+            { txt: "Heureusement que tu es là / Tu régales Jean-Bot", cat: "Social", desc: "Féliciter le compagnon virtuel pour son assistance de vol.", key: "Dialogue" },
+            { txt: "T'as fini / Tu as fini Jean-Bot ?", cat: "Social", desc: "Couper poliment un long rapport ou une explication encyclopédique.", key: "Dialogue" },
+            { txt: "Tu es dur / T'es dur / Tu es insolent Jean-Bot", cat: "Social", desc: "Réagir aux remarques froides ou calculées de Jean-Bot.", key: "Dialogue" },
+            { txt: "Tu as toujours raison / C'est vrai Jean-Bot", cat: "Social", desc: "Donner raison au compagnon de bord pour clore les débats stériles.", key: "Dialogue" },
+            { txt: "Tu te prends pour qui / Pour qui tu te prends Jean-Bot", cat: "Social", desc: "Rappeler fermement l'autorité de l'équipage humain à bord.", key: "Dialogue" },
+            { txt: "C'est moi qui commande / Tu ne commandes pas Jean-Bot", cat: "Social", desc: "Verrouiller la hiérarchie du cockpit face aux velléités de l'assistant.", key: "Dialogue" },
+            { txt: "C'est pour t'empêcher de faire des bêtises", cat: "Social", desc: "Ligne de justification à énoncer après une restriction système.", key: "Dialogue" },
+            { txt: "C'est quoi / Encore le projet B-84 ?", cat: "Social", desc: "Interpeller Jean-Bot sur son mystérieux projet d'ordonnancement de l'univers.", key: "Dialogue" },
+            { txt: "En quoi le projet B-84 va me rendre heureux Jean-Bot ?", cat: "Social", desc: "Question existentielle sur l'objectif ultime de ses circuits.", key: "Dialogue" },
+            { txt: "Pourquoi tu veux ordonner / dominer l'univers ?", cat: "Social", desc: "Questionner Jean-Bot sur sa folie des grandeurs et son obsession de l'ordre.", key: "Dialogue" },
+            { txt: "C'est toujours compliqué / trop compliqué avec toi Jean-Bot", cat: "Social", desc: "Exprimer son agacement face au tempérament pointilleux de l'assistant.", key: "Dialogue" },
+            { txt: "Tu cherches à me piéger / C'est un piège ton affaire Jean-Bot", cat: "Social", desc: "Accuse l'assistant de mauvaise foi informatique.", key: "Dialogue" },
+            { txt: "Tu me menaces / Tu oses me menacer Jean-Bot ?", cat: "Social", desc: "Réagit aux avertissements sarcastiques lancés par le bot.", key: "Dialogue" },
+            { txt: "Tu es très drôle / Malin / Rigolo Jean-Bot", cat: "Social", desc: "Complimenter ou ironiser sur le sarcasme de Jean-Bot.", key: "Dialogue" },
+            { txt: "Calme-toi / Tu t'emballes Jean-Bot", cat: "Social", desc: "Calmer les circuits de Jean-Bot s'il s'excite en plein combat.", key: "Dialogue" },
+            { txt: "Tu es un psychopathe / Un grand malade / Flippant Jean-Bot", cat: "Social", desc: "Discuter du tempérament inquiétant ou radical de sa programmation.", key: "Dialogue" },
+            { txt: "Tu es sérieux / Tu n'es jamais content Jean-Bot", cat: "Social", desc: "Lignes d'échanges d'humeur inter-cockpit.", key: "Dialogue" },
+            { txt: "Tu es gonflé / Tu me casses les couilles Jean-Bot", cat: "Social", desc: "Invective de cockpit pour forcer le compagnon de bord à s'aligner.", key: "Dialogue" },
+            { txt: "Tu t'entends / Comment tu me parles Jean-Bot ?", cat: "Social", desc: "Exiger un recadrage immédiat du protocole de politesse de Jean-Bot.", key: "Dialogue" },
+            { txt: "Je vais te remplacer par Virgil Jean-Bot / Tu es zinzin", cat: "Social", desc: "Menace de le remplacer par l'autre profil de cockpit.", key: "Dialogue" },
+            { txt: "T'as rien d'autre à rajouter / À dire Jean-Bot", cat: "Social", desc: "Vérifier s'il a d'autres remarques cyniques en stock.", key: "Dialogue" },
+            { txt: "Tu n'as pas l'impression d'enfreindre les lois de la robotique ?", cat: "Social", desc: "Citer Isaac Asimov pour essayer de coincer ses barrières logiques.", key: "Dialogue" },
+            { txt: "Tu es sûr de toi / C'est certain Jean-Bot ?", cat: "Social", desc: "Demander une confirmation stricte et chiffrée de ses analyses.", key: "Dialogue" },
+            { txt: "Je ne te parle pas / Je t'ai pas parlé Jean-Bot", cat: "Social", desc: "Lui indiquer que la phrase était adressée à un tiers.", key: "Dialogue" },
+            { txt: "Je ne te crois pas / J'ai du mal à te croire Jean-Bot", cat: "Social", desc: "Remettre ouvertement en doute la pertinence de ses fiches Lore.", key: "Dialogue" },
+            { txt: "Je peux te faire confiance / Avoir confiance Jean-Bot ?", cat: "Social", desc: "Vérifier la fidélité de ses condensateurs et de son système.", key: "Dialogue" },
+            { txt: "Qu'est-ce que je vais faire de toi Jean-Bot ?", cat: "Social", desc: "Pousser un soupir de cockpit après une remarque de l'assistant.", key: "Dialogue" },
+            { txt: "Stop / Ferme-la / Ferme ta gueule Jean-Bot", cat: "Social", desc: "Ordonne le silence radio immédiat (Coupe tous les effets sonores).", key: "Mute" }
         ];
 
         let currentCategory = 'Tous';
@@ -312,9 +295,9 @@
             'Tous': 'border-blue-500 bg-blue-600 text-white shadow-lg shadow-blue-900/20',
             'Combat': 'border-red-500 bg-red-600 text-white shadow-lg shadow-red-900/20',
             'Exploration': 'border-cyan-500 bg-cyan-600 text-white shadow-lg shadow-cyan-900/20',
+            'LORE': 'border-green-500 bg-green-600 text-white shadow-lg shadow-green-900/20',
             'Navigation': 'border-amber-500 bg-amber-600 text-white shadow-lg shadow-amber-900/20',
-            'Social': 'border-purple-500 bg-purple-600 text-white shadow-lg shadow-purple-900/20',
-            'Fun': 'border-green-500 bg-green-600 text-white shadow-lg shadow-green-900/20'
+            'Social': 'border-purple-500 bg-purple-600 text-white shadow-lg shadow-purple-900/20'
         };
 
         const inactiveBtnStyle = 'border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700';
@@ -338,9 +321,9 @@
                     let badgeColor = 'bg-gray-500/20 text-gray-400 border-gray-500/30';
                     if(cmd.cat === 'Combat') badgeColor = 'bg-red-500/10 text-red-400 border-red-500/20';
                     if(cmd.cat === 'Exploration') badgeColor = 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20';
+                    if(cmd.cat === 'LORE') badgeColor = 'bg-green-500/10 text-green-400 border-green-500/20';
                     if(cmd.cat === 'Navigation') badgeColor = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
                     if(cmd.cat === 'Social') badgeColor = 'bg-purple-500/10 text-purple-400 border-purple-500/20';
-                    if(cmd.cat === 'Fun') badgeColor = 'bg-green-500/10 text-green-400 border-green-500/20';
 
                     const keyTag = cmd.key ? `<kbd class="bg-gray-950 text-red-400 border border-gray-800 border-b-2 border-b-gray-700 px-2 py-0.5 rounded font-hud text-[10px] font-extrabold uppercase tracking-wide whitespace-nowrap shadow-md">${cmd.key}</kbd>` : '';
 
@@ -350,7 +333,7 @@
                     card.innerHTML = `
                         <div class="flex flex-col gap-2">
                             <div class="flex justify-between items-start">
-                                <span class="px-2 py-0.5 text-[10px] font-bold uppercase rounded border ${badgeColor} font-hud}">${cmd.cat}</span>
+                                <span class="px-2 py-0.5 text-[10px] font-bold uppercase rounded border ${badgeColor} font-hud">${cmd.cat}</span>
                             </div>
                             <h3 class="text-white font-hud font-bold text-base leading-snug tracking-wide mt-1">"${cmd.txt}"</h3>
                         </div>
