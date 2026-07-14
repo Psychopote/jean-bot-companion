@@ -25,9 +25,9 @@
 </head>
 <body class="min-h-screen flex flex-col font-sans selection:bg-red-600 selection:text-white">
 
-    <!-- HEADER & LOGO + BANDEAU HUD ABSOLUMENT CENTRÉ -->
+    <!-- HEADER & LOGO + BANDEAU HUD CENTRAL INTERVERTAL -->
     <header class="border-b border-red-950 bg-gray-900/50 backdrop-blur sticky top-0 z-50 px-4 py-3">
-        <!-- Utilisation d'une grille à 3 colonnes pour forcer le centrage parfait du bloc du milieu -->
+        <!-- Grille à 3 colonnes pour garantir un centrage géométrique parfait -->
         <div class="max-w-7xl mx-auto flex flex-col md:grid md:grid-cols-3 items-center gap-4">
             
             <!-- COLONNE GAUCHE : BLOC LOGO ET NOM -->
@@ -103,20 +103,49 @@
         </div>
     </main>
 
+    <!-- INTERFACE EN DEPLOYEMENT CINETIQUE (MODAL AVIONIQUE) -->
+    <div id="hudModal" class="opacity-0 pointer-events-none fixed inset-0 bg-gray-950/50 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-all duration-300 ease-out" onclick="closeHudModal()">
+        <div id="modalBox" class="bg-gray-900 border border-gray-800 rounded-2xl max-w-lg w-full p-6 relative transform scale-90 opacity-0 transition-all duration-300 ease-out flex flex-col gap-5" onclick="event.stopPropagation()">
+            
+            <!-- CROCHETS DE CIBLAGE FIXÉS EN HTML (Impossible de générer un carré fermé) -->
+            <div id="bracket-tl" class="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 transition-colors duration-300"></div>
+            <div id="bracket-tr" class="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 transition-colors duration-300"></div>
+            <div id="bracket-bl" class="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 transition-colors duration-300"></div>
+            <div id="bracket-br" class="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 transition-colors duration-300"></div>
+
+            <div class="flex justify-between items-start z-10">
+                <span id="modalBadge" class="px-2.5 py-1 text-xs font-bold uppercase rounded border font-hud"></span>
+                <button onclick="closeHudModal()" class="text-gray-500 hover:text-white transition-colors cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            
+            <h2 id="modalTitle" class="text-white font-hud font-extrabold text-2xl leading-snug tracking-wide z-10"></h2>
+            
+            <div class="border-t border-gray-800/80 pt-4 z-10">
+                <span class="text-gray-500 font-hud text-[10px] uppercase font-bold tracking-widest block mb-1">Spécification Technique</span>
+                <p id="modalDesc" class="text-gray-300 text-base sm:text-lg leading-relaxed font-hud font-medium"></p>
+            </div>
+            
+            <div id="modalKeyContainer" class="border-t border-gray-800/80 pt-4 flex justify-between items-center z-10">
+                <span class="text-gray-500 font-hud text-[10px] uppercase font-bold tracking-widest">Raccourci Avionique</span>
+                <span id="modalKey"></span>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="border-t border-gray-900 bg-gray-950 text-center py-4 text-xs text-gray-500 font-hud tracking-wider font-semibold">
-        <p>&copy; 2026 Jean-Bot Premium</p>
+        <p>&copy; 2026 Jean-Bot Premium • Index Tactique Modulaire Avionique Fixé.</p>
     </footer>
 
     <script>
-        // Base de données révisée et ventilée d'après le profil réel de Joffré
+        // Base de données complète d'après les profils réels de VoiceAttack
         const jeanBotCommands = [
             // =========================================================================
             // CATEGORIE : NAVIGATION & SYSTEMES COCKPIT
             // =========================================================================
             { txt: "Allumage / Activation du système", cat: "Navigation", desc: "Mettre sous tension l'ordinateur de bord et initialiser le HUD général.", key: "R" },
             { txt: "Allume le / Éteins le / Active le vaisseau", cat: "Navigation", desc: "Gérer l'alimentation générale des réacteurs d'énergie principaux.", key: "U" },
-            { txt: "Active / Coupe / Arrêt des moteurs", cat: "Navigation", desc: "Couper ou initialiser l'alimentation des propulseurs principaux.", key: "I" },
+            { txt: "Active / Coupe / Arrêt des moteurs", cat: "Navigation", desc: "Couper ou initialiser l'alimentation des propusseurs principaux.", key: "I" },
             { txt: "Active / Désactive le mode croisière", cat: "Navigation", desc: "Engager le maintien automatique du vecteur de poussée cinétique.", key: "Alt + C" },
             { txt: "Active le limiteur", cat: "Navigation", desc: "Brider la vitesse maximale autorisée pour sécuriser les manœuvres de précision.", key: "Alt + [" },
             { txt: "Désactive le limiteur", cat: "Navigation", desc: "Libère la vitesse maximale autorisée par le châssis.", key: "Alt + ]" },
@@ -395,7 +424,7 @@
             const searchTerms = document.getElementById('searchBar').value.toLowerCase();
             
             grid.innerHTML = '';
-            let hasCards = false;
+            hasCards = false;
 
             jeanBotCommands.forEach(cmd => {
                 const matchesSearch = cmd.txt.toLowerCase().includes(searchTerms) || cmd.desc.toLowerCase().includes(searchTerms);
@@ -415,7 +444,8 @@
                     const keyTag = cmd.key ? `<kbd class="bg-gray-950 text-red-400 border border-gray-800 border-b-2 border-b-gray-700 px-2 py-0.5 rounded font-hud text-[10px] font-extrabold uppercase tracking-wide whitespace-nowrap shadow-md">${cmd.key}</kbd>` : '';
 
                     const card = document.createElement('div');
-                    card.className = "bg-gray-900 border border-gray-800 hover:border-red-600/50 rounded-xl p-4 flex flex-col justify-between gap-4 transition-all duration-200 shadow-md hover:shadow-red-950/10 hover:scale-[1.02]";
+                    card.className = "bg-gray-900 border border-gray-800 hover:border-red-600/50 rounded-xl p-4 flex flex-col justify-between gap-4 transition-all duration-200 shadow-md hover:shadow-red-950/10 hover:scale-[1.02] cursor-pointer";
+                    card.setAttribute('onclick', `openHudModal("${encodeURIComponent(cmd.txt)}", "${cmd.cat}", "${encodeURIComponent(cmd.desc)}", "${cmd.key}")`);
                     
                     card.innerHTML = `
                         <div class="flex flex-col gap-2">
@@ -425,7 +455,7 @@
                             <h3 class="text-white font-hud font-bold text-base leading-snug tracking-wide mt-1">"${cmd.txt}"</h3>
                         </div>
                         <div class="text-gray-400 text-xs border-t border-gray-800/60 pt-3 flex justify-between items-center gap-4">
-                            <p class="flex-1 leading-relaxed font-hud font-medium">${cmd.desc}</p>
+                            <p class="flex-1 leading-relaxed font-hud font-medium line-clamp-2 md:line-clamp-none">${cmd.desc}</p>
                             ${keyTag}
                         </div>
                     `;
@@ -440,7 +470,86 @@
             }
         }
 
-        // Gestion du changement de catégorie avec allumage de couleur
+        // Fonction d'ouverture du Zoom HUD Tactique avec couleur injectée en JavaScript pur (zéro effet de carré fermé)
+        function openHudModal(txt, cat, desc, key) {
+            const modal = document.getElementById('hudModal');
+            const box = document.getElementById('modalBox');
+            
+            document.getElementById('modalTitle').innerText = `"${decodeURIComponent(txt)}"`;
+            document.getElementById('modalDesc').innerText = decodeURIComponent(desc);
+            
+            const badge = document.getElementById('modalBadge');
+            badge.innerText = cat;
+            badge.className = "px-2.5 py-1 text-xs font-bold uppercase rounded border font-hud ";
+            
+            // Palette de couleurs pour l'ATH
+            const colorMap = {
+                'Combat': '#ef4444',
+                'Minage': '#8b5cf6',
+                'Exploration': '#06b6d4',
+                'LORE': '#22c55e',
+                'Navigation': '#f97316',
+                'Social': '#ec4899'
+            };
+            
+            const activeColor = colorMap[cat] || '#3b82f6';
+            let glowColor = 'rgba(59, 130, 246, 0.4)';
+            
+            if(cat === 'Combat') {
+                badge.classList.add('bg-red-500/10', 'text-red-400', 'border-red-500/20');
+                glowColor = 'rgba(239, 68, 68, 0.5)';
+            }
+            if(cat === 'Minage') {
+                badge.classList.add('bg-violet-500/10', 'text-violet-400', 'border-violet-500/20');
+                glowColor = 'rgba(139, 92, 246, 0.5)';
+            }
+            if(cat === 'Exploration') {
+                badge.classList.add('bg-cyan-500/10', 'text-cyan-400', 'border-cyan-500/20');
+                glowColor = 'rgba(6, 182, 212, 0.5)';
+            }
+            if(cat === 'LORE') {
+                badge.classList.add('bg-green-500/10', 'text-green-400', 'border-green-500/20');
+                glowColor = 'rgba(34, 197, 94, 0.5)';
+            }
+            if(cat === 'Navigation') {
+                badge.classList.add('bg-orange-500/10', 'text-orange-400', 'border-orange-500/20');
+                glowColor = 'rgba(249, 115, 22, 0.5)';
+            }
+            if(cat === 'Social') {
+                badge.classList.add('bg-pink-500/10', 'text-pink-400', 'border-pink-500/20');
+                glowColor = 'rgba(236, 72, 153, 0.5)';
+            }
+
+            // Application de la couleur en style direct (Garantit de ne conserver QUE les angles définis en HTML stricts)
+            const corners = ['bracket-tl', 'bracket-tr', 'bracket-bl', 'bracket-br'];
+            corners.forEach(id => {
+                document.getElementById(id).style.borderColor = activeColor;
+            });
+
+            box.style.boxShadow = `0 0 35px ${glowColor}`;
+
+            // Déclenchement de la transition cinétique fluide
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                box.classList.remove('scale-90', 'opacity-0');
+                box.classList.add('scale-100', 'opacity-100');
+            }, 15);
+        }
+
+        // Fonction de fermeture cinétique inversée
+        function closeHudModal() {
+            const modal = document.getElementById('hudModal');
+            const box = document.getElementById('modalBox');
+            
+            box.classList.remove('scale-100', 'opacity-100');
+            box.classList.add('scale-90', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+            }, 250);
+        }
+
+        // Gestion du changement de catégorie
         function filterCategory(category) {
             currentCategory = category;
             
