@@ -29,9 +29,8 @@
     <header class="border-b border-red-950 bg-gray-900/50 backdrop-blur sticky top-0 z-50 px-4 py-4">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-between shadow-lg shadow-red-900/30">
-                    <i class="fa-solid fa-robot text-white text-2xl m-auto"></i>
-                </div>
+                <!-- Intégration de ton logo favicon personnalisé à la place de l'icône de robot -->
+                <img src="favicon.png" alt="Logo Jean-Bot" class="w-12 h-12 rounded-lg object-contain bg-gray-950 border border-gray-800 p-1 shadow-lg shadow-red-950/20">
                 <div>
                     <h1 class="text-xl font-extrabold tracking-wide text-white uppercase font-hud">Jean-Bot <span class="text-red-500">Premium</span></h1>
                     <p class="text-xs text-gray-400 font-hud tracking-widest uppercase font-semibold">Compagnon de Bord Virtuel • v20.8</p>
@@ -57,7 +56,7 @@
                     class="w-full bg-gray-950 border border-gray-800 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors font-hud">
             </div>
 
-            <!-- Filtres par catégorie avec la nouvelle palette de contrastes demandée -->
+            <!-- Filtres par catégorie épurés -->
             <div class="flex flex-wrap gap-2" id="filterContainer">
                 <button onclick="filterCategory('Tous')" id="btn-Tous" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-blue-500 bg-blue-600 text-white shadow-lg shadow-blue-900/20 font-hud uppercase tracking-wider">Tous</button>
                 <button onclick="filterCategory('Combat')" id="btn-Combat" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Combat</button>
@@ -83,7 +82,7 @@
 
     <!-- FOOTER -->
     <footer class="border-t border-gray-900 bg-gray-950 text-center py-4 text-xs text-gray-500 font-hud tracking-wider font-semibold">
-        <p>&copy; 2026 Jean-Bot Premium • Structure Chromatique Haudra-Contraste Validée.</p>
+        <p>&copy; 2026 Jean-Bot Premium • Parité Intégrale VoiceAttack Validée.</p>
     </footer>
 
     <script>
@@ -144,8 +143,8 @@
             { txt: "Active / Allume les boucliers / Shield", cat: "Combat", desc: "Alimenter et lève la grille des générateurs défensifs généraux.", key: "Alt + O" },
             { txt: "Éteins / Désactive les boucliers / Shield", cat: "Combat", desc: "Coupe l'attribution d'énergie de la matrice défensive passive.", key: "Alt + P" },
             { txt: "Reset / Réinitialise / Équilibre les boucliers", cat: "Combat", desc: "Rééquilibrer instantanément la puissance à 25% équitablement sur les 4 faces.", key: "Num 8" },
-            { txt: "Augmente / Renforce le bouclier avant / arrière", cat: "Combat", desc: "Surcharger la face choisie en redirigeant l'énergie des générateurs.", key: "Haut / Bas" },
-            { txt: "Augmente / Renforce le bouclier droit / gauche", cat: "Combat", desc: "Surcharger le flanc choisi en redirigeant l'énergie des générateurs.", key: "Droit / Gauche" },
+            { txt: "Augmente / Renforce le bouclier avant / arrière", cat: "Combat", desc: "Surcharger la face choisie en redirigeant l'énergie des générateurs.", key: "Flèche Haut / Bas" },
+            { txt: "Augmente / Renforce le bouclier droit / gauche", cat: "Combat", desc: "Surcharger le flanc choisi en redirigeant l'énergie des générateurs.", key: "Flèche Droite / Gauche" },
             { txt: "Bouclier arrière puissance maximale", cat: "Combat", desc: "Surcharger instantanément et au maximum la protection de la poupe.", key: "Flèche Bas" },
             { txt: "Active / Désactive les armes / l'armement", cat: "Combat", desc: "Basculer la sécurité physique des tourelles, canons et répéteurs.", key: "P" },
             { txt: "Reboot / Redémarre / Reset des armes", cat: "Combat", desc: "Forcer un cycle de redémarrage des condensateurs de tir.", key: "P (Maintien)" },
@@ -287,10 +286,10 @@
             { txt: "C'est pour t'empêcher de faire des bêtises", cat: "Social", desc: "Ligne de justification à énoncer après une restriction système.", key: "Dialogue" },
             { txt: "C'est quoi / Encore le projet B-84 ?", cat: "Social", desc: "Interpeller Jean-Bot sur son mystérieux projet d'ordonnancement de l'univers.", key: "Dialogue" },
             { txt: "En quoi le projet B-84 va me rendre heureux Jean-Bot ?", cat: "Social", desc: "Question existentielle sur l'objectif ultime de ses circuits.", key: "Dialogue" },
-            { txt: "Pourquoi tu veux ordonner / dominer l'univers ?", cat: "Social", desc: "Questionner Jean-Bot sur sa folie des grandeur et son obsession de l'ordre.", key: "Dialogue" },
+            { txt: "Pourquoi tu veux ordonner / dominer l'univers ?", cat: "Social", desc: "Questionner Jean-Bot sur sa folie des grandeurs et son obsession de l'ordre.", key: "Dialogue" },
             { txt: "C'est toujours compliqué / trop compliqué avec toi Jean-Bot", cat: "Social", desc: "Exprimer son agacement face au tempérament pointilleux de l'assistant.", key: "Dialogue" },
             { txt: "Tu cherches à me piéger / C'est un piège ton affaire Jean-Bot", cat: "Social", desc: "Accuse l'assistant de mauvaise foi informatique.", key: "Dialogue" },
-            { txt: "Tu me menaces / Tu oses me menace Jean-Bot ?", cat: "Social", desc: "Réagit aux avertissements sarcastiques lancés par le bot.", key: "Dialogue" },
+            { txt: "Tu me menaces / Tu oses me menacer Jean-Bot ?", cat: "Social", desc: "Réagit aux avertissements sarcastiques lancés par le bot.", key: "Dialogue" },
             { txt: "Tu es très drôle / Malin / Rigolo Jean-Bot", cat: "Social", desc: "Complimenter ou ironiser sur le sarcasme de Jean-Bot.", key: "Dialogue" },
             { txt: "Calme-toi / Tu t'emballes Jean-Bot", cat: "Social", desc: "Calmer les circuits de Jean-Bot s'il s'excite en plein combat.", key: "Dialogue" },
             { txt: "Tu es un psychopathe / Un grand malade / Flippant Jean-Bot", cat: "Social", desc: "Discuter du tempérament inquiétant ou radical de sa programmation.", key: "Dialogue" },
