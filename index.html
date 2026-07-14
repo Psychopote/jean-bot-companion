@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JEAN-BOT PREMIUM - Tableau de Bord Commandes</title>
+    <!-- Tailwind CSS pour un design pro et responsive -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Importation de la police "Exo 2" (Futuriste, Accessible & Haute Visibilité) -->
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* Défilement personnalisé style cockpit */
@@ -22,6 +25,7 @@
 </head>
 <body class="min-h-screen flex flex-col font-sans selection:bg-red-600 selection:text-white">
 
+    <!-- HEADER & LOGO -->
     <header class="border-b border-red-950 bg-gray-900/50 backdrop-blur sticky top-0 z-50 px-4 py-4">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
@@ -42,18 +46,22 @@
         </div>
     </header>
 
+    <!-- ZONE DE RECHERCHE ET FILTRES -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 flex flex-col gap-6">
         
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 shadow-xl flex flex-col gap-4">
+            <!-- Barre de recherche -->
             <div class="relative">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-gray-500"></i>
                 <input type="text" id="searchBar" placeholder="Rechercher un ordre, un minerai, une lune ou un dossier de Lore..." 
                     class="w-full bg-gray-950 border border-gray-800 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors font-hud">
             </div>
 
+            <!-- Filtres par catégorie épurés avec le bouton MINAGE en orange -->
             <div class="flex flex-wrap gap-2" id="filterContainer">
                 <button onclick="filterCategory('Tous')" id="btn-Tous" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-blue-500 bg-blue-600 text-white shadow-lg shadow-blue-900/20 font-hud uppercase tracking-wider">Tous</button>
                 <button onclick="filterCategory('Combat')" id="btn-Combat" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Combat</button>
+                <button onclick="filterCategory('Minage')" id="btn-Minage" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Minage</button>
                 <button onclick="filterCategory('Exploration')" id="btn-Exploration" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Exploration</button>
                 <button onclick="filterCategory('LORE')" id="btn-LORE" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Lore</button>
                 <button onclick="filterCategory('Navigation')" id="btn-Navigation" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Navigation</button>
@@ -61,21 +69,25 @@
             </div>
         </div>
 
+        <!-- GRILLE DE COMMANDES -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="commandsGrid">
-            </div>
+            <!-- Injecté via JS -->
+        </div>
 
+        <!-- Message "Aucun résultat" -->
         <div id="noResult" class="hidden text-center py-12 flex flex-col gap-3">
             <i class="fa-solid fa-robot text-gray-700 text-5xl"></i>
             <p class="text-gray-400 font-semibold font-hud">Bip Boop... Aucune commande ne correspond à votre recherche.</p>
         </div>
     </main>
 
+    <!-- FOOTER -->
     <footer class="border-t border-gray-900 bg-gray-950 text-center py-4 text-xs text-gray-500 font-hud tracking-wider font-semibold">
-        <p>&copy; 2026 Jean-Bot Premium • Structure Documentaire de Cockpit Validée.</p>
+        <p>&copy; 2026 Jean-Bot Premium • Structure Documentaire Spécifique Validée.</p>
     </footer>
 
     <script>
-        // Base de données révisée et ventilée avec la nouvelle catégorie LORE
+        // Base de données révisée et ventilée - Catégorie Minage totalement isolée
         const jeanBotCommands = [
             // =========================================================================
             // CATEGORIE : NAVIGATION & SYSTEMES COCKPIT
@@ -132,8 +144,8 @@
             { txt: "Active / Allume les boucliers / Shield", cat: "Combat", desc: "Alimenter et lève la grille des générateurs défensifs généraux.", key: "Alt + O" },
             { txt: "Éteins / Désactive les boucliers / Shield", cat: "Combat", desc: "Coupe l'attribution d'énergie de la matrice défensive passive.", key: "Alt + P" },
             { txt: "Reset / Réinitialise / Équilibre les boucliers", cat: "Combat", desc: "Rééquilibrer instantanément la puissance à 25% équitablement sur les 4 faces.", key: "Num 8" },
-            { txt: "Augmente / Renforce le bouclier avant / arrière", cat: "Combat", desc: "Surcharger la face choisie en redirigeant l'énergie des générateurs.", key: "Flèche Haut / Bas" },
-            { txt: "Augmente / Renforce le bouclier droit / gauche", cat: "Combat", desc: "Surcharger le flanc choisi en redirigeant l'énergie des générateurs.", key: "Flèche Droite / Gauche" },
+            { txt: "Augmente / Renforce le bouclier avant / arrière", cat: "Combat", desc: "Surcharger la face choisie en redirigeant l'énergie des générateurs.", key: "Haut / Bas" },
+            { txt: "Augmente / Renforce le bouclier droit / gauche", cat: "Combat", desc: "Surcharger le flanc choisi en redirigeant l'énergie des générateurs.", key: "Droit / Gauche" },
             { txt: "Bouclier arrière puissance maximale", cat: "Combat", desc: "Surcharger instantanément et au maximum la protection de la poupe.", key: "Flèche Bas" },
             { txt: "Active / Désactive les armes / l'armement", cat: "Combat", desc: "Basculer la sécurité physique des tourelles, canons et répéteurs.", key: "P" },
             { txt: "Reboot / Redémarre / Reset des armes", cat: "Combat", desc: "Forcer un cycle de redémarrage des condensateurs de tir.", key: "P (Maintien)" },
@@ -142,7 +154,7 @@
             { txt: "Lock / Cible / Verrouille la cible principale", cat: "Combat", desc: "Acquérir la signature radar du vaisseau ennemi situé en face.", key: "T" },
             { txt: "Lock / Cible / Verrouille la cible 1 / 2 / 3", cat: "Combat", desc: "Sélectionner un des vaisseaux mémorisés dans la liste prioritaire.", key: "1 / 2 / 3" },
             { txt: "Marque / Pin / Épingle la cible", cat: "Combat", desc: "Épingler un adversaire pour conserver son affichage ATH permanent.", key: "219" },
-            { txt: "Marque la cible une / Épingle le un / Épingle un", cat: "Combat", desc: "Attribuer le marqueur prioritaire numéro 1 à l'appareil ciblé.", key: "Macro" },
+            { txt: "Marque la cible une / Épingle le un", cat: "Combat", desc: "Attribuer le marqueur prioritaire numéro 1 à l'appareil ciblé.", key: "Macro" },
             { txt: "Verrouille / Lock le sous-système", cat: "Combat", desc: "Focaliser le calcul des tourelles sur un composant précis (Moteurs, Générateur).", key: "R" },
             { txt: "Active la tourelle un / deux / trois / Gimbal", cat: "Combat", desc: "Engager l'articulation motorisée ou le suivi automatique des tourelles.", key: "G" },
             { txt: "Désactive la tourelle / le Gimbal", cat: "Combat", desc: "Verrouiller les tourelles en axe fixe vers l'avant.", key: "G" },
@@ -153,55 +165,61 @@
             { txt: "Augmente les armes / moteurs au maximum / à fond", cat: "Combat", desc: "Surcharger le répartiteur (Power Triangle) à 100% sur le pôle choisi.", key: "F5 / F7" },
             { txt: "Augmente / Monte / Diminue les armes / moteurs / boucliers", cat: "Combat", desc: "Ajuster par incréments réguliers le triangle de puissance énergétique.", key: "F5/F6/F7" },
             { txt: "Diminue les armes / moteurs / boucliers au minimum", cat: "Combat", desc: "Vider entièrement l'attribution de puissance du composant énoncé.", key: "F5/F6/F7" },
-            { txt: "Quantum Snare (Intercepteur de saut / interdire le quantum)", cat: "Combat", desc: "Déployer le champ de distorsion d'interdiction quantique (RSI Mantis).", key: "Alt + 7" },
+            { txt: "Quantum Snare (Intercepteur de saut)", cat: "Combat", desc: "Déployer le champ de distorsion d'interdiction quantique (RSI Mantis).", key: "Alt + 7" },
             { txt: "Brouilleur quantique", cat: "Combat", desc: "Activer le module de brouillage pour empêcher la fuite des vaisseaux proches.", key: "Alt + 7" },
             { txt: "Caméra / Active la vue missile", cat: "Combat", desc: "Suit balistiquement la trajectoire du missile tiré.", key: "Alt + V" },
             { txt: "Jean-Bot éjection", cat: "Combat", desc: "Déclencher la procédure d'éjection d'urgence absolue du pilote.", key: "Ctrl + Alt + Y" },
 
             // =========================================================================
-            // CATEGORIE : EXPLORATION TACTIQUE (GAMEPLAY)
+            // CATEGORIE : MINAGE (ORANGE) - RECHERCHE DE GISEMENTS ET OUTILS LASER
             // =========================================================================
-            { txt: "Allume le / Active le / Allumage du sonar", cat: "Exploration", desc: "Envoyer des impulsions radars à balayage pour détecter les signatures.", key: "Tab" },
-            { txt: "Désactive le / Arrête le / Stop le sonar", cat: "Exploration", desc: "Coupe les salves d'analyses scanners actives.", key: "Tab" },
-            { txt: "Active / Désactive les lignes de précision / le pip", cat: "Exploration", desc: "Guide visuel d'aide à l'alignement pour les lasers.", key: "Alt + I" },
-            { txt: "Active le mode minage / laser / recyclage / salvage", cat: "Exploration", desc: "Déployer les bras mécaniques articulés utilitaires (Prospector, Vulture).", key: "," },
-            { txt: "Active le mode la fracture / la fracturation", cat: "Exploration", desc: "Configurer le laser de minage en mode Haute Fréquence brise-roche.", key: "Alt + Z" },
-            { txt: "Désactive la fracture / la fracturation", cat: "Exploration", desc: "Désengager le mode de destruction thermique.", key: "Alt + Z" },
-            { txt: "Active la désintégration / On le mange / Récupération", cat: "Exploration", desc: "Activer les têtes d'aspiration pour racler les coques métalliques (Salvage).", key: "Alt + S" },
-            { txt: "Désactive la désintégration / l'aspiration / la récupération", cat: "Exploration", desc: "Arrêter les têtes de collecte moléculaire.", key: "Alt + S" },
-            { txt: "Change de tête / Changement de tête / Switch de tête / Bascule", cat: "Exploration", desc: "Permuter le module utilitaire actif sur les bras de récolte.", key: "Alt + R" },
-            { txt: "Tête de droite / Tête de gauche", cat: "Exploration", desc: "Sélectionner le bras utilitaire gauche ou droit à contrôler.", key: "Molette Click" },
-            { txt: "Active le module un / deux / trois", cat: "Exploration", desc: "Déclencher un consommable équipé sur la tête de minage (Surge, Optimax...).", key: "Alt + Chiffre" },
-            { txt: "Les deux têtes / Toutes les têtes / Double tête", cat: "Exploration", desc: "Engager l'ensemble des lasers utilitaires simultanément.", key: "Macro" },
-            { txt: "Augmente / Baisse la puissance de [1 à 10]", cat: "Exploration", desc: "Ajustement de précision de l'intensité du laser.", key: "Molette" },
-            { txt: "Augmente / Baisse la puissance de [20 à 100]", cat: "Exploration", desc: "Surcharges majeures ou chutes d'intensité pour stabiliser la charge.", key: "Molette" },
-            { txt: "Augmente / Élargit / Diminue / Affine le scanneur / Scane air", cat: "Exploration", desc: "Modifier l'angle d'ouverture du cône focal d'analyse radar.", key: "Souris" },
-            { txt: "Augmente / Monte / Baisse la convergence", cat: "Exploration", desc: "Régler la distance de croisement des lasers articulés.", key: "+ / -" },
-            { txt: "Convergence maximum / convergence minimum / rizette", cat: "Exploration", desc: "Forcer la focalisation des lasers à leurs limites d'usine.", key: "Macro" },
+            { txt: "Active le mode minage / laser / recyclage / salvage", cat: "Minage", desc: "Déployer les bras mécaniques articulés utilitaires (Prospector, Vulture).", key: "," },
+            { txt: "Active le mode la fracture / la fracturation", cat: "Minage", desc: "Configurer le laser de minage en mode Haute Fréquence brise-roche.", key: "Alt + Z" },
+            { txt: "Désactive la fracture / la fracturation", cat: "Minage", desc: "Désengager le mode de destruction thermique.", key: "Alt + Z" },
+            { txt: "Active la désintégration / On le mange / Récupération", cat: "Minage", desc: "Activer les têtes d'aspiration pour racler les coques métalliques (Salvage).", key: "Alt + S" },
+            { txt: "Désactive la désintégration / l'aspiration / la récupération", cat: "Minage", desc: "Arrêter les têtes de collecte moléculaire.", key: "Alt + S" },
+            { txt: "Change de tête / Changement de tête / Switch de tête / Bascule", cat: "Minage", desc: "Permuter le module utilitaire actif sur les bras de récolte.", key: "Alt + R" },
+            { txt: "Tête de droite / Tête de gauche", cat: "Minage", desc: "Sélectionner le bras utilitaire gauche ou droit à contrôler.", key: "Molette Click" },
+            { txt: "Active le module un / deux / trois", cat: "Minage", desc: "Déclencher un consommable équipé sur la tête de minage (Surge, Optimax...).", key: "Alt + Chiffre" },
+            { txt: "Les deux têtes / Toutes les têtes / Double tête", cat: "Minage", desc: "Engager l'ensemble des lasers utilitaires simultanément.", key: "Macro" },
+            { txt: "Augmente de un / deux / trois / quatre / cinq / huit / neuf / dix", cat: "Minage", desc: "Ajuster précisément la puissance du laser (Molette souris haut).", key: "Molette" },
+            { txt: "Augmente de vingt / trente / quarante / cinquante / soixante / cent / soixante-dix", cat: "Minage", desc: "Appliquer une surcharge majeure d'intensité sur le rayon.", key: "Molette" },
+            { txt: "Baisse de un / deux / trois / quatre / cinq / huit / neuf / dix", cat: "Minage", desc: "Réduire finement la puissance du laser (Molette souris bas).", key: "Molette" },
+            { txt: "Baisse de vingt / trente / quarante / cinquante / soixante-dix", cat: "Minage", desc: "Chuter l'intensité pour stabiliser le niveau de charge de la roche.", key: "Molette" },
+            { txt: "Augmente / Monte / Baisse la convergence", cat: "Minage", desc: "Régler la distance de croisement des lasers articulés.", key: "+ / -" },
+            { txt: "Convergence maximum / convergence minimum / rizette", cat: "Minage", desc: "Forcer la focalisation des lasers à leurs limites d'usine.", key: "Macro" },
+            { txt: "Jean-Bot, où trouver du Agricium", cat: "Minage", desc: "Gisement : Minerai précieux. Signatures radars types : 3570, 7140, 10710, 14280.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Béryl", cat: "Minage", desc: "Gisement : Roche standard. Signatures radars types : 3200, 6400.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Borase", cat: "Minage", desc: "Gisement : Matériau rare. Signatures radars types : 3540, 7080, 10620, 14160.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Cuivre / Copper", cat: "Minage", desc: "Gisement : Métal commun. Signatures radars types : 3370, 6740, 10110.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Corindon / Corundum", cat: "Minage", desc: "Gisement : Pierre basique. Signatures radars types : 3385, 6770, 10155.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Hephaestanite", cat: "Minage", desc: "Gisement : Commun. Signatures radars types : 3400, 6800, 10200.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Or / Gold", cat: "Minage", desc: "Gisement : Métal précieux. Signatures radars types : 3855, 7710, 11565, 15420, 19275.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Glace / Ice", cat: "Minage", desc: "Gisement : Élément basique. Signatures radars : 3000, 9000, 15000, 21000, 27000.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Fer / Iron", cat: "Minage", desc: "Gisement : Métal industriel. Signatures radars types : 3555, 7110, 10665, 14220.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Lindinite", cat: "Minage", desc: "Gisement : Matériau très rare. Signatures radars : 4210, 8420, 12630, 16840, 21050, 25260.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Quantanium", cat: "Minage", desc: "Gisement : Matière volatile et ultra-précieuse. Signatures : 4225, 8450, 12675, 16900, 21125, 25350.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Riccite", cat: "Minage", desc: "Gisement : Roche de structure. Signatures radars types : 3185, 6370.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Savrilium", cat: "Minage", desc: "Gisement : Matériau rare. Signatures radars : 3900, 7800, 11700, 15600, 19500.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Stiléron", cat: "Minage", desc: "Gisement : Roche sédimentaire. Signatures radars types : 3585, 7170, 10755, 14340.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Étain / Tin", cat: "Minage", desc: "Gisement : Élément basique. Signatures radars types : 3600, 7200, 10800, 14400.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Titane / Titanium / Aluminium", cat: "Minage", desc: "Gisement : Métal industriel. Signatures radars types : 4240, 8480, 12720, 16960, 21200, 25440.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Aslarite / Bexalite / Laranite / Ouratite / Quartz", cat: "Minage", desc: "Gisement : Liste exhaustive des signatures de roches précieuses de l'Empire.", key: "Fiche" },
+            { txt: "Jean-Bot, où trouver du Silicium / Taranite / Torite / Tungstène", cat: "Minage", desc: "Gisement : Liste exhaustive des signatures de matériaux lourds pour le forage.", key: "Fiche" },
+            { txt: "Signatures radars [Tableau complet de 2 000 à 30 000]", cat: "Minage", desc: "Aide-mémoire technique complet pour décoder la pureté d'une roche au radar.", key: "HUD" },
+            { txt: "Signature supérieure à trente mille", cat: "Minage", desc: "Alerte de masse : Masse rocheuse trop dense pour les extracteurs standards.", key: "HUD" },
 
             // =========================================================================
-            // CATEGORIE : LORE (VERT) - ENCYCLOPÉDIE ET RECHERCHE DE CONNAISSANCES
+            // CATEGORIE : EXPLORATION (RECHERCHE NAVIGATIONNELLE & RADARS)
             // =========================================================================
-            { txt: "Jean-Bot, où trouver du Agricium", cat: "LORE", desc: "Gisement : Minerai précieux. Signatures radars types : 3570, 7140, 10710, 14280.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Béryl", cat: "LORE", desc: "Gisement : Roche standard. Signatures radars types : 3200, 6400.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Borase", cat: "LORE", desc: "Gisement : Matériau rare. Signatures radars types : 3540, 7080, 10620, 14160.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Cuivre / Copper", cat: "LORE", desc: "Gisement : Métal commun. Signatures radars types : 3370, 6740, 10110.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Corindon / Corundum", cat: "LORE", desc: "Gisement : Pierre basique. Signatures radars types : 3385, 6770, 10155.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Hephaestanite", cat: "LORE", desc: "Gisement : Commun. Signatures radars types : 3400, 6800, 10200.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Or / Gold", cat: "LORE", desc: "Gisement : Métal précieux. Signatures radars types : 3855, 7710, 11565, 15420, 19275.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Glace / Ice", cat: "LORE", desc: "Gisement : Élément basique. Signatures radars : 3000, 9000, 15000, 21000, 27000.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Fer / Iron", cat: "LORE", desc: "Gisement : Métal industriel. Signatures radars types : 3555, 7110, 10665, 14220.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Lindinite", cat: "LORE", desc: "Gisement : Matériau très rare. Signatures radars : 4210, 8420, 12630, 16840, 21050, 25260.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Quantanium", cat: "LORE", desc: "Gisement : Matière volatile et ultra-précieuse. Signatures : 4225, 8450, 12675, 16900, 21125, 25350.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Riccite", cat: "LORE", desc: "Gisement : Roche de structure. Signatures radars types : 3185, 6370.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Savrilium", cat: "LORE", desc: "Gisement : Matériau rare. Signatures radars : 3900, 7800, 11700, 15600, 19500.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Stiléron", cat: "LORE", desc: "Gisement : Roche sédimentaire. Signatures radars types : 3585, 7170, 10755, 14340.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Étain / Tin", cat: "LORE", desc: "Gisement : Élément basique. Signatures radars types : 3600, 7200, 10800, 14400.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Titane / Titanium / Aluminium", cat: "LORE", desc: "Gisement : Métal industriel. Signatures radars types : 4240, 8480, 12720, 16960, 21200, 25440.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Aslarite / Bexalite / Laranite / Ouratite / Quartz", cat: "LORE", desc: "Gisement : Liste exhaustive des signatures de roches précieuses de l'Empire.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Silicium / Taranite / Torite / Tungstène", cat: "LORE", desc: "Gisement : Liste exhaustive des signatures de matériaux lourds pour le forage.", key: "Fiche" },
-            { txt: "Signatures radars [Tableau complet de 2 000 à 30 000]", cat: "LORE", desc: "Aide-mémoire technique complet pour décoder la pureté d'une roche au radar.", key: "HUD" },
-            { txt: "Signature supérieure à trente mille", cat: "LORE", desc: "Alerte de masse : Masse rocheuse trop dense pour les extracteurs standards.", key: "HUD" },
+            { txt: "Allume le / Active le / Allumage du sonar", cat: "Exploration", desc: "Envoyer des impulsions radars à balayage pour détecter les signatures environnantes.", key: "Tab" },
+            { txt: "Désactive le / Arrête le / Stop le sonar", cat: "Exploration", desc: "Coupe les salves d'analyses scanners actives.", key: "Tab" },
+            { txt: "Active / Désactive les lignes de précision / le pip", cat: "Exploration", desc: "Guide visuel d'aide à l'alignement pour les repères de l'ATH.", key: "Alt + I" },
+            { txt: "Augmente / Élargit / Diminue / Affine le scanneur / Scane air", cat: "Exploration", desc: "Modifier l'angle d'ouverture du cône focal d'analyse radar.", key: "Souris" },
+
+            // =========================================================================
+            // CATEGORIE : LORE (VERT) - ENCYCLOPÉDIE GENERALE
+            // =========================================================================
             { txt: "Jean-Bot, parle-moi de Port Olisar / qu'est-il arrivé", cat: "LORE", desc: "Dossier Lieux : Récit historique complet de la destruction de la station orbitale emblématique.", key: "Lore" },
             { txt: "Jean-Bot, parle-moi de Crusader / Lunes de Crusader / Blocus", cat: "LORE", desc: "Dossier Lieux : La géante gazeuse de Stanton possédée par l'industrie aéronautique.", key: "Lore" },
             { txt: "Jean-Bot, parle-moi de Celline / Yela / Daymar / Grim Hex", cat: "LORE", desc: "Dossier Lieux : Fiches orbitales des trois lunes de Crusader et du repaire pirate.", key: "Lore" },
@@ -252,6 +270,7 @@
             { txt: "Jean-Bot, parle-moi du Fury / Fury MX / Fury LX", cat: "LORE", desc: "Dossier Vaisseaux : Les chasseurs légers embarqués de nouvelle génération de Mirai.", key: "Lore" },
             { txt: "Jean-Bot, parle-moi du Zeus MK1 / Zeus MK2 / Aurora MK2 / M80 / Meteor", cat: "LORE", desc: "Dossier Vaisseaux : Dossiers techniques sur les navettes d'exploration et de transport.", key: "Lore" },
             { txt: "Jean-Bot, parle-moi du Pitbull / Tiburon", cat: "LORE", desc: "Dossier Vaisseaux : Véhicules terrestres et snubs utilitaires.", key: "Lore" },
+            { txt: "Jean-Bot, quelles sont les différences entre le Hornet et le Super Hornet ?", cat: "LORE", desc: "Dossier Vaisseaux : Fiche d'analyse comparative de la gamme de combat d'Anvil Aerospace.", key: "Lore" },
 
             // =========================================================================
             // CATEGORIE : SOCIAL & DIALOGUES COMPAGNONS
@@ -294,6 +313,7 @@
         const activeBtnStyles = {
             'Tous': 'border-blue-500 bg-blue-600 text-white shadow-lg shadow-blue-900/20',
             'Combat': 'border-red-500 bg-red-600 text-white shadow-lg shadow-red-900/20',
+            'Minage': 'border-orange-500 bg-orange-600 text-white shadow-lg shadow-orange-900/20',
             'Exploration': 'border-cyan-500 bg-cyan-600 text-white shadow-lg shadow-cyan-900/20',
             'LORE': 'border-green-500 bg-green-600 text-white shadow-lg shadow-green-900/20',
             'Navigation': 'border-amber-500 bg-amber-600 text-white shadow-lg shadow-amber-900/20',
@@ -320,6 +340,7 @@
                     
                     let badgeColor = 'bg-gray-500/20 text-gray-400 border-gray-500/30';
                     if(cmd.cat === 'Combat') badgeColor = 'bg-red-500/10 text-red-400 border-red-500/20';
+                    if(cmd.cat === 'Minage') badgeColor = 'bg-orange-500/10 text-orange-400 border-orange-500/20';
                     if(cmd.cat === 'Exploration') badgeColor = 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20';
                     if(cmd.cat === 'LORE') badgeColor = 'bg-green-500/10 text-green-400 border-green-500/20';
                     if(cmd.cat === 'Navigation') badgeColor = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
