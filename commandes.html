@@ -491,32 +491,43 @@
                 });
         }
 
-        // EXPÉDITION DE LA NOTIFICATION DISCORD PARFAITEMENT ÉPURÉE AUX GRADES OFFICIELS
-        function submitRewardClaim() {
-            const email = document.getElementById('rewardEmail').value.trim();
-            const discord = document.getElementById('rewardDiscord').value.trim();
-            const log = document.getElementById('terminalLog');
+        // EXPÉDITION DE LA NOTIFICATION DISCORD AVEC HORODATAGE FRANÇAIS
+function submitRewardClaim() {
+    const email = document.getElementById('rewardEmail').value.trim();
+    const discord = document.getElementById('rewardDiscord').value.trim();
+    const log = document.getElementById('terminalLog');
 
-            if(!email || !discord) {
-                alert("Flux incomplet ! Saisissez vos identifiants réseau de pilotes.");
-                return;
-            }
+    if(!email || !discord) {
+        alert("Flux incomplet ! Saisissez vos identifiants réseau de pilotes.");
+        return;
+    }
 
-            if(!activeWebhookUrl) {
-                alert("Erreur critique : Canal Discord introuvable.");
-                return;
-            }
+    if(!activeWebhookUrl) {
+        alert("Erreur critique : Canal Discord introuvable.");
+        return;
+    }
 
-            log.innerHTML = `> Initialisation du protocole de transmission vers Discord...`;
+    log.innerHTML = `> Initialisation du protocole de transmission vers Discord...`;
 
-            const payload = {
-                content: `**ALERTE GAGNANT SITE JEAN-BOT**\nUn opérateur vient de valider une liaison quantique sur le site !\n\n**Identifiants cryptés transmis :**\n- **Pseudo Discord :** \`${discord}\`\n- **Adresse de contact :** \`${email}\``
-            };
+    // Génération de l'horodatage automatique au format local (fr-FR)
+    const maintenant = new Date();
+    const horodatage = maintenant.toLocaleString('fr-FR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
 
-            fetch(activeWebhookUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+    const payload = {
+        content: `**ALERTE GAGNANT SITE JEAN-BOT**\nUn opérateur vient de valider une liaison quantique sur le site !\n\n**Identifiants cryptés transmis :**\n- **Date et Heure :** \`${horodatage}\`\n- **Pseudo Discord :** \`${discord}\`\n- **Adresse de contact :** \`${email}\``
+    };
+
+    fetch(activeWebhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
             })
             .then(res => {
                 if(res.ok) {
@@ -529,7 +540,7 @@
             .catch(() => {
                 log.innerHTML = `> <span class="text-red-500">[ERREUR] Perte de liaison physique lors de l'envoi.</span>`;
             });
-        }
+}
 
         // Commutateur et gestion d'isolation des personnages
         function switchIAUi(iaName) {
