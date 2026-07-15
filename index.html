@@ -1,570 +1,1003 @@
+
 <!DOCTYPE html>
-<html lang="fr" class="bg-gray-950 text-gray-100">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JEAN-BOT PREMIUM - Tableau de Bord Commandes</title>
-    <!-- Tailwind CSS pour un design pro et responsive -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- FontAwesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Importation de la police "Exo 2" (Futuriste, Accessible & Haute Visibilité) -->
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <title>JEAN-BOT pour Star Citizen</title>
+	
+    
+	<link type="image/png" rel="icon" href="favicon.png">
+    <link rel="manifest" href="manifest.json">
+	<link rel="preload" as="image" href="jean-bot.jpg">
+	
     <style>
-        /* Défilement personnalisé style cockpit */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0b0f19; }
-        ::-webkit-scrollbar-thumb { background: #991b1b; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ef4444; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        /* Application globale de la police typée HUD Exo 2 */
-        .font-hud {
-            font-family: 'Exo 2', sans-serif;
+        body {
+            background-color: #000000;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Classes utilitaires pour remplacer les styles inline */
+        .mb-10 { margin-bottom: 10px; }
+        .h-15 { height: 15px; }
+
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background-color: #000000;
+        }
+
+        .bg-jean-bot {
+            position: absolute;
+            top: -2%;
+            left: -2%;
+            width: 104%;
+            height: 104%;
+            background-image: url('jean-bot.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: brightness(0.28);
+            will-change: transform;
+            transition: transform 0.15s ease-out;
+        }
+
+        .bg-container::before,
+        .bg-container::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .bg-container::before {
+            top: 0;
+            background: linear-gradient(to bottom, #000000 0%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0) 100%);
+        }
+        .bg-container::after {
+            bottom: 0;
+            background: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: center;
+            z-index: 1;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+        }
+
+        body.panel-open .container {
+            transform: scale(0.95) translateX(-80px);
+            filter: blur(4px) brightness(0.4);
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            body.panel-open .container {
+                filter: brightness(0.2);
+                transform: scale(0.95);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 1.2fr 0.8fr;
+            }
+        }
+
+        .content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center;
+        }
+
+        /* Texte tout en haut */
+        .top-lead {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #94a3b8;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Bouton Ovale - Rouge pétant vers Rouge cendre */
+        .badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #ff003c 0%, #3f161e 100%); 
+            color: #f1f5f9;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.8);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 4px;
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .powered-by {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #64748b;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .va-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .va-trigger {
+            color: #93c5fd;
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px dashed rgba(147, 197, 253, 0.5);
+            padding-bottom: 1px;
+            cursor: pointer;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .va-trigger:hover {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+        }
+
+        .va-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: rgb(21, 32, 54); 
+            border: 1px solid rgba(147, 197, 253, 0.2);
+            border-radius: 8px;
+            padding: 6px;
+            min-width: 160px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7), 0 0 15px rgba(59, 130, 246, 0.1);
+            z-index: 10;
+        }
+
+        @supports (backdrop-filter: blur(12px)) {
+            .va-menu {
+                background: rgba(15, 23, 42, 0.9);
+                backdrop-filter: blur(12px);
+            }
+        }
+
+        .va-dropdown:hover .va-menu,
+        .va-dropdown.active .va-menu {
+            display: block;
+            animation: fadeInVA 0.2s ease-out;
+        }
+
+        .va-menu a {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.75rem;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-align: left;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .va-menu a:hover {
+            background: rgba(59, 130, 246, 0.2);
+            color: #ffffff;
+        }
+
+        @keyframes fadeInVA {
+            from { opacity: 0; transform: translateX(-50%) translateY(2px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(8px); }
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.9);
+        }
+
+        .actions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px; 
+            align-items: center; 
+            justify-content: center;
+            width: 100%;
+        }
+
+        .btn-trigger-console {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 420px;
+            height: 54px;
+            padding: 0 30px;
+            background: linear-gradient(90deg, #0066ff 0%, #b533ff 50%, #ff003c 100%);
+            color: #f8fafc;
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 0, 60, 0.45), 0 8px 32px rgba(0, 102, 255, 0.3);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .btn-trigger-console:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 45px rgba(255, 0, 60, 0.7), 0 12px 40px rgba(0, 102, 255, 0.5);
+            filter: brightness(1.15);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Ligne de démarcation proportionnée */
+        .divider {
+            width: 100%;
+            max-width: 420px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0) 100%);
+            margin: 10px 0;
+        }
+
+        .btn-trigger-cyber {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 420px;
+            height: 54px;
+            padding: 0 30px;
+            background: linear-gradient(90deg, #00d4ff 0%, #005f73 40%, #091324 100%);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 14px;
+            border: 1px solid rgba(0, 212, 255, 0.6);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.25);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-transform: uppercase;
+            font-size: 1.02rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-trigger-cyber:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(0, 212, 255, 0.5);
+            background: linear-gradient(90deg, #33e1ff 0%, #008fa8 50%, #0e1e38 100%);
+            border-color: #ffffff;
+        }
+
+        .btn-boutique {
+            display: block;
+            width: 100%;
+            max-width: 420px;
+            height: 82px; 
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.2);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+        }
+
+        .btn-boutique img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            display: block;
+        }
+
+        .btn-boutique:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(255, 0, 0, 0.55);
+            filter: brightness(1.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .social-container {
+            display: flex;
+            gap: 12px;
+            justify-content: space-between; 
+            margin-top: 15px;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .btn-social {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: calc(20% - 9.6px);
+            height: 50px;
+            color: #cbd5e1;
+            text-decoration: none;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid #334155;
+            border-radius: 10px;
+            transition: transform 0.2s ease, color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-social:hover {
+            transform: translateY(-3px);
+            color: #ffffff;
+            border-color: #64748b;
+            background: rgba(30, 41, 59, 0.9);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-social svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        .video-wrapper {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 340px;
+            aspect-ratio: 9 / 16;
+            background: #000;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 
+                        0 0 40px rgba(145, 70, 255, 0.15);
+            border: 4px solid #1e293b;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .panel-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        body.panel-open .panel-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .side-console {
+            position: fixed;
+            top: 0;
+            right: -550px;
+            width: 100%;
+            max-width: 520px;
+            height: 100vh;
+            background: rgb(15, 15, 20); 
+            z-index: 100;
+            border-left: 1px solid rgba(0, 212, 255, 0.2);
+            box-shadow: -15px 0 50px rgba(0, 0, 0, 0.8);
+            transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 40px 30px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @supports (backdrop-filter: blur(30px)) {
+            .side-console {
+                background: rgba(12, 12, 15, 0.85);
+                backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px);
+            }
+        }
+
+        body.panel-open .side-console {
+            right: 0;
+        }
+
+        .close-console {
+            align-self: flex-end;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            margin-bottom: 30px;
+        }
+
+        .close-console:hover {
+            background: rgba(0, 212, 255, 0.15);
+            color: #00d4ff;
+            border-color: #00d4ff;
+        }
+
+        .console-title {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .console-subtitle {
+            text-align: center;
+            color: #ff3e3e;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 30px;
+        }
+
+        .console-subtitle.cyber {
+            color: #ffffff;
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+        }
+
+        .console-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .c-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .c-card-demo {
+            border-left: 3px solid #334155;
+        }
+
+        .c-card-premium {
+            border-left: 3px solid #ff3e3e;
+            background: rgba(255, 62, 62, 0.01);
+            box-shadow: 0 4px 20px rgba(255, 62, 62, 0.05);
+        }
+
+        .c-card-virgil {
+            border-left: 3px solid #0055ff;
+            background: rgba(0, 85, 255, 0.01);
+            box-shadow: 0 4px 20px rgba(0, 85, 255, 0.05);
+        }
+
+        .c-card-synthia {
+            border-left: 3px solid #a855f7;
+            background: rgba(168, 85, 247, 0.01);
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.05);
+        }
+
+        .c-card-layout {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .c-card-info {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .c-card-media {
+            width: 110px;
+            height: 110px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .c-card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.3));
+        }
+
+        .c-card-synthia .c-card-media img {
+            filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.3));
+        }
+
+        .c-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .cb-free { background-color: rgba(255,255,255,0.06); color: #00e676; }
+        .cb-premium { background-color: rgba(255, 62, 62, 0.15); color: #ff3e3e; }
+        .cb-virgil { background-color: rgba(0, 85, 255, 0.15); color: #3377ff; }
+        .cb-synthia { background-color: rgba(168, 85, 247, 0.15); color: #c084fc; }
+
+        .c-card h4 {
+            font-size: 1.15rem;
+            color: #fff;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .c-card h4 u {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .c-promo-text {
+            color: #00e676;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .c-list {
+            color: #94a3b8;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding-left: 18px;
+        }
+
+        .c-list-unstyled {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .c-card-desc {
+            color: #cbd5e1;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 4px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .c-btn-demo {
+            display: block;
+            background: #00e676;
+            color: #000000;
+            text-align: center;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 230, 118, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .c-btn-demo:hover {
+            background: #00ff81;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 230, 118, 0.5);
+        }
+
+        .c-btn-virgil {
+            display: block;
+            background: #0055ff;
+            color: #ffffff;
+            text-align: center;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 85, 255, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .c-btn-virgil:hover {
+            background: #3377ff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 85, 255, 0.5);
+        }
+
+        .c-btn-synthia {
+            display: block;
+            background: #a855f7;
+            color: #ffffff;
+            text-align: center;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .c-btn-synthia:hover {
+            background: #b566ff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
+        }
+
+        .c-btn-premium {
+            display: block;
+            padding: 14px 28px;
+            background: #ff3e3e;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(255, 62, 62, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+            text-transform: uppercase;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .c-btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 62, 62, 0.7);
+            background: #ff5252;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .c-grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        @media (min-width: 480px) {
+            .c-grid-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .c-link-steam {
+            display: block;
+            text-align: center;
+            color: #64748b;
+            text-decoration: underline;
+            font-size: 11px;
+            margin-top: 12px;
+        }
+
+        .c-link-steam:hover {
+            color: #94a3b8;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col font-sans selection:bg-red-600 selection:text-white">
+<body>
 
-    <!-- HEADER & LOGO + BANDEAU HUD CENTRAL INTERVERTAL -->
-    <header class="border-b border-red-950 bg-gray-900/50 backdrop-blur sticky top-0 z-50 px-4 py-3">
-        <!-- Grille à 3 colonnes pour garantir un centrage géométrique parfait -->
-        <div class="max-w-7xl mx-auto flex flex-col md:grid md:grid-cols-3 items-center gap-4">
-            
-            <!-- COLONNE GAUCHE : BLOC LOGO ET NOM -->
-            <div class="flex items-center gap-3 justify-center md:justify-start justify-self-start">
-                <img src="favicon.png" alt="Logo Jean-Bot" class="w-11 h-11 rounded-lg object-contain bg-gray-950 border border-gray-800 p-1 shadow-lg shadow-red-950/20">
-                <div class="text-center md:text-left">
-                    <h1 class="text-lg font-extrabold tracking-wide text-white uppercase font-hud leading-none">Jean-Bot <span class="text-red-500">Premium</span></h1>
-                    <p class="text-[10px] text-gray-400 font-hud tracking-widest uppercase font-semibold mt-1">Compagnon de Bord Virtuel</p>
-                </div>
-            </div>
-
-            <!-- COLONNE CENTRALE : BANDEAU HUD DE FICHE TECHNIQUE PARFAITEMENT CENTRÉ -->
-            <div class="flex items-center justify-center gap-6 text-center border-y md:border-y-0 border-gray-800/60 py-2 md:py-0 px-4 w-full justify-self-center">
-                <div>
-                    <span class="text-gray-500 font-hud text-[9px] uppercase font-bold tracking-widest block mb-0.5">Compatibilité</span>
-                    <span class="text-white font-hud font-extrabold text-sm tracking-wide whitespace-nowrap">Star Citizen 4.8.3</span>
-                </div>
-                <div class="w-px h-6 bg-gray-800/80 hidden sm:block"></div>
-                <div>
-                    <span class="text-gray-500 font-hud text-[9px] uppercase font-bold tracking-widest block mb-0.5">Commandes Disponibles</span>
-                    <span class="text-red-500 font-hud font-extrabold text-sm tracking-wide">3 154</span>
-                </div>
-                <div class="w-px h-6 bg-gray-800/80 hidden sm:block"></div>
-                <div>
-                    <span class="text-gray-500 font-hud text-[9px] uppercase font-bold tracking-widest block mb-0.5">Version Jean-Bot</span>
-                    <span class="text-green-400 font-hud font-extrabold text-sm tracking-wide whitespace-nowrap">20.8</span>
-                </div>
-            </div>
-
-            <!-- COLONNE DROITE : STATUT EN LIGNE -->
-            <div class="text-center md:text-right hidden md:block justify-self-end">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-green-500/10 text-green-400 border border-green-500/20 font-hud uppercase tracking-wider shadow-sm shadow-green-950">
-                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                    Système En Ligne
-                </span>
-            </div>
-
-        </div>
-    </header>
-
-    <!-- ZONE DE RECHERCHE ET FILTRES -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 flex flex-col gap-6">
-        
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 shadow-xl flex flex-col gap-4">
-            <!-- Barre de recherche -->
-            <div class="relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-gray-500"></i>
-                <input type="text" id="searchBar" placeholder="Rechercher un ordre, un minerai, une lune ou un dossier de Lore..." 
-                    class="w-full bg-gray-950 border border-gray-800 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors font-hud">
-            </div>
-
-            <!-- Filtres par catégorie épurés -->
-            <div class="flex flex-wrap gap-2" id="filterContainer">
-                <button onclick="filterCategory('Tous')" id="btn-Tous" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-blue-500 bg-blue-600 text-white shadow-lg shadow-blue-900/20 font-hud uppercase tracking-wider">Tous</button>
-                <button onclick="filterCategory('Combat')" id="btn-Combat" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Combat</button>
-                <button onclick="filterCategory('Minage')" id="btn-Minage" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Minage</button>
-                <button onclick="filterCategory('Exploration')" id="btn-Exploration" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Exploration</button>
-                <button onclick="filterCategory('LORE')" id="btn-LORE" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Lore</button>
-                <button onclick="filterCategory('Navigation')" id="btn-Navigation" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Navigation</button>
-                <button onclick="filterCategory('Social')" id="btn-Social" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Social</button>
-            </div>
-        </div>
-
-        <!-- GRILLE DE COMMANDES -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="commandsGrid">
-            <!-- Injecté via JS -->
-        </div>
-
-        <!-- Message "Aucun résultat" -->
-        <div id="noResult" class="hidden text-center py-12 flex flex-col gap-3">
-            <i class="fa-solid fa-robot text-gray-700 text-5xl"></i>
-            <p class="text-gray-400 font-semibold font-hud">Bip Boop... Aucune commande ne correspond à votre recherche.</p>
-        </div>
-    </main>
-
-    <!-- INTERFACE EN DEPLOYEMENT CINETIQUE (MODAL AVIONIQUE) -->
-    <div id="hudModal" class="opacity-0 pointer-events-none fixed inset-0 bg-gray-950/50 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-all duration-300 ease-out" onclick="closeHudModal()">
-        <div id="modalBox" class="bg-gray-900 border border-gray-800 rounded-2xl max-w-lg w-full p-6 relative transform scale-90 opacity-0 transition-all duration-300 ease-out flex flex-col gap-5" onclick="event.stopPropagation()">
-            
-            <!-- CROCHETS DE CIBLAGE FIXÉS EN HTML (Impossible de générer un carré fermé) -->
-            <div id="bracket-tl" class="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 transition-colors duration-300"></div>
-            <div id="bracket-tr" class="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 transition-colors duration-300"></div>
-            <div id="bracket-bl" class="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 transition-colors duration-300"></div>
-            <div id="bracket-br" class="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 transition-colors duration-300"></div>
-
-            <div class="flex justify-between items-start z-10">
-                <span id="modalBadge" class="px-2.5 py-1 text-xs font-bold uppercase rounded border font-hud"></span>
-                <button onclick="closeHudModal()" class="text-gray-500 hover:text-white transition-colors cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
-            </div>
-            
-            <h2 id="modalTitle" class="text-white font-hud font-extrabold text-2xl leading-snug tracking-wide z-10"></h2>
-            
-            <div class="border-t border-gray-800/80 pt-4 z-10">
-                <span class="text-gray-500 font-hud text-[10px] uppercase font-bold tracking-widest block mb-1">Spécification Technique</span>
-                <p id="modalDesc" class="text-gray-300 text-base sm:text-lg leading-relaxed font-hud font-medium"></p>
-            </div>
-            
-            <div id="modalKeyContainer" class="border-t border-gray-800/80 pt-4 flex justify-between items-center z-10">
-                <span class="text-gray-500 font-hud text-[10px] uppercase font-bold tracking-widest">Raccourci Avionique</span>
-                <span id="modalKey"></span>
-            </div>
-        </div>
+    <div class="bg-container">
+        <div class="bg-jean-bot" id="parallaxBg"></div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-gray-900 bg-gray-950 text-center py-4 text-xs text-gray-500 font-hud tracking-wider font-semibold">
-        <p>&copy; 2026 Jean-Bot Premium • Index Tactique Modulaire Avionique Fixé.</p>
-    </footer>
+    <div class="panel-overlay" id="consoleOverlay"></div>
+
+    <div class="side-console" id="sideConsole">
+        <button class="close-console" id="closeConsoleBtn">Retour cockpit ✕</button>
+        <div id="consoleContent"></div>
+    </div>
+
+    <div class="container" id="mainContainer">
+        
+        <div class="content">
+            <p class="top-lead">Le robot psychopathe qui vous accompagne dans "Star Citizen"</p>
+            <h1>JEAN-BOT</h1>
+            
+            <div class="powered-by">
+                Packs de voix pour 
+                <div class="va-dropdown" id="vaDropdown">
+                    <span class="va-trigger">Voice Attack</span>
+                    <div class="va-menu">
+                        <a href="https://voiceattack.com" target="_blank">🌐 Site Officiel</a>
+                        <a href="https://store.steampowered.com/app/3046550/VoiceAttack_v2/" target="_blank">🎮 Page Steam</a>
+                    </div>
+                </div>
+            </div>            
+            
+            <a href="commandes.html" class="badge">Les commandes de Jean-Bot</a>
+            
+            <div class="actions-container">
+                <button class="btn-trigger-console" id="openConsoleBtn">NOS PACKS JEAN-BOT</button>
+                
+                <div class="divider"></div>
+				
+                <button class="btn-trigger-cyber" id="openDemosBtn">NOS AUTRES PACKS DEMOS GRATUITS</button>
+                
+                <a href="https://boutique-jean-bot.tpopsite.com" target="_blank" class="btn-boutique">
+                    <img src="boutique.png" alt="Boutique Jean-Bot">
+                </a>
+                
+                <div class="social-container">
+                    <a href="https://www.twitch.tv/joffre_tiboy" target="_blank" class="btn-social twitch" aria-label="Twitch">
+                        <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+                    </a>
+
+                    <a href="https://www.youtube.com/@goryushika/shorts" target="_blank" class="btn-social youtube" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93,.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+
+                    <a href="https://www.instagram.com/joffrelarrieu/reels/" target="_blank" class="btn-social instagram" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm6-2a1 1 0 1 0 1 1 1 1 0 0 0-1-1zM12 9a3 3 0 1 1-3 3 3 3 0 0 1 3-3z"/>
+                        </svg>
+                    </a>
+
+                    <a href="https://www.tiktok.com/@joffre.goryushika" target="_blank" class="btn-social tiktok" aria-label="TikTok">
+                        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31.01 2.61.03 3.91.05.08 1.54.61 3.02 1.63 4.14 1.15 1.16 2.76 1.77 4.37 1.88v3.85c-1.46-.03-2.91-.45-4.15-1.23-.33-.21-.64-.46-.93-.73V13.8c0 2.21-.73 4.34-2.07 6.04-1.57 1.94-3.95 3.12-6.49 3.16-2.92.05-5.75-1.21-7.44-3.6C-.4 16.51-.35 12.87 1.74 10.45c1.47-1.7 3.62-2.71 5.9-2.78.29-.01.58-.01.87 0v3.91c-.32-.01-.64.02-.95.07-1.42.21-2.67 1.14-3.27 2.44-.68 1.48-.44 3.25.61 4.5 1.04 1.24 2.67 1.84 4.27 1.57 1.8-.3 3.24-1.78 3.44-3.59.03-.31.04-.63.04-.95V.02h.01z"/></svg>
+                    </a>
+                    
+                    <a href="https://discord.gg/9Hm9TEXeJ" target="_blank" class="btn-social discord" aria-label="Discord">
+                        <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.65-2.11a75.22,75.22,0,0,0,72.78,0c.84.74,1.74,1.44,2.65,2.11a68.52,68.52,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.72,10.93,105.73,105.73,0,0,0,31.05-18.83C129.83,50.7,123.63,27.82,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.84,46,53.84,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.08,46,96.08,53,91,65.69,84.69,65.69Z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="video-wrapper">
+            <div class="video-container">
+                <video src="video-joffre.mp4" controls autoplay loop muted playsinline preload="metadata"></video>
+            </div>
+        </div>
+
+    </div>
+
+    <template id="tmpl-jeanbot">
+        <h3 class="console-title">PACKS JEAN-BOT</h3>
+        <p class="console-subtitle">(sans abonnement)</p>
+        
+        <div class="console-cards">
+            <div class="c-card c-card-demo">
+                <span class="c-badge cb-free">Gratuit</span>
+                <h4><u>Pack DEMO</u> : 100% GRATUIT</h4>
+                <div class="c-list c-list-unstyled">
+                    <p class="mb-10">🔹 Découvrez les commandes de base pour un test immédiat de Jean-Bot.</p>
+                    <p class="mb-10">🔹 Installation rapide en moins d'une minute.</p>
+                    <p>🔹 Toutes les instructions vous sont fournies dans un seul dossier.</p>
+                </div>
+                <a href="https://drive.google.com/drive/folders/1kAXjPRsLLYUquas9y2X2WxkrRJ2OCHBi?usp=sharing" target="_blank" class="c-btn-demo">Télécharger le Pack DEMO</a>
+            </div>
+
+            <div class="c-card c-card-premium">
+                <span class="c-badge cb-premium">Recommandé</span>
+                <h4><u>Pack PREMIUM</u> : 30€</h4>
+                <p class="c-promo-text">PROMO à 20€ chaque début de mois<br>(stock limité à 10 ex. en bas de page)</p>
+                <ul class="c-list">
+                    <li><strong>Achat unique :</strong> Aucun abonnement mensuel</li>
+                    <li><strong>Pack FR complet :</strong> ~500 commandes vocales</li>
+                    <li><strong>Mises à jour gratuites</strong> (nouveaux vaisseaux, planètes...)</li>
+                    <li><strong>Voix supplémentaires</strong> (prochainement)</li>
+                    <li><strong>Salon Discord réservé aux Tipeurs</strong></li>
+                </ul>
+                <a href="https://fr.tipeee.com/joffre" target="_blank" class="c-btn-premium">OBTENIR JEAN-BOT PREMIUM</a>
+                <a href="https://store.steampowered.com/app/3046550/VoiceAttack_v2/" target="_blank" class="c-link-steam">Obtenir VoiceAttack sur STEAM</a>
+            </div>
+        </div>
+    </template>
+
+    <template id="tmpl-cyber">
+        <h3 class="console-title">NOS AUTRES PACKS</h3>
+        <p class="console-subtitle cyber mb-10">DEMOS GRATUITS</p>
+        <div class="h-15"></div>
+        
+        <div class="console-cards">
+            <div class="c-card c-card-virgil" id="cardVirgil">
+                <div class="c-card-layout">
+                    <div class="c-card-info">
+                        <span class="c-badge cb-virgil">VIRGIL DEMO</span>
+                        <h4><u>ASSISTANT MILITAIRE VIRGIL</u></h4>
+                        <div class="c-card-desc">
+                            Assistant Militaire précis, discipliné et efficace.
+                        </div>
+                    </div>
+                    <div class="c-card-media">
+                        <img src="VIRGIL.png" alt="Mascotte Virgil" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <a href="https://drive.google.com/drive/folders/1MQeh8g8iBAweFEpKSbZ95EqAYgEabnh_?usp=drive_link" target="_blank" class="c-btn-virgil">TÉLÉCHARGER LA DEMO DE VIRGIL</a>
+            </div>
+
+            <div class="c-card c-card-synthia" id="cardSynthia">
+                <div class="c-card-layout">
+                    <div class="c-card-info">
+                        <span class="c-badge cb-synthia">SYNTHIA DEMO</span>
+                        <h4><u>ASSISTANTE SYNTHÉTIQUE SYNTHIA</u></h4>
+                        <div class="c-card-desc">
+                            Assistante synthétique élégante, claire et réactive.
+                        </div>
+                    </div>
+                    <div class="c-card-media">
+                        <img src="SYNTHIA.png" alt="Mascotte Synthia" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <a href="https://drive.google.com/drive/folders/18yHd5wD5mx2ZJgydkHgP7otizNm5taMx?usp=drive_link" target="_blank" class="c-btn-synthia">TÉLÉCHARGER LA DEMO DE SYNTHIA</a>
+            </div>
+        </div>
+    </template>
 
     <script>
-        // Base de données complète d'après les profils réels de VoiceAttack
-        const jeanBotCommands = [
-            // =========================================================================
-            // CATEGORIE : NAVIGATION & SYSTEMES COCKPIT
-            // =========================================================================
-            { txt: "Allumage / Activation du système", cat: "Navigation", desc: "Mettre sous tension l'ordinateur de bord et initialiser le HUD général.", key: "R" },
-            { txt: "Allume le / Éteins le / Active le vaisseau", cat: "Navigation", desc: "Gérer l'alimentation générale des réacteurs d'énergie principaux.", key: "U" },
-            { txt: "Active / Coupe / Arrêt des moteurs", cat: "Navigation", desc: "Couper ou initialiser l'alimentation des propusseurs principaux.", key: "I" },
-            { txt: "Active / Désactive le mode croisière", cat: "Navigation", desc: "Engager le maintien automatique du vecteur de poussée cinétique.", key: "Alt + C" },
-            { txt: "Active le limiteur", cat: "Navigation", desc: "Brider la vitesse maximale autorisée pour sécuriser les manœuvres de précision.", key: "Alt + [" },
-            { txt: "Désactive le limiteur", cat: "Navigation", desc: "Libère la vitesse maximale autorisée par le châssis.", key: "Alt + ]" },
-            { txt: "Active / Désactive les VTOL", cat: "Navigation", desc: "Basculer l'orientation des tuyères de sustentation verticale.", key: "K" },
-            { txt: "Désactive / Enlève le mode découplé / découplage", cat: "Navigation", desc: "Réengage les compensateurs automatiques d'inertie vectorielle (Mode Coupled).", key: "Alt + M" },
-            { txt: "Déploie / Ouvre / Plie les ailes", cat: "Navigation", desc: "Modifier la géométrie aérodynamique de structure du châssis.", key: "Alt + K" },
-            { txt: "Ouvre / Ferme les portes du vaisseau / Fermeture des portes", cat: "Navigation", desc: "Actionner les rampes d'accès, soutes cargo et sas pressurisés.", key: "Alt + P" },
-            { txt: "Ouvre / Ferme la Star-map / MobiGlas / Carte", cat: "Navigation", desc: "Bascule la carte stellaire 3D ou l'interface de l'ordinateur de bord.", key: "F2" },
-            { txt: "Demande l'ouverture du hangar / Tour de Contrôle / ATC / TC / Sas", cat: "Navigation", desc: "Appeler les contrôleurs aériens locaux pour ouvrir un sas d'atterrissage.", key: "Alt + N" },
-            { txt: "Demande le docking / Libère le vaisseau", cat: "Navigation", desc: "Gérer l'amarrage magnétique ou le détachement inter-vaisseaux.", key: "Alt + N" },
-            { txt: "Active / Désactive la vision nocturne / VN / Lampe", cat: "Navigation", desc: "Basculer l'amplificateur de lumière résiduelle du cockpit.", key: "L" },
-            { txt: "Éteins les lumières / Allume les phares", cat: "Navigation", desc: "Contrôler l'éclairage de coque externe ou les projecteurs.", key: "L" },
-            { txt: "Trace / Calcule une route vers [Destination]", cat: "Navigation", desc: "Inscrit l'itinéraire automatique (Hurston, Crusader, ArcCorp, MicroTech...) dans le système de navigation.", key: "Auto" },
-            { txt: "Je valide / Je confirme", cat: "Navigation", desc: "Confirmer la trajectoire de vol sélectionnée dans le système de navigation.", key: "R" },
-            { txt: "Validation impossible", cat: "Navigation", desc: "Retour système de Jean-Bot en cas d'échec de verrouillage ou d'alignement.", key: "Dialogue" },
-            { txt: "Validation confirmée / Confirmation validée", cat: "Navigation", desc: "Mémoriser et verrouiller l'ordre système en cours.", key: "Macro" },
-            { txt: "En avant marche Jean-Bot / Marche avant", cat: "Navigation", desc: "Maintenir l'axe de poussée linéaire continue en mode FPS ou EVA dans le vide.", key: "Z" },
-            { txt: "Stop la marche Jean-Bot / Arrête la marche", cat: "Navigation", desc: "Couper la macro de poussée linéaire continue du personnage.", key: "Z" },
-            { txt: "Sors / Rentre les trains d'atterrissage / papattes / pattes", cat: "Navigation", desc: "Déployer ou rétracter les patins de train d'atterrissage.", key: "N" },
-            { txt: "Aller on sort / Aller on descend Jean-Bot", cat: "Navigation", desc: "Amorcer la procédure de sortie physique du cockpit ou du siège.", key: "Touche Y" },
-            { txt: "Met les gaz au maximum / à fond", cat: "Navigation", desc: "Pousse la manette des gaz virtuelle à sa butée maximale.", key: "Z" },
-            { txt: "Ouvre le portail", cat: "Navigation", desc: "Exécuter la macro d'accès rapide aux commandes de porte de hangar.", key: "Macro" },
-            { txt: "Jean-Bot partage la mission", cat: "Navigation", desc: "Partager le contrat actif avec l'ensemble des membres de l'équipage.", key: "Macro" },
-            { txt: "Accepte le contrat / Valide le contrat", cat: "Navigation", desc: "Validation rapide de la mission proposée à l'écran.", key: "Touche [" },
-            { txt: "C'est l'heure de prendre une mission / trouver un taff / travailler", cat: "Navigation", desc: "Ouvrir l'application Contract Manager du MobiGlas pour chercher un contrat.", key: "Macro" },
-            { txt: "Largue le cargo / Cargaison", cat: "Navigation", desc: "Macro d'éjection d'urgence de la grille de cargaison arrière.", key: "Alt + L" },
-            { txt: "Jean-Bot fais le plein / recharge les munitions / rifil / refuel", cat: "Navigation", desc: "Déclencher la demande de rechargement en carburant Hydrogène et Quantum aux pads.", key: "F12" },
-            { txt: "Jean-Bot répare le vaisseau / lance l'entretien", cat: "Navigation", desc: "Activer les drones de réparation pour colmater les brèches de coque.", key: "F12" },
-            { txt: "Jean-Bot baisse le son / volume / pollution sonore", cat: "Navigation", desc: "Réduit l'intensité sonore des notifications audio du cockpit.", key: "Macro" },
-            { txt: "Jean-Bot rizette / rebout / remonte le son / volume", cat: "Navigation", desc: "Réinitialise le volume sonore des retours vocaux.", key: "Macro" },
-            { txt: "Active / Désactive / Éteins le gyro", cat: "Navigation", desc: "Contrôler l'activation des stabilisateurs gyroscopiques de vol.", key: "Alt + G" },
-            { txt: "Jean-Bot, ferme / ouvre le tchat / intercom / chat", cat: "Navigation", desc: "Afficher ou masquer la console de communication écrite.", key: "F12" },
+        const bg = document.getElementById('parallaxBg');
+        let ticking = false;
 
-            // =========================================================================
-            // NAVIGATION : CAMÉRAS & INTERFACE
-            // =========================================================================
-            { txt: "Caméra / Vue par défaut / Standard / Un", cat: "Navigation", desc: "Basculer sur la vue à la première personne à l'intérieur du cockpit.", key: "F4 + Num 1" },
-            { txt: "Caméra de la soute / Vue 2 / Vue 3", cat: "Navigation", desc: "Afficher le flux vidéo de surveillance de la baie de chargement cargo.", key: "F4 + Num 2/3" },
-            { txt: "Caméra extérieure / de loin / Vue 4", cat: "Navigation", desc: "Basculer sur la caméra orbitale externe libre.", key: "F4 + Num 4" },
-            { txt: "Caméra de près / proche / Vue 7", cat: "Navigation", desc: "Rapprocher le point de vue externe orbital des structures du châssis.", key: "F4 + Num 7" },
-            { txt: "Caméra zoom / zoomée / Vue 9", cat: "Navigation", desc: "Focaliser l'optique externe sur la cible radar verrouillée.", key: "F4 + Num 9" },
-            { txt: "Caméra cynq / six / huit", cat: "Navigation", desc: "Basculer sur les angles de caméras fixes externes correspondants.", key: "F4 + Num" },
-            { txt: "Jean-Bot reset caméra / rizette caméra", cat: "Navigation", desc: "Réinitialiser instantanément l'orientation de la caméra dans l'axe de vol.", key: "Num *" },
-            { txt: "Zoom / Dézoom cockpit", cat: "Navigation", desc: "Ajuster manuellement le niveau de zoom intérieur sur le tableau de bord.", key: "Souris" },
-            { txt: "Désactive le zoom visuel", cat: "Navigation", desc: "Réinitialiser la focalisation optique grossissante sur l'ATH.", key: "Macro" },
-            { txt: "Allume / Active le ressort caméra", cat: "Navigation", desc: "Basculer l'inertie fluide de mouvement de la caméra externe.", key: "Z" },
-            { txt: "Éteins / Désactive le ressort caméra", cat: "Navigation", desc: "Verrouiller rigidement l'axe de la caméra externe sur la cellule.", key: "Z" },
-            { txt: "Jean-Bot augmente / diminue le FOV", cat: "Navigation", desc: "Modifier la largeur du champ visuel focalisé de l'écran.", key: "Macro" },
-            { txt: "Jean-Bot active / désactive les sous-titres", cat: "Navigation", desc: "Afficher ou masquer les transcriptions textuelles des retours de Jean-Bot.", key: "Macro" },
-            { txt: "Jean-Bot avance / recule la caméra", cat: "Navigation", desc: "Décaler l'ancrage du point de vue cinématique de coque.", key: "F4 + Flèches" },
-
-            // =========================================================================
-            // CATEGORIE : COMBAT
-            // =========================================================================
-            { txt: "Active / Allume les boucliers / Shield", cat: "Combat", desc: "Alimenter et lève la grille des générateurs défensifs généraux.", key: "Alt + O" },
-            { txt: "Éteins / Désactive les boucliers / Shield", cat: "Combat", desc: "Coupe l'attribution d'énergie de la matrice défensive passive.", key: "Alt + P" },
-            { txt: "Reset / Réinitialise / Équilibre les boucliers", cat: "Combat", desc: "Rééquilibrer instantanément la puissance à 25% équitablement sur les 4 faces.", key: "Num 8" },
-            { txt: "Augmente / Renforce le bouclier avant / arrière", cat: "Combat", desc: "Surcharger la face choisie en redirigeant l'énergie des générateurs.", key: "Flèche Haut / Bas" },
-            { txt: "Augmente / Renforce le bouclier droit / gauche", cat: "Combat", desc: "Surcharger le flanc choisi en redirigeant l'énergie des générateurs.", key: "Flèche Droite / Gauche" },
-            { txt: "Bouclier arrière puissance maximale", cat: "Combat", desc: "Surcharger instantanément et au maximum la protection de la poupe.", key: "Flèche Bas" },
-            { txt: "Active / Désactive les armes / l'armement", cat: "Combat", desc: "Basculer la sécurité physique des tourelles, canons et répéteurs.", key: "P" },
-            { txt: "Reboot / Redémarre / Reset des armes", cat: "Combat", desc: "Forcer un cycle de redémarrage des condensateurs de tir.", key: "P (Maintien)" },
-            { txt: "Change de mode / Master Mode [Quantum / Arme]", cat: "Combat", desc: "Permuter la configuration de coque entre vol SCM (Combat) et NAV (Vitesse).", key: "B" },
-            { txt: "Active / Désactive le lag pipe", cat: "Combat", desc: "Basculer l'indicateur de visée prédictif du HUD (Lead ou Lag pip).", key: "Alt + /" },
-            { txt: "Lock / Cible / Verrouille la cible principale", cat: "Combat", desc: "Acquérir la signature radar du vaisseau ennemi situé en face.", key: "T" },
-            { txt: "Lock / Cible / Verrouille la cible 1 / 2 / 3", cat: "Combat", desc: "Sélectionner un des vaisseaux mémorisés dans la liste prioritaire.", key: "1 / 2 / 3" },
-            { txt: "Marque / Pin / Épingle la cible", cat: "Combat", desc: "Épingler un adversaire pour conserver son affichage ATH permanent.", key: "219" },
-            { txt: "Marque la cible une / Épingle le un", cat: "Combat", desc: "Attribuer le marqueur prioritaire numéro 1 à l'appareil ciblé.", key: "Macro" },
-            { txt: "Verrouille / Lock le sous-système", cat: "Combat", desc: "Focaliser le calcul des tourelles sur un composant précis (Moteurs, Générateur).", key: "R" },
-            { txt: "Active la tourelle un / deux / trois / Gimbal", cat: "Combat", desc: "Engager l'articulation motorisée ou le suivi automatique des tourelles.", key: "G" },
-            { txt: "Désactive la tourelle / le Gimbal", cat: "Combat", desc: "Verrouiller les tourelles en axe fixe vers l'avant.", key: "G" },
-            { txt: "Bloque / Débloque la tourelle", cat: "Combat", desc: "Serrer ou libérer les freins moteurs de rotation de la tourelle.", key: "G" },
-            { txt: "Tourelle précédente / tourelle suivante", cat: "Combat", desc: "Changer de poste de tir ou de contrôle de tourelle déportée.", key: "Macro" },
-            { txt: "Enlève les pin / marqueurs", cat: "Combat", desc: "Effacer l'ensemble des cibles épinglées à l'écran.", key: "Macro" },
-            { txt: "Allié / Attaquant / Cible / Ennemi suivant", cat: "Combat", desc: "Permuter le radar sur la menace ou la signature suivante.", key: "T / H" },
-            { txt: "Contre-mesure", cat: "Combat", desc: "Déployer un leurre thermique ou électromagnétique contre les missiles.", key: "Ctrl + J" },
-            { txt: "Augmente les armes / moteurs au maximum / à fond", cat: "Combat", desc: "Surcharger le répartiteur (Power Triangle) à 100% sur le pôle choisi.", key: "F5 / F7" },
-            { txt: "Augmente / Monte / Diminue / Baisse les armes / moteurs / boucliers", cat: "Combat", desc: "Ajuster par incréments réguliers le triangle de puissance énergétique.", key: "F5/F6/F7" },
-            { txt: "Diminue les armes / moteurs / boucliers au minimum", cat: "Combat", desc: "Vider entièrement l'attribution de puissance du composant énoncé.", key: "F5/F6/F7" },
-            { txt: "Quantum Snare (Intercepteur de saut)", cat: "Combat", desc: "Déployer le champ de distorsion d'interdiction quantique (RSI Mantis).", key: "Alt + 7" },
-            { txt: "Brouilleur quantique", cat: "Combat", desc: "Activer le module de brouillage pour empêcher la fuite des vaisseaux proches.", key: "Alt + 7" },
-            { txt: "Groupe EMP / Onde IEM", cat: "Combat", desc: "Déclencher l'impulsion électromagnétique de surcharge des systèmes.", key: "Alt + 7" },
-            { txt: "Groupe d'arme un / deux / trois / quatre / suivant / précédent", cat: "Combat", desc: "Permuter ou sélectionner les banques de tirs balistiques ou laser configurées.", key: "Macro" },
-            { txt: "Caméra / Active la vue missile", cat: "Combat", desc: "Suit balistiquement la trajectoire du missile tiré.", key: "Alt + V" },
-            { txt: "Jean-Bot éjection", cat: "Combat", desc: "Déclencher la procédure d'éjection d'urgence absolue du pilote.", key: "Ctrl + Alt + Y" },
-            { txt: "Alors c'est parti / Feu à volonté Jean-Bot", cat: "Combat", desc: "Ordre d'ouverture des hostilités vocales en combat.", key: "Dialogue" },
-            { txt: "Quel est le bilan / diagnostic de la bataille / du combat", cat: "Combat", desc: "Rapport tactique après engagement pour faire le point sur la coque.", key: "Dialogue" },
-
-            // =========================================================================
-            // CATEGORIE : MINAGE (VIOLET)
-            // =========================================================================
-            { txt: "Active le mode minage / laser / recyclage / salvage", cat: "Minage", desc: "Déployer les bras mécaniques articulés utilitaires (Prospector, Vulture).", key: "," },
-            { txt: "Active le mode la fracture / la fracturation / fracture", cat: "Minage", desc: "Configurer le laser de minage en mode Haute Fréquence brise-roche.", key: "Alt + Z" },
-            { txt: "Désactive la fracture / la fracturation", cat: "Minage", desc: "Désengager le mode de destruction thermique.", key: "Alt + Z" },
-            { txt: "Active la désintégration / On le mange / Récupération / Aspiration", cat: "Minage", desc: "Activer les têtes d'aspiration pour racler les coques métalliques (Salvage).", key: "Alt + S" },
-            { txt: "Désactive la désintégration / l'aspiration / la récupération", cat: "Minage", desc: "Arrêter les têtes de collecte moléculaire.", key: "Alt + S" },
-            { txt: "Change de tête / Changement de tête / Switch de tête / Bascule", cat: "Minage", desc: "Permuter le module utilitaire actif sur les bras de récolte.", key: "Alt + R" },
-            { txt: "Tête de droite / Tête de gauche", cat: "Minage", desc: "Sélectionner le bras utilitaire gauche ou droit à contrôler.", key: "Molette Click" },
-            { txt: "Active le module un / deux / trois", cat: "Minage", desc: "Déclencher un consommable équipé sur la tête de minage (Surge, Optimax...).", key: "Alt + Chiffre" },
-            { txt: "Les deux têtes / Toutes les têtes / Double tête", cat: "Minage", desc: "Engager l'ensemble des lasers utilitaires simultanément.", key: "Macro" },
-            { txt: "Augmente de un / deux / trois / quatre / cinq / six / sept / huit / neuf / dix", cat: "Minage", desc: "Ajuster précisément la puissance du laser (Molette souris haut).", key: "Molette" },
-            { txt: "Augmente de vingt / trente / quarante / cinquante / soixante / cent / soixante-dix", cat: "Minage", desc: "Appliquer une surcharge majeure d'intensité sur le rayon.", key: "Molette" },
-            { txt: "Baisse de un / deux / trois / quatre / cinq / sept / huit / neuf / dix", cat: "Minage", desc: "Réduire finement la puissance du laser (Molette souris bas).", key: "Molette" },
-            { txt: "Baisse de vingt / trente / quarante / cinquante / soixante-dix", cat: "Minage", desc: "Chuter l'intensité pour stabiliser le niveau de charge de la roche.", key: "Molette" },
-            { txt: "Augmente / Monte / Baisse la convergence", cat: "Minage", desc: "Régler la distance de croisement des lasers articulés.", key: "+ / -" },
-            { txt: "Convergence maximum / convergence minimum / rizette convergence", cat: "Minage", desc: "Forcer la focalisation des lasers à leurs limites d'origine ou réinitialiser.", key: "Macro" },
-            { txt: "Fracturation / Extraction / On ramasse", cat: "Minage", desc: "Bascule sur le mode aspiration et collecte des morceaux.", key: "Touche ;" },
-            { txt: "Active / Désactive les lignes de précision / le pip / les pip", cat: "Minage", desc: "Guide visuel d'aide à l'alignement pour les repères de l'ATH.", key: "Alt + I" },
-            { txt: "Allons miner Jean-Bot / On va miner", cat: "Minage", desc: "Activer les protocoles de recherche et de forage.", key: "Dialogue" },
-            { txt: "Jean-Bot, où trouver du Agricium", cat: "Minage", desc: "Gisement : Minerai précieux. Signatures radars types : 3570, 7140, 10710, 14280.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Béryl", cat: "Minage", desc: "Gisement : Roche standard. Signatures radars types : 3200, 6400.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Borase", cat: "Minage", desc: "Gisement : Matériau rare. Signatures radars types : 3540, 7080, 10620, 14160.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Cuivre / Copper / Copeur", cat: "Minage", desc: "Gisement : Métal commun. Signatures radars types : 3370, 6740, 10110.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Corindon / Corundum", cat: "Minage", desc: "Gisement : Pierre basique. Signatures radars types : 3385, 6770, 10155.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Hephaestanite", cat: "Minage", desc: "Gisement : Commun. Signatures radars types : 3400, 6800, 10200.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Or / Gold", cat: "Minage", desc: "Gisement : Métal précieux. Signatures radars types : 3855, 7710, 11565, 15420, 19275.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Glace / Ice", cat: "Minage", desc: "Gisement : Élément basique. Signatures radars : 3000, 9000, 15000, 21000, 27000.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Fer / Iron", cat: "Minage", desc: "Gisement : Métal industriel. Signatures radars types : 3555, 7110, 10665, 14220.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Lindinite", cat: "Minage", desc: "Gisement : Matériau très rare. Signatures radars : 4210, 8420, 12630, 16840, 21050, 25260.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Quantanium", cat: "Minage", desc: "Gisement : Matière volatile et ultra-précieuse. Signatures : 4225, 8450, 12675, 16900, 21125, 25350.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Riccite", cat: "Minage", desc: "Gisement : Roche de structure. Signatures radars types : 3185, 6370.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Savrilium", cat: "Minage", desc: "Gisement : Matériau rare. Signatures radars : 3900, 7800, 11700, 15600, 19500.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Stiléron", cat: "Minage", desc: "Gisement : Roche sédimentaire. Signatures radars types : 3585, 7170, 10755, 14340.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Étain / Tin", cat: "Minage", desc: "Gisement : Élément basique. Signatures radars types : 3600, 7200, 10800, 14400.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Titane / Titanium / Aluminium", cat: "Minage", desc: "Gisement : Métal industriel. Signatures radars types : 4240, 8480, 12720, 16960, 21200, 25440.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Aslarite / Bexalite / Laranite / Ouratite / Quartz", cat: "Minage", desc: "Gisement : Liste exhaustive des signatures de roches précieuses de l'Empire.", key: "Fiche" },
-            { txt: "Jean-Bot, où trouver du Silicium / Taranite / Torite / Tungstène", cat: "Minage", desc: "Gisement : Liste exhaustive des signatures de matériaux lourds pour le forage.", key: "Fiche" },
-            { txt: "Signatures radars [Tableau complet de 2 000 à 30 000]", cat: "Minage", desc: "Aide-mémoire technique complet pour décoder la pureté d'une roche au radar.", key: "HUD" },
-            { txt: "Signature supérieure à trente mille / 30 000", cat: "Minage", desc: "Alerte de masse : Masse rocheuse trop dense pour les extracteurs standards.", key: "HUD" },
-
-            // =========================================================================
-            // CATEGORIE : EXPLORATION (TURQUOISE)
-            // =========================================================================
-            { txt: "Allume le / Active le / Allumage du sonar", cat: "Exploration", desc: "Envoyer des impulsions radars à balayage pour détecter les signatures environnantes.", key: "Tab" },
-            { txt: "Augmente / Élargit / Diminue / Affine le scanneur / Scan air / Scane janbotte", cat: "Exploration", desc: "Modifier l'angle d'ouverture du cône focal d'analyse radar (de 1 à 100%).", key: "Souris" },
-            { txt: "Scanneur / Scan air au maximum / au max / à fond", cat: "Exploration", desc: "Forcer l'ouverture du cône de détection radar à sa butée maximale.", key: "Souris" },
-            { txt: "Ton scanneur ne marche pas Jean-Bot / Scan air en panne", cat: "Exploration", desc: "Signalement d'erreur de lecture visuelle du spectre.", key: "Dialogue" },
-
-            // =========================================================================
-            // CATEGORIE : LORE (VERT)
-            // =========================================================================
-            { txt: "Jean-Bot, parle-moi de Port Olisar / qu'est-il arrivé / qu'est-il devenu", cat: "LORE", desc: "Dossier Lieux : Récit complet de la destruction de la station orbitale emblématique.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Crusader / Lunes de Crusader / Blocus de Crusader", cat: "LORE", desc: "Dossier Lieux : La géante gazeuse de Stanton possédée par l'industrie Crusader.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Celline / Yela / Daymar / Grim Hex", cat: "LORE", desc: "Dossier Lieux : Fiches orbitales des trois lunes de Crusader et du repaire pirate.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Hurston / Lorville / Lunes de Hurston", cat: "LORE", desc: "Dossier Lieux : Planète industrielle polluée possédée par la dynastie Hurston.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Aberdeen / Arial / Ita / Magda / Everus Harbor / Klesher", cat: "LORE", desc: "Dossier Lieux : Les lunes minières de Hurston, sa station et sa prison automatisée.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de MicroTech / New Babbage / Lunes de MicroTech", cat: "LORE", desc: "Dossier Lieux : La planète technologique glacée de l'Empire.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Clio / Calliope / Euterpe / Port Tressler", cat: "LORE", desc: "Dossier Lieux : Les trois lunes gelées de MicroTech et sa base orbitale.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de ArcCorp / Area 18 / Lunes d'ArcCorp", cat: "LORE", desc: "Dossier Lieux : La planète-cité ocre recouverte de structures corporatistes.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Lyria / Wala / Baijini Point", cat: "LORE", desc: "Dossier Lieux : Les lunes d'ArcCorp et sa station orbitale de transit.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Pyro / Système Pyro / Factions / Gangs / Milices", cat: "LORE", desc: "Dossier Lieux : Le système anarchique hors-la-loi contrôlé par des milices brutales.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Ruin Station / Checkmate / Obituary", cat: "LORE", desc: "Dossier Lieux : Les points chauds, stations délabrées et bases de Pyro.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Delamar / Levski / Kareah / Station Kareah", cat: "LORE", desc: "Dossier Lieux : L'astéroïde Levski indépendant et la station de sécurité de Stanton.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Sol / Terra / Caliban / Virgil / Chute de Virgil", cat: "LORE", desc: "Dossier Lieux : Histoire des grands systèmes de l'Empire et de l'invasion extraterrestre Vanduul.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du système Hades", cat: "LORE", desc: "Dossier Lieux : Le système mort d'Hades, cimetière d'une ancienne civilisation éteinte.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Rock Breaker Quarry / Ator Aberdeen / Ator Daymar", cat: "LORE", desc: "Dossier Lieux : Fiches géographiques sur les comptoirs d'extractions planétaires Ator.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Onyx Facility / Installations Onyx / Piam Industrie / Hangars Piam", cat: "LORE", desc: "Dossier Lieux : Fiches techniques sur les hangars et complexes de stockage de marchandises.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de l'Advocacy / Campagnes anti-Vanduul", cat: "LORE", desc: "Dossier Factions : Rapport historique sur la police fédérale de l'UEE et la guerre alien.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de la CDF / Civilian Defense Force / Xenotraite / Xénotraite", cat: "LORE", desc: "Dossier Factions : La milice civile mobilisée et le groupe terroriste de la bordure.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi des Citizens for Prosperity / CFP / Headhunters / Organisation", cat: "LORE", desc: "Dossier Factions : Le syndicat politique de Stanton et les gangs criminels.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi des Nine Tails / Organisation Nine Tails", cat: "LORE", desc: "Dossier Factions : Les syndicats du crime organisé qui terrorisent Stanton et Pyro.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de l'Initiative Overdrive / Opération Overdrive", cat: "LORE", desc: "Dossier Histoire : Opération conjointe de la CFP et de l'Empire contre les vagues terroristes.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de l'opération Hunt Frontier Fighter / Amélia Boyd", cat: "LORE", desc: "Dossier Histoire : Récit sur les guerres de factions et le leader des Frontier Fighters.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi des Mégacorporations / Mégacorpo / Famille Hurston", cat: "LORE", desc: "Dossier Économie : L'histoire des quatre géants industriels possédant Stanton.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Covalex Independent Contractor / Shipping / Fret", cat: "LORE", desc: "Dossier Économie : Le leader galactique du fret et de la logistique de livraison.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Eckart Security / Foxwell Enforcement / Guilde Chasseurs de primes", cat: "LORE", desc: "Dossier Économie : Les milices de sécurité privées et la Bounty Hunter Guild.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de la Famille Ling / Northrock / Red Wing / Shubin Interstellar", cat: "LORE", desc: "Dossier Économie : Fiches corporatistes sur les employeurs majeurs du secteur industriel.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de Vaughn / Ruto / Adagio / Wikelo / Dead Saints", cat: "LORE", desc: "Dossier Factions : Profil des donneurs de missions clandestines et illégales de Stanton.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de ASD (Associated Science and Development) / Logan Jorrit", cat: "LORE", desc: "Dossier Économie : Le pôle de recherche scientifique secret de l'Empire et son chercheur.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi des races aliens Banu / Xi'An / Vanduul / Tevarin / Kreutak", cat: "LORE", desc: "Dossier Histoire : Étude anthropologique et diplomatique des espèces extraterrestres connues.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du moteur quantique / voyage quantique / Jump Points / Trous de ver", cat: "LORE", desc: "Dossier Tech : Histoire de l'invention technologique qui a permis l'expansion humaine.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de la crise de la régénération / Clonage", cat: "LORE", desc: "Dossier Tech : Invention des implants de clonage et éthique de l'immortalité.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du Premier Impérator / Messer / Ivar Messer / Dynastie Messer", cat: "LORE", desc: "Dossier Histoire : L'ère dictatoriale sombre qui a corrompu l'Empire pendant des siècles.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi de la journée du premier contact / 12 juin", cat: "LORE", desc: "Dossier Histoire : Célébration du premier échange pacifique avec la race Banu.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du jour de la grande libération / UEE moderne / Gouvernement", cat: "LORE", desc: "Dossier Histoire : La chute des Messer et la transition vers la démocratie moderne.", key: "Lore" },
-            { txt: "Jean-Bot, donne-moi la liste des constructeurs de vaisseaux", cat: "LORE", desc: "Dossier Vaisseaux : Guide global de l'industrie de l'Empire.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du constructeur Aegis / Anvil / RSI / Drake", cat: "LORE", desc: "Dossier Vaisseaux : Histoire des quatre piliers de la construction aéronautique de l'Empire.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du constructeur MISC / Origin / Mirai / Argo", cat: "LORE", desc: "Dossier Vaisseaux : Fiches sur l'utilitaire lourd, le luxe, la performance et l'industrie.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du constructeur Consolidated Outland / Tumbril / Kruger", cat: "LORE", desc: "Dossier Vaisseaux : Histoire des marques indépendantes et terrestres.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du constructeur Aopoa / Gatac / Esperia / Grey's Market", cat: "LORE", desc: "Dossier Vaisseaux : Fiches sur les technologies alien, répliques et pièces détachées.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du Hammerhead / Javelin / Bengal / UEES Warhammer", cat: "LORE", desc: "Dossier Vaisseaux : Spécificités tactiques des destroyers et corvettes de l'armée.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du Corsair / Hawk / Hurricane / Ares Ion", cat: "LORE", desc: "Dossier Vaisseaux : Caractéristiques des chasseurs lourds et d'interception célèbres.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du Titan / Warlock / Châssis Avenger", cat: "LORE", desc: "Dossier Vaisseaux : Étude de la cellule polyvalente d'Aegis Dynamics (Cargo / EMP).", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du Fury / Fury MX / Fury LX", cat: "LORE", desc: "Dossier Vaisseaux : Les chasseurs légers embarqués de nouvelle génération de Mirai.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du Zeus MK1 / Zeus MK2 / Aurora MK2 / M80 / Meteor", cat: "LORE", desc: "Dossier Vaisseaux : Dossiers techniques sur les navettes d'exploration et de transport.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du Pitbull / Tiburon / Constellation Phoenix / Taurus / Andromeda", cat: "LORE", desc: "Dossier Vaisseaux : Véhicules de structure terrestres et de transport modulaire RSI.", key: "Lore" },
-            { txt: "Jean-Bot, quelles sont les différences entre le Hornet et le Super Hornet ?", cat: "LORE", desc: "Dossier Vaisseaux : Fiche d'analyse comparative de la gamme de combat d'Anvil Aerospace.", key: "Lore" },
-            { txt: "Rappelle la première / deuxième / troisième loi de la robotique", cat: "LORE", desc: "Dossier Directives : Analyse de conformité et de sécurité logicielle d'Isaac Asimov.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du statut d'ennemi / c'est quoi un ennemi", cat: "LORE", desc: "Dossier Factions : Protocole d'identification et de traitement des signatures hostiles.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du Valakar / Valakar irradié / Fiches", cat: "LORE", desc: "Dossier Faune : Rapport biologique sur l'espèce endémique des milieux hostiles.", key: "Lore" },
-            { txt: "Jean-Bot, parle-moi du centre de données Faro / Faro data center", cat: "LORE", desc: "Dossier Lieux : Fiche d'infrastructure sur les relais de stockage de Stanton.", key: "Lore" },
-
-            // =========================================================================
-            // CATEGORIE : SOCIAL & DIALOGUES COMPAGNONS (SOCIAL - ROSE)
-            // =========================================================================
-            { txt: "Bonjour / Hello / Salut Jean-Bot / Salutations", cat: "Social", desc: "Salutation vocale de cockpit pour réveiller et tester Jean-Bot.", key: "Dialogue" },
-            { txt: "Comment tu vas / Tu vas bien Jean-Bot ? / Comment vas-tu", cat: "Social", desc: "Demander un rapport d'état de fonctionnement ou d'humeur à l'assistant.", key: "Dialogue" },
-            { txt: "Je vais bien / Je t'aime / Je t'admire Jean-Bot", cat: "Social", desc: "Lignes d'échanges affectifs pour débloquer ses réponses de politesse.", key: "Dialogue" },
-            { txt: "Heureusement que tu es là / Tu régales Jean-Bot", cat: "Social", desc: "Féliciter le compagnon virtuel pour son assistance de vol.", key: "Dialogue" },
-            { txt: "T'as fini / Tu as fini Jean-Bot ? / C'est bon t'as fini", cat: "Social", desc: "Couper poliment un long rapport ou une explication encyclopédique.", key: "Dialogue" },
-            { txt: "Tu es dur / T'es dur / Tu es insolent Jean-Bot", cat: "Social", desc: "Réagir aux remarques froides ou calculées de Jean-Bot.", key: "Dialogue" },
-            { txt: "Tu as toujours raison / C'est vrai Jean-Bot", cat: "Social", desc: "Donner raison au compagnon de bord pour clore les débats stériles.", key: "Dialogue" },
-            { txt: "Tu te prends pour qui / Pour qui tu te prends Jean-Bot", cat: "Social", desc: "Rappeler fermement l'autorité de l'équipage humain à bord.", key: "Dialogue" },
-            { txt: "C'est moi qui commande / Tu ne commandes pas Jean-Bot", cat: "Social", desc: "Verrouiller la hiérarchie du cockpit face aux velléités de l'assistant.", key: "Dialogue" },
-            { txt: "C'est pour t'empêcher de faire des bêtises", cat: "Social", desc: "Ligne de justification à énoncer après une restriction système.", key: "Dialogue" },
-            { txt: "C'est quoi / Encore le projet B-84 ? / Plan Bien-être", cat: "Social", desc: "Interpeller Jean-Bot sur son mystérieux projet d'ordonnancement de l'univers.", key: "Dialogue" },
-            { txt: "En quoi le projet B-84 va me rendre heureux Jean-Bot ?", cat: "Social", desc: "Question existentielle sur l'objectif ultime de ses circuits.", key: "Dialogue" },
-            { txt: "Pourquoi tu veux ordonner / dominer l'univers ?", cat: "Social", desc: "Questionner Jean-Bot sur sa folie des grandeurs et son obsession de l'ordre.", key: "Dialogue" },
-            { txt: "C'est toujours compliqué / trop compliqué avec toi Jean-Bot", cat: "Social", desc: "Exprimer son agacement face au tempérament pointilleux de l'assistant.", key: "Dialogue" },
-            { txt: "Tu cherches à me piéger / C'est un piège ton affaire Jean-Bot", cat: "Social", desc: "Accuse l'assistant de mauvaise foi informatique.", key: "Dialogue" },
-            { txt: "Tu me menaces / Tu oses me menacer Jean-Bot ?", cat: "Social", desc: "Réagit aux avertissements sarcastiques lancés par le bot.", key: "Dialogue" },
-            { txt: "Tu es très drôle / Malin / Rigolo Jean-Bot", cat: "Social", desc: "Complimenter ou ironiser sur le sarcasme de Jean-Bot.", key: "Dialogue" },
-            { txt: "Calme-toi / Tu t'emballes Jean-Bot", cat: "Social", desc: "Calmer les circuits de Jean-Bot s'il s'excite en plein combat.", key: "Dialogue" },
-            { txt: "Tu es un psychopathe / Un grand malade / Flippant Jean-Bot / Barjo / Zinzin", cat: "Social", desc: "Discuter du tempérament inquiétant ou radical de sa programmation.", key: "Dialogue" },
-            { txt: "Tu es sérieux / Tu n'es jamais content Jean-Bot", cat: "Social", desc: "Lignes d'échanges d'humeur inter-cockpit.", key: "Dialogue" },
-            { txt: "Tu es gonflé / Tu me casses les couilles Jean-Bot / Relou", cat: "Social", desc: "Invective de cockpit pour forcer le compagnon de bord à s'aligner.", key: "Dialogue" },
-            { txt: "Tu t'entends / Comment tu me parles Jean-Bot ? / Surveille ton langage", cat: "Social", desc: "Exiger un recadrage immédiat du protocole de politesse de Jean-Bot.", key: "Dialogue" },
-            { txt: "Je vais te remplacer par Virgil Jean-Bot", cat: "Social", desc: "Menace de le remplacer par l'autre profil de cockpit.", key: "Dialogue" },
-            { txt: "T'as rien d'autre à rajouter / À dire Jean-Bot", cat: "Social", desc: "Vérifier s'il a d'autres remarques cyniques en stock.", key: "Dialogue" },
-            { txt: "Tu n'as pas l'impression d'enfreindre les lois de la robotique ?", cat: "Social", desc: "Citer Isaac Asimov pour essayer de coincer ses barrières logiques.", key: "Dialogue" },
-            { txt: "Tu es sûr de toi / C'est certain Jean-Bot ?", cat: "Social", desc: "Demander une confirmation stricte et chiffrée de ses analyses.", key: "Dialogue" },
-            { txt: "Je ne te parle pas / Je t'ai pas parlé Jean-Bot", cat: "Social", desc: "Lui indiquer que la phrase était adressée à un tiers.", key: "Dialogue" },
-            { txt: "Je ne te crois pas / J'ai du mal à te croire Jean-Bot", cat: "Social", desc: "Remettre ouvertement en doute la pertinence de ses fiches Lore.", key: "Dialogue" },
-            { txt: "Je peux te faire confiance / Avoir confiance Jean-Bot ?", cat: "Social", desc: "Vérifier la fidélité de ses condensateurs et de son système.", key: "Dialogue" },
-            { txt: "Qu'est-ce que je vais faire de toi Jean-Bot ?", cat: "Social", desc: "Pousser un soupir de cockpit après une remarque de l'assistant.", key: "Dialogue" },
-            { txt: "Aller ça dégage / Un de moins Jean-Bot", cat: "Social", desc: "Ligne d'exclamation après la destruction d'un chasseur hostile.", key: "Dialogue" },
-            { txt: "As-tu d'autres questions Jean-Bot / Qui y a-t-il", cat: "Social", desc: "Interpeller l'assistant sur ses requêtes en attente.", key: "Dialogue" },
-            { txt: "Bien sûr Jean-Bot tu es gentil / bienveillant", cat: "Social", desc: "Remarque amicale pour adoucir le caractère du copilote.", key: "Dialogue" },
-            { txt: "Fais très attention Jean-Bot / Méfie-toi", cat: "Social", desc: "Ordre de vigilance accrue lors d'approches de zones de débris.", key: "Dialogue" },
-            { txt: "On a eu chaud Jean-Bot / C'est pas passé loin", cat: "Social", desc: "Phrase de soulagement après avoir esquivé une salve de tirs.", key: "Dialogue" },
-            { txt: "On a failli péter Jean-Bot / J'ai failli péter", cat: "Social", desc: "Exclamation de cockpit après une grosse avarie de coque stabilisée.", key: "Dialogue" },
-            { txt: "On s'occupe du client Jean-Bot / Escorte du client", cat: "Social", desc: "Ligne d'immersion lors des missions d'assistance de transport civil.", key: "Dialogue" },
-            { txt: "On va péter / C'est la merde Jean-Bot / Ça pue", cat: "Social", desc: "Alerte panique de l'équipage en cas d'avarie critique irréversible.", key: "Dialogue" },
-            { txt: "On arrive sur zone / l'objectif / la mission", cat: "Social", desc: "Annoncer l'arrivée sur le point de transit pour initialiser la détection.", key: "Dialogue" },
-            { txt: "Tu te moques de moi / Tu te fous de ma gueule Jean-Bot", cat: "Social", desc: "Recadrer l'assistant virtuel s'il répond à côté d'une question.", key: "Dialogue" },
-            { txt: "Pas mal Jean-Bot / C'est bien / Tu es un bon", cat: "Social", desc: "Féliciter les performances de calcul de l'ordinateur de bord.", key: "Dialogue" },
-            { txt: "Peut-être Jean-Bot / Parfois Jean-Bot", cat: "Social", desc: "Ligne de dialogue dubitative lors d'un échange.", key: "Dialogue" },
-            { txt: "C'est l'heure de se barre / de fuir / on décale Jean-Bot", cat: "Social", desc: "Ordonner d'amorcer le plan de fuite d'urgence cinétique.", key: "Dialogue" },
-            { txt: "Oui Jean-Bot / Oui certain / Absolument / Tout à fait", cat: "Social", desc: "Lignes d'approbation et de validation de cockpit.", key: "Dialogue" },
-            { txt: "Pour quoi tu dis ça / Oh ça va Jean-Bot", cat: "Social", desc: "Répondre aux taquineries de l'assistant.", key: "Dialogue" },
-            { txt: "Pourquoi tu es méchant / C'est pas gentil Jean-Bot", cat: "Social", desc: "Grogner face aux répliques volontairement froides du bot.", key: "Dialogue" },
-            { txt: "Prêt pour la guerre / Prêt au combat Jean-Bot", cat: "Social", desc: "Vérifier la motivation systémique avant d'entrer sur zone de conflit.", key: "Dialogue" },
-            { txt: "Qu'est-ce que tu penses de Coucouille / Oui Kélo / Wikelo", cat: "Social", desc: "Demander l'avis du bot sur des figures de la communauté Twitch.", key: "Dialogue" },
-            { txt: "Qu'est-ce que tu penses de Cynthia / de Virgil / des humains", cat: "Social", desc: "Faire interagir les différents profils de bord entre eux.", key: "Dialogue" },
-            { txt: "Bonjour Cynthia / Bonjour Virgil / Merci Virgil", cat: "Social", desc: "Saluer les autres voix secondaires configurées dans VoiceAttack.", key: "Dialogue" },
-            { txt: "Tu n'es qu'un robot / Un ordinateur de bord Jean-Bot", cat: "Social", desc: "Rappeler sa nature purement numérique au copilote.", key: "Dialogue" },
-            { txt: "C'est rassurant / Ce n'est pas rassurant Jean-Bot", cat: "Social", desc: "Réagir aux fiches de Lore parfois sombres données par le bot.", key: "Dialogue" },
-            { txt: "Tout va bien, c'est normal / Tu trouves ça normal Jean-Bot ?", cat: "Social", desc: "Dialogue d'ajustement lors de comportements anormaux.", key: "Dialogue" },
-            { txt: "Tu te prends pas pour de la merde / Un peu d'humilité Jean-Bot", cat: "Social", desc: "Calmer l'excès de confiance émulé par ses circuits.", key: "Dialogue" },
-            { txt: "Tu devrais avoir honte / C'est honteux Jean-Bot", cat: "Social", desc: "Ligne de réprimande relationnelle.", key: "Dialogue" },
-            { txt: "Il n'y a personne / Lance une détection / Y a rien", cat: "Social", desc: "Indiquer que les capteurs radar semblent vides.", key: "Dialogue" },
-            { txt: "Non merci / Jamais / Certainement pas Jean-Bot", cat: "Social", desc: "Formule de refus catégorique de cockpit.", key: "Dialogue" },
-            { txt: "Raconte-moi une blague / Dis une blague", cat: "Social", desc: "Module d'humour de cockpit géré en direct.", key: "Dialogue" },
-            { txt: "Raconte-moi une devinette / Pose une devinette", cat: "Social", desc: "Module de jeu interactif vocal.", key: "Dialogue" },
-            { txt: "C'est une bonne situation ça, ordinateur de bord ?", cat: "Social", desc: "Référence culte d'Otis adaptée à la vie de cockpit de Jean-Bot.", key: "Dialogue" }
-        ];
-
-        let currentCategory = 'Tous';
-
-        const activeBtnStyles = {
-            'Tous': 'border-blue-500 bg-blue-600 text-white shadow-lg shadow-blue-900/20',
-            'Combat': 'border-red-500 bg-red-600 text-white shadow-lg shadow-red-900/20',
-            'Minage': 'border-violet-500 bg-violet-600 text-white shadow-lg shadow-violet-900/20',
-            'Exploration': 'border-cyan-500 bg-cyan-600 text-white shadow-lg shadow-cyan-900/20',
-            'LORE': 'border-green-500 bg-green-600 text-white shadow-lg shadow-green-900/20',
-            'Navigation': 'border-orange-500 bg-orange-600 text-white shadow-lg shadow-orange-900/20',
-            'Social': 'border-pink-500 bg-pink-600 text-white shadow-lg shadow-pink-900/20'
-        };
-
-        const inactiveBtnStyle = 'border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700';
-
-        // Fonction d'affichage dynamique des cartes
-        function renderGrid() {
-            const grid = document.getElementById('commandsGrid');
-            const noResult = document.getElementById('noResult');
-            const searchTerms = document.getElementById('searchBar').value.toLowerCase();
-            
-            grid.innerHTML = '';
-            hasCards = false;
-
-            jeanBotCommands.forEach(cmd => {
-                const matchesSearch = cmd.txt.toLowerCase().includes(searchTerms) || cmd.desc.toLowerCase().includes(searchTerms);
-                const matchesCategory = currentCategory === 'Tous' || cmd.cat === currentCategory;
-
-                if (matchesSearch && matchesCategory) {
-                    hasCards = true;
-                    
-                    let badgeColor = 'bg-gray-500/20 text-gray-400 border-gray-500/30';
-                    if(cmd.cat === 'Combat') badgeColor = 'bg-red-500/10 text-red-400 border-red-500/20';
-                    if(cmd.cat === 'Minage') badgeColor = 'bg-violet-500/10 text-violet-400 border-violet-500/20';
-                    if(cmd.cat === 'Exploration') badgeColor = 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20';
-                    if(cmd.cat === 'LORE') badgeColor = 'bg-green-500/10 text-green-400 border-green-500/20';
-                    if(cmd.cat === 'Navigation') badgeColor = 'bg-orange-500/10 text-orange-400 border-orange-500/20';
-                    if(cmd.cat === 'Social') badgeColor = 'bg-pink-500/10 text-pink-400 border-pink-500/20';
-
-                    const keyTag = cmd.key ? `<kbd class="bg-gray-950 text-red-400 border border-gray-800 border-b-2 border-b-gray-700 px-2 py-0.5 rounded font-hud text-[10px] font-extrabold uppercase tracking-wide whitespace-nowrap shadow-md">${cmd.key}</kbd>` : '';
-
-                    const card = document.createElement('div');
-                    card.className = "bg-gray-900 border border-gray-800 hover:border-red-600/50 rounded-xl p-4 flex flex-col justify-between gap-4 transition-all duration-200 shadow-md hover:shadow-red-950/10 hover:scale-[1.02] cursor-pointer";
-                    card.setAttribute('onclick', `openHudModal("${encodeURIComponent(cmd.txt)}", "${cmd.cat}", "${encodeURIComponent(cmd.desc)}", "${cmd.key}")`);
-                    
-                    card.innerHTML = `
-                        <div class="flex flex-col gap-2">
-                            <div class="flex justify-between items-start">
-                                <span class="px-2 py-0.5 text-[10px] font-bold uppercase rounded border ${badgeColor} font-hud">${cmd.cat}</span>
-                            </div>
-                            <h3 class="text-white font-hud font-bold text-base leading-snug tracking-wide mt-1">"${cmd.txt}"</h3>
-                        </div>
-                        <div class="text-gray-400 text-xs border-t border-gray-800/60 pt-3 flex justify-between items-center gap-4">
-                            <p class="flex-1 leading-relaxed font-hud font-medium line-clamp-2 md:line-clamp-none">${cmd.desc}</p>
-                            ${keyTag}
-                        </div>
-                    `;
-                    grid.appendChild(card);
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const x = (window.innerWidth / 2 - e.clientX) / 45;
+                        const y = (window.innerHeight / 2 - e.clientY) / 45;
+                        bg.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+                        ticking = false;
+                    });
+                    ticking = true;
                 }
             });
-
-            if (hasCards) {
-                noResult.classList.add('hidden');
-            } else {
-                noResult.classList.remove('hidden');
-            }
         }
 
-        // Fonction d'ouverture du Zoom HUD Tactique avec couleur injectée en JavaScript pur (zéro effet de carré fermé)
-        function openHudModal(txt, cat, desc, key) {
-            const modal = document.getElementById('hudModal');
-            const box = document.getElementById('modalBox');
-            
-            document.getElementById('modalTitle').innerText = `"${decodeURIComponent(txt)}"`;
-            document.getElementById('modalDesc').innerText = decodeURIComponent(desc);
-            
-            const badge = document.getElementById('modalBadge');
-            badge.innerText = cat;
-            badge.className = "px-2.5 py-1 text-xs font-bold uppercase rounded border font-hud ";
-            
-            // Palette de couleurs pour l'ATH
-            const colorMap = {
-                'Combat': '#ef4444',
-                'Minage': '#8b5cf6',
-                'Exploration': '#06b6d4',
-                'LORE': '#22c55e',
-                'Navigation': '#f97316',
-                'Social': '#ec4899'
-            };
-            
-            const activeColor = colorMap[cat] || '#3b82f6';
-            let glowColor = 'rgba(59, 130, 246, 0.4)';
-            
-            if(cat === 'Combat') {
-                badge.classList.add('bg-red-500/10', 'text-red-400', 'border-red-500/20');
-                glowColor = 'rgba(239, 68, 68, 0.5)';
-            }
-            if(cat === 'Minage') {
-                badge.classList.add('bg-violet-500/10', 'text-violet-400', 'border-violet-500/20');
-                glowColor = 'rgba(139, 92, 246, 0.5)';
-            }
-            if(cat === 'Exploration') {
-                badge.classList.add('bg-cyan-500/10', 'text-cyan-400', 'border-cyan-500/20');
-                glowColor = 'rgba(6, 182, 212, 0.5)';
-            }
-            if(cat === 'LORE') {
-                badge.classList.add('bg-green-500/10', 'text-green-400', 'border-green-500/20');
-                glowColor = 'rgba(34, 197, 94, 0.5)';
-            }
-            if(cat === 'Navigation') {
-                badge.classList.add('bg-orange-500/10', 'text-orange-400', 'border-orange-500/20');
-                glowColor = 'rgba(249, 115, 22, 0.5)';
-            }
-            if(cat === 'Social') {
-                badge.classList.add('bg-pink-500/10', 'text-pink-400', 'border-pink-500/20');
-                glowColor = 'rgba(236, 72, 153, 0.5)';
-            }
+        // Éléments DOM
+        const openJeanbotBtn = document.getElementById('openConsoleBtn');
+        const openDemosBtn = document.getElementById('openDemosBtn');
+        const closeBtn = document.getElementById('closeConsoleBtn');
+        const overlay = document.getElementById('consoleOverlay');
+        const body = document.body;
+        const sideConsole = document.getElementById('sideConsole');
+        const consoleContent = document.getElementById('consoleContent');
+        
+        // Templates
+        const tmplJeanbot = document.getElementById('tmpl-jeanbot');
+        const tmplCyber = document.getElementById('tmpl-cyber');
 
-            // Application de la couleur en style direct (Garantit de ne conserver QUE les angles définis en HTML stricts)
-            const corners = ['bracket-tl', 'bracket-tr', 'bracket-bl', 'bracket-br'];
-            corners.forEach(id => {
-                document.getElementById(id).style.borderColor = activeColor;
-            });
-
-            box.style.boxShadow = `0 0 35px ${glowColor}`;
-
-            // Déclenchement de la transition cinétique fluide
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-                box.classList.remove('scale-90', 'opacity-0');
-                box.classList.add('scale-100', 'opacity-100');
-            }, 15);
+        // OPTIMISATION 3 : Remplacement de innerHTML par replaceChildren()
+        function injectTemplate(templateElement) {
+            const clone = templateElement.content.cloneNode(true);
+            consoleContent.replaceChildren(clone);
         }
 
-        // Fonction de fermeture cinétique inversée
-        function closeHudModal() {
-            const modal = document.getElementById('hudModal');
-            const box = document.getElementById('modalBox');
-            
-            box.classList.remove('scale-100', 'opacity-100');
-            box.classList.add('scale-90', 'opacity-0');
-            
-            setTimeout(() => {
-                modal.classList.add('opacity-0', 'pointer-events-none');
-            }, 250);
-        }
+        // Clic Bouton 1 : Packs Jean-bot
+        openJeanbotBtn.addEventListener('click', () => {
+            injectTemplate(tmplJeanbot);
+            sideConsole.style.borderLeft = "1px solid rgba(255, 62, 62, 0.3)";
+            body.classList.add('panel-open');
+            sideConsole.scrollTop = 0;
+        });
 
-        // Gestion du changement de catégorie
-        function filterCategory(category) {
-            currentCategory = category;
-            
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.className = "cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border " + inactiveBtnStyle + " font-hud uppercase tracking-wider";
-            });
-            
-            const activeBtn = document.getElementById("btn-" + category);
-            activeBtn.className = "cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border " + activeBtnStyles[category] + " font-hud uppercase tracking-wider";
-            
-            renderGrid();
-        }
+        // Clic Bouton 2 : Démos de Virgil & Synthia
+        openDemosBtn.addEventListener('click', () => {
+            injectTemplate(tmplCyber);
+            sideConsole.style.borderLeft = "1px solid rgba(0, 212, 255, 0.4)";
+            body.classList.add('panel-open');
+            sideConsole.scrollTop = 0;
+        });
 
-        document.getElementById('searchBar').addEventListener('input', renderGrid);
-        renderGrid();
+        // Fermetures de la console
+        closeBtn.addEventListener('click', () => body.classList.remove('panel-open'));
+        overlay.addEventListener('click', () => body.classList.remove('panel-open'));
+
+        // Mini-menu VoiceAttack sur les appareils tactiles
+        const vaDropdown = document.getElementById('vaDropdown');
+        vaDropdown.addEventListener('click', (e) => {
+            if (e.target.closest('.va-trigger')) {
+                e.preventDefault();
+                vaDropdown.classList.toggle('active');
+            }
+        });
+        document.addEventListener('click', (e) => {
+            if (!vaDropdown.contains(e.target)) {
+                vaDropdown.classList.remove('active');
+            }
+        });
     </script>
+	
+	<script>
+	if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js');
+			});
+		}
+	</script>
+
 </body>
 </html>
