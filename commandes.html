@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JEAN-BOT PREMIUM - Tableau de Bord Commandes</title>
+    <!-- Moteur de style Tailwind CSS stable -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Importation de la police "Exo 2" -->
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* Défilement personnalisé style cockpit */
@@ -21,17 +24,20 @@
 </head>
 <body class="min-h-screen flex flex-col font-sans selection:bg-red-600 selection:text-white bg-gray-950 text-gray-100">
 
+    <!-- HEADER & LOGO + BANDEAU HUD CENTRAL INTERVERTAL -->
     <header class="border-b border-red-950 bg-gray-900/50 backdrop-blur sticky top-0 z-50 px-4 py-3">
         <div class="max-w-7xl mx-auto flex flex-col md:grid md:grid-cols-3 items-center gap-4">
             
+            <!-- COLONNE GAUCHE : BLOC LOGO ET NOM (ROUGE HARMONISÉ AU SURVOL) -->
             <a href="index.html" class="flex items-center gap-3 justify-center md:justify-start justify-self-start group transition-all">
                 <img src="favicon.png" alt="Logo Jean-Bot" class="w-11 h-11 rounded-lg object-contain bg-gray-950 border border-gray-800 p-1 shadow-lg shadow-red-950/20 group-hover:border-red-600/50 transition-colors">
                 <div class="text-center md:text-left">
-                    <h1 class="text-lg font-extrabold tracking-wide text-white uppercase font-hud leading-none group-hover:text-red-400 transition-colors">Jean-Bot <span class="text-red-500">Premium</span></h1>
+                    <h1 class="text-lg font-extrabold tracking-wide text-white uppercase font-hud leading-none group-hover:text-red-500 transition-colors">Jean-Bot <span class="text-red-500">Premium</span></h1>
                     <p class="text-[10px] text-gray-400 font-hud tracking-widest uppercase font-semibold mt-1">Compagnon de Bord Virtuel</p>
                 </div>
             </a>
 
+            <!-- COLONNE CENTRALE : BANDEAU HUD CENTRAL -->
             <div class="flex items-center justify-center gap-6 text-center border-y md:border-y-0 border-gray-800/60 py-2 md:py-0 px-4 w-full justify-self-center">
                 <div>
                     <span class="text-gray-500 font-hud text-[9px] uppercase font-bold tracking-widest block mb-0.5">Compatibilité</span>
@@ -49,6 +55,7 @@
                 </div>
             </div>
 
+            <!-- COLONNE DROITE : STATUT EN LIGNE -->
             <div class="text-center md:text-right hidden md:block justify-self-end">
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-green-500/10 text-green-400 border border-green-500/20 font-hud uppercase tracking-wider shadow-sm shadow-green-950">
                     <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
@@ -59,15 +66,18 @@
         </div>
     </header>
 
+    <!-- ZONE DE RECHERCHE ET FILTRES -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 flex flex-col gap-6">
         
         <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 shadow-xl flex flex-col gap-4">
+            <!-- Barre de recherche -->
             <div class="relative">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-gray-500"></i>
                 <input type="text" id="searchBar" placeholder="Rechercher un ordre, un minerai, une lune ou un dossier de Lore..." 
                     class="w-full bg-gray-950 border border-gray-800 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors font-hud">
             </div>
 
+            <!-- Filtres par catégorie épurés -->
             <div class="flex flex-wrap gap-2 justify-start" id="filterContainer">
                 <button onclick="filterCategory('Tous')" id="btn-Tous" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-blue-500 bg-blue-600 text-white shadow-lg shadow-blue-900/20 font-hud uppercase tracking-wider">Tous</button>
                 <button onclick="filterCategory('Combat')" id="btn-Combat" class="cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700 font-hud uppercase tracking-wider">Combat</button>
@@ -79,18 +89,23 @@
             </div>
         </div>
 
+        <!-- GRILLE DE COMMANDES -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="commandsGrid">
-            </div>
+            <!-- Injecté via JS -->
+        </div>
 
+        <!-- Message "Aucun résultat" -->
         <div id="noResult" class="hidden text-center py-12 flex flex-col gap-3">
             <i class="fa-solid fa-robot text-gray-700 text-5xl"></i>
             <p class="text-gray-400 font-semibold font-hud">Bip Boop... Aucune commande ne correspond à votre recherche.</p>
         </div>
     </main>
 
+    <!-- INTERFACE EN DEPLOYEMENT CINETIQUE (MODAL AVIONIQUE) -->
     <div id="hudModal" class="opacity-0 pointer-events-none fixed inset-0 bg-gray-950/50 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-all duration-300 ease-out" onclick="closeHudModal()">
         <div id="modalBox" class="bg-gray-900 border border-gray-800 rounded-2xl max-w-lg w-full p-6 relative transform scale-90 opacity-0 transition-all duration-300 ease-out flex flex-col gap-5" onclick="event.stopPropagation()">
             
+            <!-- CROCHETS DE CIBLAGE HUD FIXES -->
             <div id="bracket-tl" class="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 transition-colors duration-300"></div>
             <div id="bracket-tr" class="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 transition-colors duration-300"></div>
             <div id="bracket-bl" class="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 transition-colors duration-300"></div>
@@ -115,16 +130,13 @@
         </div>
     </div>
 
+    <!-- FOOTER -->
     <footer class="border-t border-gray-900 bg-gray-950 text-center py-4 text-xs text-gray-500 font-hud tracking-wider font-semibold">
         <p>&copy; 2026 Jean-Bot Premium • Index Tactique Modulaire Avionique Fixé.</p>
     </footer>
 
     <script>
-        // Base de données complète d'après les profils réels de VoiceAttack
         const jeanBotCommands = [
-            // =========================================================================
-            // CATEGORIE : NAVIGATION & SYSTEMES COCKPIT
-            // =========================================================================
             { txt: "Allumage / Activation du système", cat: "Navigation", desc: "Mettre sous tension l'ordinateur de bord et initialiser le HUD général.", key: "R" },
             { txt: "Allume le / Éteins le / Active le vaisseau", cat: "Navigation", desc: "Gérer l'alimentation générale des réacteurs d'énergie principaux.", key: "U" },
             { txt: "Active / Coupe / Arrêt des moteurs", cat: "Navigation", desc: "Couper ou initialiser l'alimentation des propusseurs principaux.", key: "I" },
@@ -161,7 +173,7 @@
             { txt: "Active / Désactive / Éteins le gyro", cat: "Navigation", desc: "Contrôler l'activation des stabilisateurs gyroscopiques de vol.", key: "Alt + G" },
             { txt: "Jean-Bot, ferme / ouvre le tchat / intercom / chat", cat: "Navigation", desc: "Afficher ou masquer la console de communication écrite.", key: "F12" },
 
-            // NAVIGATION : CAMÉRAS & INTERFACE
+            // CAMÉRAS
             { txt: "Caméra / Vue par défaut / Standard / Un", cat: "Navigation", desc: "Basculer sur la vue à la première personne à l'intérieur du cockpit.", key: "F4 + Num 1" },
             { txt: "Caméra de la soute / Vue 2 / Vue 3", cat: "Navigation", desc: "Afficher le flux vidéo de surveillance de la baie de chargement cargo.", key: "F4 + Num 2/3" },
             { txt: "Caméra extérieure / de loin / Vue 4", cat: "Navigation", desc: "Basculer sur la caméra orbitale externe libre.", key: "F4 + Num 4" },
@@ -326,7 +338,7 @@
             { txt: "Pourquoi tu veux ordonner / dominer l'univers ?", cat: "Social", desc: "Questionner Jean-Bot sur sa folie des grandeurs et son obsession de l'ordre.", key: "Dialogue" },
             { txt: "C'est toujours compliqué / trop compliqué avec toi Jean-Bot", cat: "Social", desc: "Exprimer son agacement face au tempérament pointilleux de l'assistant.", key: "Dialogue" },
             { txt: "Tu cherches à me piéger / C'est un piège ton affaire Jean-Bot", cat: "Social", desc: "Accuse l'assistant de mauvaise foi informatique.", key: "Dialogue" },
-            { txt: "Tu me menaces / Tu oses me menaces Jean-Bot ?", cat: "Social", desc: "Réagit aux avertissements sarcastiques lancés par le bot.", key: "Dialogue" },
+            { txt: "Tu me menaces / Tu oses me menace Jean-Bot ?", cat: "Social", desc: "Réagit aux avertissements sarcastiques lancés par le bot.", key: "Dialogue" },
             { txt: "Tu es très drôle / Malin / Rigolo Jean-Bot", cat: "Social", desc: "Complimenter ou ironiser sur le sarcasme de Jean-Bot.", key: "Dialogue" },
             { txt: "Calme-toi / Tu t'emballes Jean-Bot", cat: "Social", desc: "Calmer les circuits de Jean-Bot s'il s'excite en plein combat.", key: "Dialogue" },
             { txt: "Tu es un psychopathe / Un grand malade / Flippant Jean-Bot / Barjo / Zinzin", cat: "Social", desc: "Discuter du tempérament inquiétant ou radical de sa programmation.", key: "Dialogue" },
