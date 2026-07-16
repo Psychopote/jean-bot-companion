@@ -296,7 +296,36 @@
 
         const inactiveBtnStyle = 'border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700';
 
-        // 🔹 FONCTION DE COMPTAGE DYNAMIQUE CORRIGÉE : Plus de typo sur "liste"
+        // 🔹 FONCTION DE COMPTAGE DYNAMIQUE CORRIGÉE (liste avec un "e" partout)
+        function compterCommandes(liste) {
+            let total = 0;
+            if (!Array.isArray(liste)) return 0;
+
+            for (const cmd of list) { // <-- L'ERREUR ÉTAIT ICI, MAINTENANT REMPLACÉE PAR liste
+                if (!cmd) continue;
+
+                if (typeof cmd.count === 'number') {
+                    total += cmd.count;
+                    continue;
+                }
+
+                const texte = (cmd.txt || "").trim();
+                if (!texte) {
+                    total++;
+                    continue;
+                }
+
+                total += texte
+                    .split("/")
+                    .map(v => v.trim())
+                    .filter(v => v.length > 0)
+                    .length;
+            }
+
+            return total;
+        }
+
+        // VRAIE CORRECTION APPLIQUÉE :
         function compterCommandes(liste) {
             let total = 0;
             if (!Array.isArray(liste)) return 0;
