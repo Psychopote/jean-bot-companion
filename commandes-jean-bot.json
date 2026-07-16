@@ -1637,4 +1637,173 @@
     "key": "Dialogue",
     "char": "Jean-Bot"
   }
+  ,
+  {
+    "txt": "Active / Désactive le stager (Tir alterné)",
+    "cat": "Combat",
+    "desc": "Permuter le mode de tir de l'armement pour alterner le déclenchement des points d'emport (Staggered Mode).",
+    "key": "Alt + X",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Verrouille / Lock le composant / sous-système",
+    "cat": "Combat",
+    "desc": "Focaliser le verrouillage des scanners avioniques et des tourelles sur un module adverse spécifique (moteurs, générateurs).",
+    "key": "Touche R",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Caméra cockpit / Retour cockpit / Retour caméra",
+    "cat": "Navigation",
+    "desc": "Réinitialiser instantanément la vue à la première personne depuis le siège de pilotage principal.",
+    "key": "F4",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Caméra de la soute / Vue deux",
+    "cat": "Navigation",
+    "desc": "Afficher le flux vidéo de surveillance interne ou arrière de la soute cargo.",
+    "key": "F4 + Num 2",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Caméra zoom / Zoomée / Vue neuf",
+    "cat": "Navigation",
+    "desc": "Focaliser l'optique externe au maximum sur l'axe de visée cinématique.",
+    "key": "F4 + Num 9",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Déploie / Ouvre / Rentre / Plie les ailes / la cargo grid",
+    "cat": "Navigation",
+    "desc": "Actionner la géométrie variable des ailes ou verrouiller/déverrouiller la grille de stockage cargo externe.",
+    "key": "Alt + K",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Débloque la tourelle",
+    "cat": "Navigation",
+    "desc": "Libérer les axes gyroscopiques de rotation moteurs de la tourelle active.",
+    "key": "Touche G",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Signature [Valeur brute du gisement (ex: 3200, 4225, 7140...)]",
+    "cat": "Minage",
+    "desc": "Annoncer de vive voix la signature lue sur votre ATH de minage pour que Jean-Bot identifie instantanément le type de minerai détecté (Béryl, Quantanium, Agricium, Or...).",
+    "key": "Fiche",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Baisse / Diminue la puissance au minimum / de cinq pour cent",
+    "cat": "Minage",
+    "desc": "Ajustement par paliers rapides ou coupure d'urgence de l'intensité du laser de minage.",
+    "key": "Molette",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Jean-Bot, lance une musique / chanson de Star Citizen",
+    "cat": "Social",
+    "desc": "Activer le lecteur multimédia pour diffuser une piste aléatoire de la bande originale du jeu.",
+    "key": "Lecteur",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Bonjour / Qui es-tu Synthia / Cynthia ?",
+    "cat": "Social",
+    "desc": "Saluer ou demander une présentation protocolaire de l'IA alternative du cockpit.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Qu'est-ce que tu penses de Synthia / Virgil / Jean-Bot ?",
+    "cat": "Social",
+    "desc": "Lancer des lignes d'échanges croisées pour faire interagir les différentes IA du pack entre elles.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "C'est compris / Tu as compris / Compris Jean-Bot",
+    "cat": "Social",
+    "desc": "Confirmer à l'assistant que ses directives ou explications techniques ont bien été assimilées.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Laisse l'univers tranquille / Détend-toi / Respire un coup Jean-Bot",
+    "cat": "Social",
+    "desc": "Tenter de calmer la rigidité logique ou les ambitions de domination galactique de la machine.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Prends-moi pour un con / Tu te fous de ma gueule Jean-Bot",
+    "cat": "Social",
+    "desc": "Réagir vivement lorsque l'assistant simule une fausse incompréhension ou se moque ouvertement du pilote.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Que veux-tu dire / Comment ça Jean-Bot ?",
+    "cat": "Social",
+    "desc": "Demander des éclaircissements sur une remarque cryptique ou une analyse un peu trop passive-agressive.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Sois poli / Tu me respectes pas un minimum Jean-Bot",
+    "cat": "Social",
+    "desc": "Exiger un recadrage et une réinitialisation immédiate des protocoles de courtoisie de l'IA.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Tu es désespérant / T'es trop désespérant Jean-Bot",
+    "cat": "Social",
+    "desc": "Soupirer face à l'entêtement algorithmique ou aux conclusions cyniques de l'ordinateur de bord.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Tu es gonflé / présomptueux / imbu de toi-même Jean-Bot",
+    "cat": "Social",
+    "desc": "Pointer du doigt l'arrogance et l'excès de confiance simulés par les circuits relationnels du bot.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "C'est du chantage / Tu me fais chanter Jean-Bot",
+    "cat": "Social",
+    "desc": "Dénoncer une tentative d'extorsion de faveurs, de composants ou de crédits aUEC par votre automate.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "J'aimerais bien savoir pourquoi / Et pourquoi donc Jean-Bot ?",
+    "cat": "Social",
+    "desc": "Pousser l'IA à justifier une directive stricte ou un refus catégorique de collaborer.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Je m'en fous / J'en ai rien à carrer Jean-Bot",
+    "cat": "Social",
+    "desc": "Ignorer ouvertement les menaces voilées ou les conseils techniques de sécurité du cockpit.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "T'es taquin / Tu es aigri / Tu es salé / blâsé Jean-Bot",
+    "cat": "Social",
+    "desc": "Faire remarquer l'état d'esprit (souvent grincheux) émulé par les modules de personnalité.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  },
+  {
+    "txt": "Tu es un bon robot / C'était un compliment Jean-Bot",
+    "cat": "Social",
+    "desc": "Donner une gratification verbale pour tenter d'obtenir une réponse un peu plus chaleureuse.",
+    "key": "Dialogue",
+    "char": "Jean-Bot"
+  }
 ]
