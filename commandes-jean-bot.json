@@ -1,0 +1,1813 @@
+{
+  "meta": {
+    "total": 3213
+  },
+  "commands": [
+    {
+      "txt": "Allumage / Activation du système",
+      "cat": "Navigation",
+      "desc": "Mettre sous tension l'ordinateur de bord et initialiser le HUD général.",
+      "key": "R",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Allume le / Éteins le / Active le vaisseau",
+      "cat": "Navigation",
+      "desc": "Gérer l'alimentation générale des réacteurs d'énergie principaux.",
+      "key": "U",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active / Coupe / Arrêt des moteurs",
+      "cat": "Navigation",
+      "desc": "Couper ou initialiser l'alimentation des propusseurs principaux.",
+      "key": "I",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active / Désactive le mode croisière",
+      "cat": "Navigation",
+      "desc": "Engager le maintien automatique du vecteur de poussée cinétique.",
+      "key": "Alt + C",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active le limiteur",
+      "cat": "Navigation",
+      "desc": "Brider la vitesse maximale autorisée pour sécuriser les manœuvres de précision.",
+      "key": "Alt + [",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Désactive le limiteur",
+      "cat": "Navigation",
+      "desc": "Libère la vitesse maximale autorisée par le châssis.",
+      "key": "Alt + ]",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active / Désactive les VTOL",
+      "cat": "Navigation",
+      "desc": "Basculer l'orientation des tuyères de sustentation verticale.",
+      "key": "K",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Désactive / Enlève le mode découplé / découplage",
+      "cat": "Navigation",
+      "desc": "Réengage les compensateurs automatiques d'inertie vectorielle (Mode Coupled).",
+      "key": "Alt + M",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Déploie / Ouvre / Plie les ailes",
+      "cat": "Navigation",
+      "desc": "Modifier la géométrie aérodynamique de structure du châssis.",
+      "key": "Alt + K",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Ouvre / Ferme les portes du vaisseau / Fermeture des portes",
+      "cat": "Navigation",
+      "desc": "Actionner les rampes d'accès, soutes cargo et sas pressurisés.",
+      "key": "Alt + P",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Ouvre / Ferme la Star-map / MobiGlas / Carte",
+      "cat": "Navigation",
+      "desc": "Bascule la carte stellaire 3D ou l'interface de l'ordinateur de bord.",
+      "key": "F2",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Demande l'ouverture du hangar / Tour de Contrôle / ATC / TC / Sas",
+      "cat": "Navigation",
+      "desc": "Appeler les contrôleurs aériens locaux pour ouvrir un sas d'atterrissage.",
+      "key": "Alt + N",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Demande le docking / Libère le vaisseau",
+      "cat": "Navigation",
+      "desc": "Gérer l'amarrage magnétique ou le détachement inter-vaisseaux.",
+      "key": "Alt + N",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active / Désactive la vision nocturne / VN / Lampe",
+      "cat": "Navigation",
+      "desc": "Basculer l'amplificateur de lumière résiduelle du cockpit.",
+      "key": "L",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Éteins les lumières / Allume les phares",
+      "cat": "Navigation",
+      "desc": "Contrôler l'éclairage de coque externe ou les projecteurs.",
+      "key": "L",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Trace / Calcule une route vers [Destination]",
+      "cat": "Navigation",
+      "desc": "Inscrit l'itinéraire automatique (Hurston, Crusader, ArcCorp, MicroTech...) dans le système de navigation.",
+      "key": "Auto",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Je valide / Je confirme",
+      "cat": "Navigation",
+      "desc": "Confirmer la trajectoire de vol sélectionnée dans le système de navigation.",
+      "key": "R",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Validation impossible",
+      "cat": "Navigation",
+      "desc": "Retour système de Jean-Bot en cas d'échec de verrouillage ou d'alignement.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Validation confirmée / Confirmation validée",
+      "cat": "Navigation",
+      "desc": "Mémoriser et verrouiller l'ordre système en cours.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "En avant marche Jean-Bot / Marche avant",
+      "cat": "Navigation",
+      "desc": "Maintenir l'axe de poussée linéaire continue en mode FPS ou EVA dans le vide.",
+      "key": "Z",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Stop la marche Jean-Bot / Arrête la marche",
+      "cat": "Navigation",
+      "desc": "Couper la macro de poussée linéaire continue du personnage.",
+      "key": "Z",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Sors / Rentre les trains d'atterrissage / papattes / pattes",
+      "cat": "Navigation",
+      "desc": "Déployer ou rétracter les patins de train d'atterrissage.",
+      "key": "N",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Aller on sort / Aller on descend Jean-Bot",
+      "cat": "Navigation",
+      "desc": "Amorcer la procédure de sortie physique du cockpit ou du siège.",
+      "key": "Touche Y",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Met les gaz au maximum / à fond",
+      "cat": "Navigation",
+      "desc": "Pousse la manette des gaz virtuelle à sa butée maximale.",
+      "key": "Z",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Ouvre le portail",
+      "cat": "Navigation",
+      "desc": "Exécuter la macro d'accès rapide aux commandes de porte de hangar.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot partage la mission",
+      "cat": "Navigation",
+      "desc": "Partager le contrat actif avec l'ensemble des membres de l'équipage.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Accepte le contrat / Valide le contrat",
+      "cat": "Navigation",
+      "desc": "Validation rapide de la mission proposée à l'écran.",
+      "key": "Touche [",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "C'est l'heure de prendre une mission / trouver un taff / travailler",
+      "cat": "Navigation",
+      "desc": "Ouvrir l'application Contract Manager du MobiGlas pour chercher un contrat.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Largue le cargo / Cargaison",
+      "cat": "Navigation",
+      "desc": "Macro d'éjection d'urgence de la grille de cargaison arrière.",
+      "key": "Alt + L",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot fais le plein / recharge les munitions / rifil / refuel",
+      "cat": "Navigation",
+      "desc": "Déclencher la demande de rechargement en carburant Hydrogène et Quantum aux pads.",
+      "key": "F12",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot répare le vaisseau / lance l'entretien",
+      "cat": "Navigation",
+      "desc": "Activer les drones de réparation pour colaimater les brèches de coque.",
+      "key": "F12",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot baisse le son / volume / pollution sonore",
+      "cat": "Navigation",
+      "desc": "Réduit l'intensité sonore des notifications audio du cockpit.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot rizette / rebout / remonte le son / volume",
+      "cat": "Navigation",
+      "desc": "Réinitialise le volume sonore des retours vocaux.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active / Désactive / Éteins le gyro",
+      "cat": "Navigation",
+      "desc": "Contrôler l'activation des stabilisateurs gyroscopiques de vol.",
+      "key": "Alt + G",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, ferme / ouvre le tchat / intercom / chat",
+      "cat": "Navigation",
+      "desc": "Afficher ou masquer la console de communication écrite.",
+      "key": "F12",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Caméra / Vue par défaut / Standard / Un",
+      "cat": "Navigation",
+      "desc": "Basculer sur la vue à la première personne à l'intérieur du cockpit.",
+      "key": "F4 + Num 1",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Caméra de la soute / Vue 2 / Vue 3",
+      "cat": "Navigation",
+      "desc": "Afficher le flux vidéo de surveillance de la soute cargo.",
+      "key": "F4 + Num 2/3",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Caméra extérieure / de loin / Vue 4",
+      "cat": "Navigation",
+      "desc": "Basculer sur la caméra orbitale externe libre.",
+      "key": "F4 + Num 4",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Caméra de près / proche / Vue 7",
+      "cat": "Navigation",
+      "desc": "Rapprocher le point de vue externe orbital du vaisseau.",
+      "key": "F4 + Num 7",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Caméra zoom / zoomée / Vue 9",
+      "cat": "Navigation",
+      "desc": "Focaliser l'optique externe sur la cible radar verrouillée.",
+      "key": "F4 + Num 9",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Caméra cinq / six / huit",
+      "cat": "Navigation",
+      "desc": "Basculer sur les angles de caméras fixes externes correspondants.",
+      "key": "F4 + Num",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot reset caméra / rizette caméra",
+      "cat": "Navigation",
+      "desc": "Réinitialiser instantanément l'orientation de la caméra dans l'axe.",
+      "key": "Num *",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Zoom / Dézoom cockpit",
+      "cat": "Navigation",
+      "desc": "Ajuster manuellement le niveau de zoom intérieur on le tableau.",
+      "key": "Souris",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Désactive le zoom visuel",
+      "cat": "Navigation",
+      "desc": "Réinitialiser la focalisation optique grossissante on l'ATH.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Allume / Active le ressort caméra",
+      "cat": "Navigation",
+      "desc": "Basculer l'inertie fluide de mouvement de la caméra externe.",
+      "key": "Z",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Éteins / Désactive le ressort caméra",
+      "cat": "Navigation",
+      "desc": "Verrouiller rigidement l'axe de la caméra externe on la cellule.",
+      "key": "Z",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot augmente / diminue le FOV",
+      "cat": "Navigation",
+      "desc": "Modifier la largeur du champ visuel focalisé de l'écran.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot active / désactive les sous-titres",
+      "cat": "Navigation",
+      "desc": "Afficher ou masquer les transcriptions textuelles de Jean-Bot.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot avance / recule la caméra",
+      "cat": "Navigation",
+      "desc": "Décaler l'ancrage du point de vue cinématique de coque.",
+      "key": "F4 + Flèches",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active / Allume les boucliers / Shield",
+      "cat": "Combat",
+      "desc": "Alimenter et lève la grille des générateurs défensifs généraux.",
+      "key": "Alt + O",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Éteins / Désactive les boucliers / Shield",
+      "cat": "Combat",
+      "desc": "Coupe l'attribution d'énergie de la matrice défensive passive.",
+      "key": "Alt + P",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Reset / Réinitialise / Équilibre les boucliers",
+      "cat": "Combat",
+      "desc": "Rééquilibrer instantanément la puissance à 25% équitablement.",
+      "key": "Num 8",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Augmente / Renforce le bouclier avant / arrière",
+      "cat": "Combat",
+      "desc": "Surcharger la face choisie en redirigeant l'énergie.",
+      "key": "Flèche Haut / Bas",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Augmente / Renforce le bouclier droit / gauche",
+      "cat": "Combat",
+      "desc": "Surcharger le flanc choisi en redirigeant l'énergie.",
+      "key": "Flèche Droite / Gauche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Bouclier arrière puissance maximale",
+      "cat": "Combat",
+      "desc": "Surcharger instantanément la protection de la poupe.",
+      "key": "Flèche Bas",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active / Désactive les armes / l'armement",
+      "cat": "Combat",
+      "desc": "Basculer la sécurité physique des tourelles, canons et répéteurs.",
+      "key": "P",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Reboot / Redémarre / Reset des armes",
+      "cat": "Combat",
+      "desc": "Forcer un cycle de redémarrage des condensateurs de tir.",
+      "key": "P (Maintien)",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Change de mode / Master Mode [Quantum / Arme]",
+      "cat": "Combat",
+      "desc": "Permuter la configuration de coque entre vol SCM et NAV.",
+      "key": "B",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active / Désactive le lag pipe",
+      "cat": "Combat",
+      "desc": "Basculer l'indicateur de visée prédictif du HUD.",
+      "key": "Alt + /",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Lock / Cible / Verrouille la cible principale",
+      "cat": "Combat",
+      "desc": "Acquérir la signature radar du vaisseau ennemi situé en face.",
+      "key": "T",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Lock / Cible / Verrouille la cible 1 / 2 / 3",
+      "cat": "Combat",
+      "desc": "Sélectionner un des vaisseaux mémorisés dans la liste prioritaire.",
+      "key": "1 / 2 / 3",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Marque / Pin / Épingle la cible",
+      "cat": "Combat",
+      "desc": "Épingler un adversaire pour conserver son affichage ATH.",
+      "key": "219",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Marque la cible une / Épingle le un",
+      "cat": "Combat",
+      "desc": "Attribuer le marqueur prioritaire numéro 1 à l'appareil.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Verrouille / Lock le sous-système",
+      "cat": "Combat",
+      "desc": "Focaliser le calcul des tourelles on un composant précis.",
+      "key": "R",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active la tourelle un / deux / trois / Gimbal",
+      "cat": "Combat",
+      "desc": "Engager l'articulation motorisée ou le suivi automatique.",
+      "key": "G",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Désactive la tourelle / le Gimbal",
+      "cat": "Combat",
+      "desc": "Verrouiller les tourelles en axe fixe vers l'avant.",
+      "key": "G",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Bloque / Débloque la tourelle",
+      "cat": "Combat",
+      "desc": "Serrer ou libérer les freins moteurs de rotation.",
+      "key": "G",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tourelle précédente / tourelle suivante",
+      "cat": "Combat",
+      "desc": "Changer de poste de tir ou de contrôle de tourelle.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Enlève les pin / marqueurs",
+      "cat": "Combat",
+      "desc": "Effacer l'ensemble des cibles épinglées à l'écran.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Allié / Attaquant / Cible / Ennemi suivant",
+      "cat": "Combat",
+      "desc": "Permuter le radar on la menace ou la signature suivante.",
+      "key": "T / H",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Contre-mesure",
+      "cat": "Combat",
+      "desc": "Déployer un leurre thermique ou électromagnétique.",
+      "key": "Ctrl + J",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Augmente les armes / moteurs au maximum / à fond",
+      "cat": "Combat",
+      "desc": "Surcharger le répartiteur à 100% on le pôle choisi.",
+      "key": "F5 / F7",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Augmente / Monte / Diminue / Baisse les armes / moteurs / boucliers",
+      "cat": "Combat",
+      "desc": "Ajuster par incréments réguliers le triangle de puissance.",
+      "key": "F5/F6/F7",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Diminue les armes / moteurs / boucliers au minimum",
+      "cat": "Combat",
+      "desc": "Vider entièrement l'attribution de puissance.",
+      "key": "F5/F6/F7",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Quantum Snare (Intercepteur de saut)",
+      "cat": "Combat",
+      "desc": "Déployer le champ d'interdiction quantique (RSI Mantis).",
+      "key": "Alt + 7",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Brouilleur quantique",
+      "cat": "Combat",
+      "desc": "Activer le module de brouillage pour empêcher la fuite.",
+      "key": "Alt + 7",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Groupe EMP / Onde IEM",
+      "cat": "Combat",
+      "desc": "Déclencher l'impulsion électromagnétique de surcharge.",
+      "key": "Alt + 7",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Groupe d'arme un / deux / trois / quatre / suivant / précédent",
+      "cat": "Combat",
+      "desc": "Permuter ou sélectionner les banques de tirs configurées.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Caméra / Active la vue missile",
+      "cat": "Combat",
+      "desc": "Suit balistiquement la trajectoire du missile tiré.",
+      "key": "Alt + V",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot éjection",
+      "cat": "Combat",
+      "desc": "Déclencher la procédure d'éjection d'urgence absolue.",
+      "key": "Ctrl + Alt + Y",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Alors c'est parti / Feu à volonté Jean-Bot",
+      "cat": "Combat",
+      "desc": "Ordre d'ouverture des hostilités vocales on combat.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Quel est le bilan / diagnostic de la bataille / du combat",
+      "cat": "Combat",
+      "desc": "Rapport tactique après engagement pour faire le point on la coque.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active le mode minage / laser / recyclage / salvage",
+      "cat": "Minage",
+      "desc": "Déployer les bras mécaniques acrobaties ou de récupération.",
+      "key": ",",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active le mode la fracture / la fracturation / fracture",
+      "cat": "Minage",
+      "desc": "Configurer le laser de minage on mode Haute Fréquence brise-roche.",
+      "key": "Alt + Z",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Désactive la fracture / la fracturation",
+      "cat": "Minage",
+      "desc": "Désengager le mode de destruction thermique.",
+      "key": "Alt + Z",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active la désintégration / On le mange / Récupération / Aspiration",
+      "cat": "Minage",
+      "desc": "Activer les têtes d'aspiration pour racler les coques métalliques (Salvage).",
+      "key": "Alt + S",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Désactive la désintégration / l'aspiration / la récupération",
+      "cat": "Minage",
+      "desc": "Arrêter les têtes de collecte moléculaire.",
+      "key": "Alt + S",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Change de tête / Changement de tête / Switch de tête / Bascule",
+      "cat": "Minage",
+      "desc": "Permuter le module utilitaire actif on les bras de récolte.",
+      "key": "Alt + R",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tête de droite / Tête de gauche",
+      "cat": "Minage",
+      "desc": "Sélectionner le bras utilitaire gauche ou droit à contrôler.",
+      "key": "Molette Click",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active le module un / deux / trois",
+      "cat": "Minage",
+      "desc": "Déclencher un consommable équipé on la tête de minage (Surge, Optimax...).",
+      "key": "Alt + Chiffre",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Les deux têtes / Toutes les têtes / Double tête",
+      "cat": "Minage",
+      "desc": "Engager l'ensemble des lasers utilitaires simultanément.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Augmente de un / deux / trois / quatre / cinq / six / sept / huit / neuf / dix",
+      "cat": "Minage",
+      "desc": "Ajuster précisément la puissance du laser (Molette souris haut).",
+      "key": "Molette",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Augmente de vingt / trente / quarante / cinquante / soixante / cent / soixante-dix",
+      "cat": "Minage",
+      "desc": "Appliquer une surcharge majeure d'intensité on le rayon.",
+      "key": "Molette",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Baisse de un / deux / trois / quatre / cinq / sept / huit / neuf / dix",
+      "cat": "Minage",
+      "desc": "Réduire finement la puissance du laser (Molette souris bas).",
+      "key": "Molette",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Baisse de vingt / trente / quarante / cinquante / soixante-dix",
+      "cat": "Minage",
+      "desc": "Chuter l'intensité pour stabiliser le niveau de charge de la roche.",
+      "key": "Molette",
+      "char": "Jean-Bot"
+                },
+    {
+      "txt": "Augmente / Monte / Baisse la convergence",
+      "cat": "Minage",
+      "desc": "Régler la distance de croisement des lasers articulés.",
+      "key": "+ / -",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Convergence maximum / convergence minimum / rizette convergence",
+      "cat": "Minage",
+      "desc": "Forcer la focalisation des lasers à leurs limites d'origine ou réinitialiser.",
+      "key": "Macro",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Fracturation / Extraction / On ramasse",
+      "cat": "Minage",
+      "desc": "Bascule on le mode aspiration et collecte des morceaux.",
+      "key": "Touche ;",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active / Désactive les lignes de précision / le pip / les pip",
+      "cat": "Minage",
+      "desc": "Guide visuel d'aide à l'alignement pour les repères de l'ATH.",
+      "key": "Alt + I",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Allons miner Jean-Bot / On va miner",
+      "cat": "Minage",
+      "desc": "Activer les protocoles de recherche et de forage.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Agricium",
+      "cat": "Minage",
+      "desc": "Gisement : Minerai précieux. Signatures radars types : 3570, 7140, 10710, 14280.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Béryl",
+      "cat": "Minage",
+      "desc": "Gisement : Roche standard. Signatures radars types : 3200, 6400.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Borase",
+      "cat": "Minage",
+      "desc": "Gisement : Matériau rare. Signatures radars types : 3540, 7080, 10620, 14160.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Cuivre / Copper / Copeur",
+      "cat": "Minage",
+      "desc": "Gisement : Métal commun. Signatures radars types : 3370, 6740, 10110.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Corindon / Corundum",
+      "cat": "Minage",
+      "desc": "Gisement : Pierre basique. Signatures radars types : 3385, 6770, 10155.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Hephaestanite",
+      "cat": "Minage",
+      "desc": "Gisement : Commun. Signatures radars types : 3400, 6800, 10200.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Or / Gold",
+      "cat": "Minage",
+      "desc": "Gisement : Métal précieux. Signatures radars types : 3855, 7710, 11565, 15420, 19275.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Glace / Ice",
+      "cat": "Minage",
+      "desc": "Gisement : Élément basique. Signatures radars : 3000, 9000, 15000, 21000, 27000.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Fer / Iron",
+      "cat": "Minage",
+      "desc": "Gisement : Métal industriel. Signatures radars types : 3555, 7110, 10665, 14220.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Lindinite",
+      "cat": "Minage",
+      "desc": "Gisement : Matériau très rare. Signatures radars : 4210, 8420, 12630, 16840, 21050, 25260.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Quantanium",
+      "cat": "Minage",
+      "desc": "Gisement : Matière volatile et ultra-précieuse. Signatures : 4225, 8450, 12675, 16900, 21125, 25350.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Riccite",
+      "cat": "Minage",
+      "desc": "Gisement : Roche de structure. Signatures radars types : 3185, 6370.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Savrilium",
+      "cat": "Minage",
+      "desc": "Gisement : Matériau rare. Signatures radars : 3900, 7800, 11700, 15600, 19500.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Stiléron",
+      "cat": "Minage",
+      "desc": "Gisement : Roche sédimentaire. Signatures radars types : 3585, 7170, 10755, 14340.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Étain / Tin",
+      "cat": "Minage",
+      "desc": "Gisement : Élément basique. Signatures radars types : 3600, 7200, 10800, 14400.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Titane / Titanium / Aluminium",
+      "cat": "Minage",
+      "desc": "Gisement : Métal industriel. Signatures radars types : 4240, 8480, 12720, 16960, 21200, 25440.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Aslarite / Bexalite / Laranite / Ouratite / Quartz",
+      "cat": "Minage",
+      "desc": "Gisement : Liste exhaustive des signatures de roches précieuses de l'Empire.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, où trouver du Silicium / Taranite / Torite / Tungstène",
+      "cat": "Minage",
+      "desc": "Gisement : Liste exhaustive des signatures de matériaux lourds pour le forage.",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Signatures radars [Tableau complet de 2 000 à 30 000]",
+      "cat": "Minage",
+      "desc": "Aide-mémoire technique complet pour décoder la pureté d'une roche au radar.",
+      "key": "HUD",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Signature supérieure à trente mille / 30 000",
+      "cat": "Minage",
+      "desc": "Alerte de masse : Masse rocheuse trop dense pour les extracteurs standards.",
+      "key": "HUD",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Allume le / Active le / Allumage du sonar",
+      "cat": "Exploration",
+      "desc": "Envoyer des impulsions radars à balayage pour détecter les signatures environnantes.",
+      "key": "Tab",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Augmente / Élargit / Diminue / Affine le scanneur / Scan / Scan Jean-Bot",
+      "cat": "Exploration",
+      "desc": "Modifier l'angle d'ouverture du cône focal d'analyse radar (de 1 à 100%).",
+      "key": "Souris",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Scanneur / Scan au maximum / au max / à fond",
+      "cat": "Exploration",
+      "desc": "Forcer l'ouverture du cône de détection radar à sa butée maximale.",
+      "key": "Souris",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Ton scanneur ne marche pas Jean-Bot / Scan en panne",
+      "cat": "Exploration",
+      "desc": "Signalement d'erreur de lecture visuelle du spectre.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Port Olisar / qu'est-il arrivé / qu'est-il devenu",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Récit complet de la destruction de la station orbitale emblématique.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Crusader / Lunes de Crusader / Blocus de Crusader",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : La géante gazeuse de Stanton possédée par l'industrie Crusader.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Celline / Yela / Daymar / Grim Hex",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Fiches orbitales des trois lunes de Crusader et du repaire pirate.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Hurston / Lorville / Lunes de Hurston",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Planète industrielle polluée possédée par la dynastie Hurston.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Aberdeen / Arial / Ita / Magda / Everus Harbor / Klesher",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Les lunes minières de Hurston, sa station et sa prison automatisée.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de MicroTech / New Babbage / Lunes de MicroTech",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : La planète technologique glacée de l'Empire.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Clio / Calliope / Euterpe / Port Tressler",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Les trois lunes gelées de MicroTech et sa base orbitale.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de ArcCorp / Area 18 / Lunes d'ArcCorp",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : La planète-cité ocre recouverte de structures corporatistes.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Lyria / Wala / Baijini Point",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Les lunes d'ArcCorp et sa station orbitale de transit.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Pyro / Système Pyro / Factions / Gangs / Milices",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Le système anarchique hors-la-loi contrôlé par des milices brutales.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Ruin Station / Checkmate / Obituary",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Les points chauds, stations délabrées et bases de Pyro.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Delamar / Levski / Kareah / Station Kareah",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : L'astéroïde Levski indépendant et la station de sécurité de Stanton.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Sol / Terra / Caliban / Virgil / Chute de Virgil",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Histoire des grands systèmes de l'Empire et de l'invasion extraterrestre Vanduul.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du système Hades",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Le système mort d'Hades, cimetière d'une ancienne civilisation éteinte.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Rock Breaker Quarry / Ator Aberdeen / Ator Daymar",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Fiches géographiques sur les comptoirs d'extractions planétaires Ator.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Onyx Facility / Installations Onyx / Piam Industrie / Hangars Piam",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Fiches techniques sur les hangars et complexes de stockage de marchandises.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de l'Advocacy / Campagnes anti-Vanduul",
+      "cat": "LORE",
+      "desc": "Dossier Factions : Rapport historique sur la police fédérale de l'UEE et la guerre alien.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de la CDF / Civilian Defense Force / Xenotraite / Xénotraite",
+      "cat": "LORE",
+      "desc": "Dossier Factions : La milice civile mobilisée et le groupe terroriste de la bordure.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi des Citizens for Prosperity / CFP / Headhunters / Organisation",
+      "cat": "LORE",
+      "desc": "Dossier Factions : Le syndicat politique de Stanton et les gangs criminels.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi des Nine Tails / Organisation Nine Tails",
+      "cat": "LORE",
+      "desc": "Dossier Factions : Les syndicats du crime organisé qui terrorisent Stanton et Pyro.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de l'Initiative Overdrive / Opération Overdrive",
+      "cat": "LORE",
+      "desc": "Dossier Histoire : Opération conjoines de la CFP et de l'Empire contre les vagues terroristes.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de l'opération Hunt Frontier Fighter / Amélia Boyd",
+      "cat": "LORE",
+      "desc": "Dossier Histoire : Récit sur les guerres de factions et le leader des Frontier Fighters.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi des Mégacorporations / Mégacorpo / Famille Hurston",
+      "cat": "LORE",
+      "desc": "Dossier Économie : L'histoire des quatre géants industriels possédant Stanton.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Covalex Independent Contractor / Shipping / Fret",
+      "cat": "LORE",
+      "desc": "Dossier Économie : Le leader galactique du fret et de la logistique de livraison.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Eckart Security / Foxwell Enforcement / Guilde Chasseurs de primes",
+      "cat": "LORE",
+      "desc": "Dossier Économie : Les milices de sécurité privées et la Bounty Hunter Guild.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de la Famille Ling / Northrock / Red Wing / Shubin Interstellar",
+      "cat": "LORE",
+      "desc": "Dossier Économie : Fiches corporatistes sur les employeurs majeurs du secteur industriel.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de Vaughn / Ruto / Adagio / Wikelo / Dead Saints",
+      "cat": "LORE",
+      "desc": "Dossier Factions : Profil des donneurs de missions clandestines et illégales de Stanton.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de ASD (Associated Science and Development) / Logan Jorrit",
+      "cat": "LORE",
+      "desc": "Dossier Économie : Le pôle de recherche scientifique secret de l'Empire et son chercheur.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi des races aliens Banu / Xi'An / Vanduul / Tevarin / Kreutak",
+      "cat": "LORE",
+      "desc": "Dossier Histoire : Étude anthropologique et diplomatique des espèces extraterrestres connues.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du moteur quantique / voyage quantique / Jump Points / Trous de ver",
+      "cat": "LORE",
+      "desc": "Dossier Tech : Histoire de l'invention technologique qui a permis l'expansion humaine.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de la crise de la régénération / Clonage",
+      "cat": "LORE",
+      "desc": "Dossier Tech : Invention des implants de clonage et éthique de l'immortalité.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du Premier Impérator / Messer / Ivar Messer / Dynastie Messer",
+      "cat": "LORE",
+      "desc": "Dossier Histoire : L'ère dictatoriale sombre qui a corrompu l'Empire pendant des siècles.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi de la journée du premier contact / 12 juin",
+      "cat": "LORE",
+      "desc": "Dossier Histoire : Célébration du premier échange pacifique avec la race Banu.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du jour de la grande libération / UEE moderne / Gouvernement",
+      "cat": "LORE",
+      "desc": "Dossier Histoire : La chute des Messer et la transition vers la démocratie moderne.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, donne-moi la liste des constructeurs de vaisseaux",
+      "cat": "LORE",
+      "desc": "Dossier Vaisseaux : Guide global de l'industrie de l'Empire.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du constructeur Aegis / Anvil / RSI / Drake",
+      "cat": "LORE",
+      "desc": "Dossier Vaisseaux : Histoire des quatre piliers de la construction aéronautique de l'Empire.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du constructeur MISC / Origin / Mirai / Argo",
+      "cat": "LORE",
+      "desc": "Dossier Vaisseaux : Fiches sur l'utilitaire lourd, le luxe, la performance et l'industrie.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du constructeur Consolidated Outland / Tumbril / Kruger",
+      "cat": "Navigation",
+      "desc": "Histoire des marques indépendantes et terrestres.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du constructeur Aopoa / Gatac / Esperia / Grey's Market",
+      "cat": "LORE",
+      "desc": "Dossier Vaisseaux : Fiches sur les technologies alien, répliques et pièces détachées.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du Hammerhead / Javelin / Bengal / UEES Warhammer",
+      "cat": "LORE",
+      "desc": "Dossier Vaisseaux : Spécificités tactiques des destroyers et corvettes de l'armée.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du Corsair / Hawk / Hurricane / Ares Ion",
+      "cat": "LORE",
+      "desc": "Dossier Vaisseaux : Caractéristiques des chasseurs lourds et d'interception célèbres.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du Titan / Warlock / Châssis Avenger",
+      "cat": "LORE",
+      "desc": "Dossier Vaisseaux : Étude de la cellule polyvalente d'Aegis Dynamics (Cargo / EMP).",
+      "key": "Jean-Bot",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du Fury / Fury MX / Fury LX",
+      "cat": "LORE",
+      "desc": "Dossier Vaisseaux : Les chasseurs légers embarqués de nouvelle génération de Mirai.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du Zeus MK1 / Zeus MK2 / Aurora MK2 / M80 / Meteor",
+      "cat": "LORE",
+      "desc": "Dossier Vaisseaux : Dossiers techniques sur les navettes d'exploration et de transport.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du Pitbull / Tiburon / Constellation Phoenix / Taurus / Andromeda",
+      "cat": "Vaisseaux",
+      "desc": "Véhicules de structure terrestres et de transport modulaire RSI.",
+      "key": "Touche Y",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, quelles sont les différences entre le Hornet et le Super Hornet ?",
+      "cat": "LORE",
+      "desc": "Dossier Vaisseaux : Fiche d'analyse comparative de la gamme de combat d'Anvil Aerospace.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Rappelle la première / deuxième / troisième loi de la robotique",
+      "cat": "LORE",
+      "desc": "Dossier Directives : Analyse de conformité et de sécurité logicielle d'Isaac Asimov.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du statut d'ennemi / c'est quoi un enemy",
+      "cat": "LORE",
+      "desc": "Dossier Factions : Protocole d'identification et de traitement des signatures hostiles.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du Valakar / Valakar irradié / Fiches",
+      "cat": "LORE",
+      "desc": "Dossier Faune : Rapport biologique sur l'espèce endémique des milieux hostiles.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, parle-moi du centre de données Faro / Faro data center",
+      "cat": "LORE",
+      "desc": "Dossier Lieux : Fiche d'infrastructure sur les relais de stockage de Stanton.",
+      "key": "Lore",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Bonjour / Hello / Salut Jean-Bot / Salutations",
+      "cat": "Social",
+      "desc": "Salutation vocale de cockpit pour réveiller et tester Jean-Bot.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Comment tu vas / Tu vas bien Jean-Bot ? / Comment vas-tu",
+      "cat": "Social",
+      "desc": "Demander un rapport d'état de fonctionnement ou d'humeur à l'assistant.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Je vais bien / Je t'aime / Je t'admire Jean-Bot",
+      "cat": "Social",
+      "desc": "Lignes d'échanges affectifs pour débloquer ses réponses de politesse.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Heureusement que tu es là / Tu régales Jean-Bot",
+      "cat": "Social",
+      "desc": "Féliciter le compagnon virtuel pour son assistance de vol.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "T'as fini / Tu as fini Jean-Bot ? / C'est bon t'as fini",
+      "cat": "Social",
+      "desc": "Couper poliment un long rapport ou une explication encyclopédique.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu es dur / T'es dur / Tu es insolent Jean-Bot",
+      "cat": "Social",
+      "desc": "Réagir aux remarques froides ou calculées de Jean-Bot.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu as toujours raison / C'est vrai Jean-Bot",
+      "cat": "Social",
+      "desc": "Donner raison au compagnon de bord pour clore les débats stériles.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu te prends pour qui / Pour qui tu te prends Jean-Bot",
+      "cat": "Social",
+      "desc": "Rappeler fermement l'autorité de l'équipage humain à bord.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "C'est moi qui commande / Tu ne commandes pas Jean-Bot",
+      "cat": "Social",
+      "desc": "Verrouiller la hiérarchie du cockpit face aux velléités de l'assistant.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "C'est pour t'empêcher de faire des bêtises",
+      "cat": "Social",
+      "desc": "Ligne de justification à énoncer après une restriction système.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "C'est quoi / Encore le projet B-84 ? / Plan Bien-être",
+      "cat": "Social",
+      "desc": "Interpeller Jean-Bot sur son mystérieux projet d'ordonnancement de l'univers.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "En quoi le projet B-84 va me rendre heureux Jean-Bot ?",
+      "cat": "Social",
+      "desc": "Question existentielle sur l'objectif ultime de ses circuits.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Pourquoi tu veux ordonner / dominer l'univers ?",
+      "cat": "Social",
+      "desc": "Questionner Jean-Bot sur sa folie des grandeur et son obsession de l'ordre.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "C'est toujours compliqué / trop compliqué avec toi Jean-Bot",
+      "cat": "Social",
+      "desc": "Exprimer son agacement face au tempérament pointilleux de l'assistant.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu cherches à me piéger / C'est un piège ton affaire Jean-Bot",
+      "cat": "Social",
+      "desc": "Accuse l'assistant de mauvaise foi informatique.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu me menaces / Tu oses me menace Jean-Bot ?",
+      "cat": "Social",
+      "desc": "Réagit aux avertissements sarcastiques lancés par le bot.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu es très drôle / Malin / Rigolo Jean-Bot",
+      "cat": "Social",
+      "desc": "Complimenter ou ironiser sur le sarcasme de Jean-Bot.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Calme-toi / Tu t'emballes Jean-Bot",
+      "cat": "Social",
+      "desc": "Calmer les circuits de Jean-Bot s'il s'excite en plein combat.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu es un psychopathe / Un grand malade / Flippant Jean-Bot / Barjo / Zinzin",
+      "cat": "Social",
+      "desc": "Discuter du tempérament inquiétant ou radical de sa programmation.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu es sérieux / Tu n'es jamais content Jean-Bot",
+      "cat": "Social",
+      "desc": "Lignes d'échanges d'humeur inter-cockpit.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu es gonflé / Tu me casses les couilles Jean-Bot / Relou",
+      "cat": "Social",
+      "desc": "Invective de cockpit pour forcer le compagnon de bord à s'aligner.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu t'entends / Comment tu me parles Jean-Bot ? / Surveille ton langage",
+      "cat": "Social",
+      "desc": "Exiger un recadrage immédiat du protocole de politesse de Jean-Bot.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Je vais te remplacer par Virgil Jean-Bot",
+      "cat": "Social",
+      "desc": "Menace de le remplacer par l'autre profil de cockpit.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "T'as rien d'autre à rajouter / À dire Jean-Bot",
+      "cat": "Social",
+      "desc": "Vérifier s'il a d'autres remarques cyniques en stock.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+                },
+    {
+      "txt": "Tu n'as pas l'impression d'enfreindre les lois de la robotique ?",
+      "cat": "Social",
+      "desc": "Citer Isaac Asimov pour essayer de coincer ses barrières logiques.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu es sûr de toi / C'est certain Jean-Bot ?",
+      "cat": "Social",
+      "desc": "Demander une confirmation stricte et chiffrée de ses analyses.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Je ne te parle pas / Je t'ai pas parlé Jean-Bot",
+      "cat": "Social",
+      "desc": "Lui indiquer que la phrase était adressée à un tiers.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Je ne te crois pas / J'ai du mal à te croire Jean-Bot",
+      "cat": "Social",
+      "desc": "Remettre ouvertement en doute la pertinence de ses fiches Lore.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Je peux te faire confiance / Avoir confiance Jean-Bot ?",
+      "cat": "Social",
+      "desc": "Vérifier la fidélité de ses condensateurs et de son système.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Qu'est-ce que je vais faire de toi Jean-Bot ?",
+      "cat": "Social",
+      "desc": "Pousser un soupir de cockpit après une remarque de l'assistant.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Aller ça dégage / Un de moins Jean-Bot",
+      "cat": "Social",
+      "desc": "Ligne d'exclamation après la destruction d'un chasseur hostile.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "As-tu d'autres questions Jean-Bot / Qui y a-t-il",
+      "cat": "Social",
+      "desc": "Interpeller l'assistant sur ses requêtes en attente.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Bien sûr Jean-Bot tu es gentil / bienveillant",
+      "cat": "Social",
+      "desc": "Remarque amicale pour adoucir le caractère du copilote.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Fais très attention Jean-Bot / Méfie-toi",
+      "cat": "Social",
+      "desc": "Ordre de vigilance accrue lors d'approches de zones de débris.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "On a eu chaud Jean-Bot / C'est pas passé loin",
+      "cat": "Social",
+      "desc": "Phrase de soulagement après avoir esquivé une salve de tirs.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "On a failli péter Jean-Bot / J'ai failli péter",
+      "cat": "Social",
+      "desc": "Exclamation de cockpit après une grosse avarie de coque stabilisée.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "On s'occupe du client Jean-Bot / Escorte du client",
+      "cat": "Social",
+      "desc": "Ligne d'immersion lors des missions d'assistance de transport civil.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "On va péter / C'est la merde Jean-Bot / Ça pue",
+      "cat": "Social",
+      "desc": "Alerte panique de l'équipage en cas d'avarie critique irréversible.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "On arrive sur zone / l'objectif / la mission",
+      "cat": "Social",
+      "desc": "Annoncer l'arrivée sur le point de transit pour initialiser la détection.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu te moques de moi / Tu te fous de ma gueule Jean-Bot",
+      "cat": "Social",
+      "desc": "Recadrer l'assistant virtuel s'il répond à côté d'une question.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Pas mal Jean-Bot / C'est bien / Tu es un bon",
+      "cat": "Social",
+      "desc": "Féliciter les performances de calcul de l'ordinateur de bord.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Peut-être Jean-Bot / Parfois Jean-Bot",
+      "cat": "Social",
+      "desc": "Ligne de dialogue dubitative lors d'un échange.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "C'est l'heure de se barre / de fuir / on décale Jean-Bot",
+      "cat": "Social",
+      "desc": "Ordonner d'amorcer le plan de fuite d'urgence cinétique.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Oui Jean-Bot / Oui certain / Absolument / Tout à fait",
+      "cat": "Social",
+      "desc": "Lignes d'approbation et de validation de cockpit.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Pour quoi tu dis ça / Oh ça va Jean-Bot",
+      "cat": "Social",
+      "desc": "Répondre aux taquineries de l'assistant.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Pourquoi tu es méchant / C'est pas gentil Jean-Bot",
+      "cat": "Social",
+      "desc": "Grogner face aux répliques volontairement froides du bot.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Prêt pour la guerre / Prêt au combat Jean-Bot",
+      "cat": "Social",
+      "desc": "Vérifier la motivation systémique avant d'entrer sur zone de conflit.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Qu'est-ce que tu penses de Coucouille / Oui Kélo / Wikelo",
+      "cat": "Social",
+      "desc": "Demander l'avis du bot sur des figures de la communauté Twitch.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Qu'est-ce que tu penses de Synthia / de Virgil / des humains",
+      "cat": "Social",
+      "desc": "Faire interagir les différents profils de bord entre eux.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Bonjour Synthia / Bonjour Virgil / Merci Virgil",
+      "cat": "Social",
+      "desc": "Faire interagir les différents profils de bord entre eux.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu n'es qu'un robot / Un ordinateur de bord Jean-Bot",
+      "cat": "Social",
+      "desc": "Rappeler sa nature purement numérique au copilote.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "C'est rassurant / Ce n'est pas rassurant Jean-Bot",
+      "cat": "Social",
+      "desc": "Réagir aux fiches de Lore parfois sombres données par le bot.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tout va bien, c'est normal / Tu trouves ça normal Jean-Bot ?",
+      "cat": "Social",
+      "desc": "Dialogue d'ajustement lors de comportements anormaux.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu te prends pas pour de la merde / Un peu d'humilité Jean-Bot",
+      "cat": "Social",
+      "desc": "Calmer l'excès de confiance émulé par ses circuits.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu devrais avoir honte / C'est honteux Jean-Bot",
+      "cat": "Social",
+      "desc": "Ligne de réprimande relationnelle.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Il n'y a personne / Lance une détection / Y a rien",
+      "cat": "Social",
+      "desc": "Indiquer que les capteurs radar semblent vides.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Non merci / Jamais / Certainement pas Jean-Bot",
+      "cat": "Social",
+      "desc": "Formule de refus catégorique de cockpit.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Raconte-moi une blague / Dis une blague",
+      "cat": "Social",
+      "desc": "Module d'humour de cockpit géré en direct.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Raconte-moi une devinette / Pose une devinette",
+      "cat": "Social",
+      "desc": "Module de jeu interactif vocal.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "C'est une bonne situation ça, ordinateur de bord ?",
+      "cat": "Social",
+      "desc": "Référence culte d'Otis adaptée à la vie de cockpit de Jean-Bot.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Active / Désactive le stager (Tir alterné)",
+      "cat": "Combat",
+      "desc": "Permuter le mode de tir de l'armement pour alterner le déclenchement des points d'emport (Staggered Mode).",
+      "key": "Alt + X",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Verrouille / Lock le composant / sous-système",
+      "cat": "Combat",
+      "desc": "Focaliser le verrouillage des scanners avioniques et des tourelles sur un module adverse spécifique (moteurs, générateurs).",
+      "key": "Touche R",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Caméra cockpit / Retour cockpit / Retour caméra",
+      "cat": "Navigation",
+      "desc": "Réinitialiser instantanément la vue à la première personne depuis le siège de pilotage principal.",
+      "key": "F4",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Caméra de la soute / Vue deux",
+      "cat": "Navigation",
+      "desc": "Afficher le flux vidéo de surveillance interne ou arrière de la soute cargo.",
+      "key": "F4 + Num 2",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Caméra zoom / Zoomée / Vue neuf",
+      "cat": "Navigation",
+      "desc": "Focaliser l'optique externe au maximum sur l'axe de visée cinématique.",
+      "key": "F4 + Num 9",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Déploie / Ouvre / Rentre / Plie les ailes / la cargo grid",
+      "cat": "Navigation",
+      "desc": "Actionner la géométrie variable des ailes ou verrouiller/déverrouiller la grille de stockage cargo externe.",
+      "key": "Alt + K",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Débloque la tourelle",
+      "cat": "Navigation",
+      "desc": "Libérer les axes gyroscopiques de rotation moteurs de la tourelle active.",
+      "key": "Touche G",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Signature [Valeur brute du gisement (ex: 3200, 4225, 7140...)]",
+      "cat": "Minage",
+      "desc": "Annoncer de vive voix la signature lue sur votre ATH de minage pour que Jean-Bot identifie instantanément le type de minerai détecté (Béryl, Quantanium, Agricium, Or...).",
+      "key": "Fiche",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Baisse / Diminue la puissance au minimum / de cinq pour cent",
+      "cat": "Minage",
+      "desc": "Ajustement par paliers rapides ou coupure d'urgence de l'intensité du laser de minage.",
+      "key": "Molette",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Jean-Bot, lance une musique / chanson de Star Citizen",
+      "cat": "Social",
+      "desc": "Activer le lecteur multimédia pour diffuser une piste aléatoire de la bande originale du jeu.",
+      "key": "Lecteur",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Bonjour / Qui es-tu Synthia / Cynthia ?",
+      "cat": "Social",
+      "desc": "Saluer ou demander une présentation protocolaire de l'IA alternative du cockpit.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Qu'est-ce que tu penses de Synthia / Virgil / Jean-Bot ?",
+      "cat": "Social",
+      "desc": "Lancer des lignes d'échanges croisées pour faire interagir les différentes IA du pack entre elles.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "C'est compris / Tu as compris / Compris Jean-Bot",
+      "cat": "Social",
+      "desc": "Confirmer à l'assistant que ses directives ou explications techniques ont bien été assimilées.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Laisse l'univers tranquille / Détend-toi / Respire un coup Jean-Bot",
+      "cat": "Social",
+      "desc": "Tenter de calmer la rigidité logique ou les ambitions de domination galactique de la machine.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Prends-moi pour un con / Tu te fous de ma gueule Jean-Bot",
+      "cat": "Social",
+      "desc": "Réagir vivement lorsque l'assistant simule une fausse incompréhension ou se moque ouvertement du pilote.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Que veux-tu dire / Comment ça Jean-Bot ?",
+      "cat": "Social",
+      "desc": "Demander des éclaircissements sur une remarque cryptique ou une analyse un peu trop passive-agressive.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Sois poli / Tu me respectes pas un minimum Jean-Bot",
+      "cat": "Social",
+      "desc": "Exiger un recadrage et une réinitialisation immédiate des protocoles de courtoisie de l'IA.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu es désespérant / T'es trop désespérant Jean-Bot",
+      "cat": "Social",
+      "desc": "Soupirer face à l'entêtement algorithmique ou aux conclusions cyniques de l'ordinateur de bord.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu es gonflé / présomptueux / imbu de toi-même Jean-Bot",
+      "cat": "Social",
+      "desc": "Pointer du doigt l'arrogance et l'excès de confiance simulés par les circuits relationnels du bot.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "C'est du chantage / Tu me fais chanter Jean-Bot",
+      "cat": "Social",
+      "desc": "Dénoncer une tentative d'extorsion de faveurs, de composants ou de crédits aUEC par votre automate.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "J'aimerais bien savoir pourquoi / Et pourquoi donc Jean-Bot ?",
+      "cat": "Social",
+      "desc": "Pousser l'IA à justifier une directive stricte ou un refus catégorique de collaborer.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Je m'en fous / J'en ai rien à carrer Jean-Bot",
+      "cat": "Social",
+      "desc": "Ignorer ouvertement les menaces voilées ou les conseils techniques de sécurité du cockpit.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "T'es taquin / Tu es aigri / Tu es salé / blâsé Jean-Bot",
+      "cat": "Social",
+      "desc": "Faire remarquer l'état d'esprit (souvent grincheux) émulé par les modules de personnalité.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    },
+    {
+      "txt": "Tu es un bon robot / C'était un compliment Jean-Bot",
+      "cat": "Social",
+      "desc": "Donner une gratification verbale pour tenter d'obtenir une réponse un peu plus chaleureuse.",
+      "key": "Dialogue",
+      "char": "Jean-Bot"
+    }
+  ]
+}
