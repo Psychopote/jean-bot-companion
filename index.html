@@ -7,7 +7,7 @@
 	
     <link type="image/png" rel="icon" href="favicon.png">
     <link rel="manifest" href="manifest.json">
-	<link rel="preload" as="image" href="jean-bot.jpg">
+    <link rel="preload" as="image" href="https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/jean-bot.jpg">
 	
     <style>
         * {
@@ -49,7 +49,8 @@
             left: -2%;
             width: 104%;
             height: 104%;
-            background-image: url('jean-bot.jpg');
+            /* IMAGE DE FOND APPLIQUÉE VIA GITHUB */
+            background-image: url('https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/jean-bot.jpg');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -409,7 +410,6 @@
             border: 4px solid #1e293b;
         }
 
-        /* L'ATTRIBUT SRC EST VOLONTAIREMENT VIDE POUR LE CAMOUFLAGE */
         .video-container video {
             width: 100%;
             height: 100%;
@@ -632,7 +632,7 @@
                 <button class="btn-trigger-cyber" id="openDemosBtn">NOS AUTRES PACKS DEMOS GRATUITS</button>
                 
                 <a href="https://boutique-jean-bot.tpopsite.com" target="_blank" class="btn-boutique">
-                    <img src="boutique.png" alt="Boutique Jean-Bot">
+                    <img src="https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/boutique.png" alt="Boutique Jean-Bot">
                 </a>
                 
                 <div class="social-container">
@@ -661,7 +661,6 @@
             </div>
         </div>
 
-        <!-- BALISE VIDEO INITIALISEE SANS ATTRIBUT SRC POUR LE COUVERT SÉCURITÉ -->
         <div class="video-wrapper">
             <div class="video-container">
                 <video id="cockpitVideo" autoplay loop muted playsinline preload="metadata"></video>
@@ -719,7 +718,7 @@
                         </div>
                     </div>
                     <div class="c-card-media">
-                        <img src="VIRGIL.png" alt="Mascotte Virgil" loading="lazy" decoding="async">
+                        <img src="https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/VIRGIL.png" alt="Mascotte Virgil" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <a href="https://drive.google.com/drive/folders/1MQeh8g8iBAweFEpKSbZ95EqAYgEabnh_?usp=drive_link" target="_blank" class="c-btn-virgil">TÉLÉCHARGER LA DEMO DE VIRGIL</a>
@@ -735,7 +734,7 @@
                         </div>
                     </div>
                     <div class="c-card-media">
-                        <img src="SYNTHIA.png" alt="Mascotte Synthia" loading="lazy" decoding="async">
+                        <img src="https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/SYNTHIA.png" alt="Mascotte Synthia" loading="lazy" decoding="async">
                     </div>
                 </div>
                 <a href="https://drive.google.com/drive/folders/18yHd5wD5mx2ZJgydkHgP7otizNm5taMx?usp=drive_link" target="_blank" class="c-btn-synthia">TÉLÉCHARGER LA DEMO DE SYNTHIA</a>
@@ -807,11 +806,12 @@
             }
         });
 
-        // INJECTION FURTIVE DIRECTE DEPUIS LES SERVEURS SECURISES DE GITHUB
+        // INJECTION DU STREAM AVEC RESTAURATION DES BOUTONS DE LECTURE (CONTROLS)
         document.addEventListener('DOMContentLoaded', () => {
             const videoPlayer = document.getElementById('cockpitVideo');
             if (videoPlayer) {
-                // Lien brut direct pointant sur la branche principale (main) de ton dépôt
+                // Réactivation forcée de l'interface utilisateur de lecture
+                videoPlayer.controls = true;
                 videoPlayer.src = "https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/video-joffre.mp4";
             }
         });
