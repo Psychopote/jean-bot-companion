@@ -42,7 +42,7 @@
                 <div class="w-px h-6 bg-gray-800/80 hidden sm:block"></div>
                 <div>
                     <span class="text-gray-500 font-hud text-[9px] uppercase font-bold tracking-widest block mb-0.5">Commandes Disponibles</span>
-                    <span id="totalCommandsCount" class="text-red-500 font-hud font-extrabold text-sm tracking-wide">3213</span>
+                    <span id="totalCommandsCount" class="text-red-500 font-hud font-extrabold text-sm tracking-wide">...</span>
                 </div>
                 <div class="w-px h-6 bg-gray-800/80 hidden sm:block"></div>
                 <div>
@@ -294,12 +294,54 @@
         let currentIA = 'Jean-Bot';
         let activeWebhookUrl = '';
 
-        // 🔹 MODIFIE CE CHIFFRE ICI QUAND LE PACK GRANDIT DANS VOICEATTACK
-        const COMPTEUR_REEL_VOICEATTACK = "3 154"; 
-
         const inactiveBtnStyle = 'border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700';
 
-        // LIAISON ET CHARGEMENT SIMULTANÉ DES 3 FICHIERS JSON DISTINCTS CHIFBRÉS
+        // 🔹 FONCTION DE COMPTAGE DYNAMIQUE PAR VARIANTES DE "TXT" (Option A et Option B supportées)
+        function compterCommandes(liste) {
+            let total = 0;
+            if (!Array.isArray(liste)) return 0;
+
+            for (const cmd of list) {
+                if (!cmd) continue;
+
+                // Option B : Si un champ "count" explicite est présent dans le JSON, on l'applique
+                if (typeof cmd.count === 'number') {
+                    total += cmd.count;
+                    continue;
+                }
+
+                // Option A : Sinon, comptage classique par découpage du caractère "/"
+                const texte = (cmd.txt || "").trim();
+                if (!texte) {
+                    total++;
+                    continue;
+                }
+
+                total += texte
+                    .split("/")
+                    .map(v => v.trim())
+                    .filter(v => v.length > 0)
+                    .length;
+            }
+
+            return total;
+        }
+
+        // 🔹 MISE À JOUR MULTI-PERSONNAGES DU COMPTEUR DE COCKPIT
+        function mettreAJourCompteur() {
+            let total = 0;
+
+            for (const personnage in allCommands) {
+                total += compterCommandes(allCommands[personnage]);
+            }
+
+            const compteur = document.getElementById("totalCommandsCount");
+            if (compteur) {
+                compteur.textContent = total.toLocaleString("fr-FR");
+            }
+        }
+
+        // LIAISON ET CHARGEMENT SIMULTANÉ DES 3 FICHIERS JSON DISTINCTS CHIFFRÉS
         document.addEventListener('DOMContentLoaded', () => {
             const files = [
                 { ia: 'Jean-Bot', url: unmask('jsonJeanbot') },
@@ -317,9 +359,8 @@
                 allCommands['Synthia'] = results[1];
                 allCommands['Virgil'] = results[2];
 
-                // 🔹 ENVOI DU VRAI NOMBRE GLOBAL DANS L'EN-TÊTE DU COCKPIT
-                const counterElem = document.getElementById('totalCommandsCount');
-                if (counterElem) counterElem.innerText = COMPTEUR_REEL_VOICEATTACK;
+                // Calcul dynamique et injection du nombre total réel de commandes
+                mettreAJourCompteur();
 
                 // Initialisation par défaut sur l'affichage de Jean-Bot
                 selectIAFilter('Jean-Bot');
