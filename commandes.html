@@ -8,11 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght=500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* Défilement personnalisé style cockpit */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0b0f19; }
         ::-webkit-scrollbar-thumb { background: #991b1b; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #ef4444; }
-        .font-hud { font-family: 'Exo 2', sans-serif; }
+
+        .font-hud {
+            font-family: 'Exo 2', sans-serif;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col font-sans selection:bg-red-600 selection:text-white bg-gray-950 text-gray-100">
@@ -188,6 +192,7 @@
     </footer>
 
     <script>
+        // RECEPTACLE DES BASES DE DONNÉES DE CHAQUE COPILOTE
         let allCommands = {
             'Jean-Bot': [],
             'Synthia': [],
@@ -198,8 +203,12 @@
         let currentIA = 'Jean-Bot';
         let activeWebhookUrl = '';
 
+        // 🔹 MODIFIE CE CHIFFRE ICI QUAND LE PACK GRANDIT DANS VOICEATTACK
+        const COMPTEUR_REEL_VOICEATTACK = "3 154"; 
+
         const inactiveBtnStyle = 'border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700';
 
+        // LIAISON ET CHARGEMENT SIMULTANÉ DES 3 FICHIERS JSON DISTINCTS
         document.addEventListener('DOMContentLoaded', () => {
             const files = [
                 { ia: 'Jean-Bot', url: './commandes-jean-bot.json' },
@@ -217,20 +226,10 @@
                 allCommands['Synthia'] = results[1];
                 allCommands['Virgil'] = results[2];
 
-                // CALCUL PARFAIT DE TOUTES LES COMMANDES + LES SOUS-COMMANDES DANS LES TEXTES
-                let totalRealCommands = 0;
-                results.forEach(array => {
-                    array.forEach(cmd => {
-                        if (cmd.txt) {
-                            // On découpe au niveau des slashes pour compter chaque variation d'ordre vocal
-                            totalRealCommands += cmd.txt.split('/').length;
-                        }
-                    });
-                });
+                // 🔹 ENVOI DU VRAI NOMBRE GLOBAL DANS L'EN-TÊTE DU COCKPIT
+                document.getElementById('totalCommandsCount').innerText = COMPTEUR_REEL_VOICEATTACK;
 
-                // Affichage du vrai chiffre global calculé dynamiquement
-                document.getElementById('totalCommandsCount').innerText = totalRealCommands.toLocaleString('fr-FR');
-
+                // Initialisation par défaut sur l'affichage de Jean-Bot
                 selectIAFilter('Jean-Bot');
             })
             .catch(error => {
