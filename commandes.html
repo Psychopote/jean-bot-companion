@@ -191,4 +191,504 @@
         <h3 class="console-title">PACKS JEAN-BOT</h3>
         <p class="console-subtitle">(sans abonnement)</p>
         
-        <div class="console-cards
+        <div class="console-cards">
+            <div class="c-card c-card-demo">
+                <span class="c-badge cb-free">Gratuit</span>
+                <h4><u>Pack DEMO</u> : 100% GRATUIT</h4>
+                <div class="c-list c-list-unstyled">
+                    <p class="mb-10">🔹 Découvrez les commandes de base pour un test immédiat de Jean-Bot.</p>
+                    <p class="mb-10">🔹 Installation rapide en moins d'une minute.</p>
+                    <p>🔹 Toutes les instructions vous sont fournies dans un seul dossier.</p>
+                </div>
+                <a id="btn-drive-demo" href="#" target="_blank" class="c-btn-demo">Télécharger le Pack DEMO</a>
+            </div>
+
+            <div class="c-card c-card-premium">
+                <span class="c-badge cb-premium">Recommandé</span>
+                <h4><u>Pack PREMIUM</u> : 30€</h4>
+                <p class="c-promo-text">PROMO à 20€ chaque début de mois<br>(stock limité à 10 ex. en bas de page)</p>
+                <ul class="c-list">
+                    <li><strong>Achat unique :</strong> Aucun abonnement mensuel</li>
+                    <li><strong>Pack FR complet :</strong> ~500 commandes vocales</li>
+                    <li><strong>Mises à jour gratuites</strong> (nouveaux vaisseaux, planètes...)</li>
+                    <li><strong>Voix supplémentaires</strong> (prochainement)</li>
+                    <li><strong>Salon Discord réservé aux Tipeurs</strong></li>
+                </ul>
+                <a id="btn-tipeee-premium" href="#" target="_blank" class="c-btn-premium">OBTENIR JEAN-BOT PREMIUM</a>
+                <a href="https://store.steampowered.com/app/3046550/VoiceAttack_v2/" target="_blank" class="c-link-steam">Obtenir VoiceAttack sur STEAM</a>
+            </div>
+        </div>
+    </template>
+
+    <template id="tmpl-cyber">
+        <h3 class="console-title">NOS AUTRES PACKS</h3>
+        <p class="console-subtitle cyber mb-10">DEMOS GRATUITS</p>
+        <div class="h-15"></div>
+        
+        <div class="console-cards">
+            <div class="c-card c-card-virgil" id="cardVirgil">
+                <div class="c-card-layout">
+                    <div class="c-card-info">
+                        <span class="c-badge cb-virgil">VIRGIL DEMO</span>
+                        <h4><u>ASSISTANT MILITAIRE VIRGIL</u></h4>
+                        <div class="c-card-desc">
+                            Assistant Militaire précis, discipliné et efficace.
+                        </div>
+                    </div>
+                    <div class="c-card-media">
+                        <img id="img-virgil" src="" alt="Mascotte Virgil" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <a id="btn-drive-virgil" href="#" target="_blank" class="c-btn-virgil">TÉLÉCHARGER LA DEMO DE VIRGIL</a>
+            </div>
+
+            <div class="c-card c-card-synthia" id="cardSynthia">
+                <div class="c-card-layout">
+                    <div class="c-card-info">
+                        <span class="c-badge cb-synthia">SYNTHIA DEMO</span>
+                        <h4><u>ASSISTANTE SYNTHÉTIQUE SYNTHIA</u></h4>
+                        <div class="c-card-desc">
+                            Assistante synthétique élégante, claire et réactive.
+                        </div>
+                    </div>
+                    <div class="c-card-media">
+                        <img id="img-synthia" src="" alt="Mascotte Synthia" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <a id="btn-drive-synthia" href="#" target="_blank" class="c-btn-synthia">TÉLÉCHARGER LA DEMO DE SYNTHIA</a>
+            </div>
+        </div>
+    </template>
+
+    <footer class="border-t border-gray-900 bg-gray-950 text-center py-4 text-xs text-gray-500 font-hud tracking-wider font-semibold">
+        <p>&copy; 2026 Jean-Bot Premium</p>
+    </footer>
+
+    <script>
+        // ==============================================================================
+        // COFFRE-FORT NUMÉRIQUE : TOUTES LES ENDPOINTS ET URLS SONT SÉCURISÉES ICI
+        // (Chiffrement Base64 pour ne laisser aucune adresse en clair dans le HTML source)
+        // ==============================================================================
+        const COFFRE_FORT = {
+            jsonJeanbot: "Li9jb21tYW5kZXMtamVhbi1ib3QuanNvbg==",
+            jsonSynthia: "Li9jb21tYW5kZXMtc3ludGhpYS5qc29u",
+            jsonVirgil: "Li9jb21tYW5kZXMtdmlyZ2lsLmpzb24=",
+            driveDemo: "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWtBWGpQUnNMTFlVcXVhczl5MlgyV3hrclJKMk9DSEJpP3VzcD1zaGFyaW5n",
+            tipeeePremium: "aHR0cHM6Ly9mci50aXBlZWUuY29tL2pvZmZyZQ==",
+            virgilPng: "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1BzeWNob3BvdGUvamVhbi1ib3QtY29tcGFuaW9uL21haW4vVklSR0lMLnBuZw==",
+            driveVirgil: "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMU1RZWg4ZzhpQkF3ZUZFcEtTYlo5NUVxQVlnRWFibmhfP3VzcD1kcml2ZV9saW5r",
+            synthiaPng: "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1BzeWNob3BvdGUvamVhbi1ib3QtY29tcGFuaW9uL21haW4vU1lOVEhJQS5wbmc=",
+            driveSynthia: "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMTh5SGQ1d0Q1bXgyWkpneWRrSGdQN290aXpObTV0YU14P3VzcD1kcml2ZV9saW5r"
+        };
+
+        const unmask = (key) => window.atob(COFFRE_FORT[key]);
+
+        // RECEPTACLE DES BASES DE DONNÉES DE CHAQUE COPILOTE
+        let allCommands = {
+            'Jean-Bot': [],
+            'Synthia': [],
+            'Virgil': []
+        };
+        
+        let currentCategory = 'Tous';
+        let currentIA = 'Jean-Bot';
+        let activeWebhookUrl = '';
+
+        // 🔹 MODIFIE CE CHIFFRE ICI QUAND LE PACK GRANDIT DANS VOICEATTACK
+        const COMPTEUR_REEL_VOICEATTACK = "3 154"; 
+
+        const inactiveBtnStyle = 'border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700';
+
+        // LIAISON ET CHARGEMENT SIMULTANÉ DES 3 FICHIERS JSON DISTINCTS CHIFBRÉS
+        document.addEventListener('DOMContentLoaded', () => {
+            const files = [
+                { ia: 'Jean-Bot', url: unmask('jsonJeanbot') },
+                { ia: 'Synthia', url: unmask('jsonSynthia') },
+                { ia: 'Virgil', url: unmask('jsonVirgil') }
+            ];
+
+            Promise.all(files.map(file => 
+                fetch(file.url)
+                    .then(response => response.ok ? response.json() : [])
+                    .catch(() => [])
+            ))
+            .then(results => {
+                allCommands['Jean-Bot'] = results[0];
+                allCommands['Synthia'] = results[1];
+                allCommands['Virgil'] = results[2];
+
+                // 🔹 ENVOI DU VRAI NOMBRE GLOBAL DANS L'EN-TÊTE DU COCKPIT
+                const counterElem = document.getElementById('totalCommandsCount');
+                if (counterElem) counterElem.innerText = COMPTEUR_REEL_VOICEATTACK;
+
+                // Initialisation par défaut sur l'affichage de Jean-Bot
+                selectIAFilter('Jean-Bot');
+            })
+            .catch(error => {
+                console.error("Erreur critique d'initialisation avionique :", error);
+                const counterElem = document.getElementById('totalCommandsCount');
+                if (counterElem) counterElem.innerText = "Hors Ligne";
+            });
+        });
+
+        function toggleIAConsole() {
+            const panel = document.getElementById('iaConsolePanel');
+            const chevron = document.getElementById('consoleChevron');
+            if (panel) panel.classList.toggle('hidden');
+            if (chevron) chevron.classList.toggle('rotate-180');
+        }
+
+        function checkSecretCode() {
+            const secretInput = document.getElementById('secretCodeInput');
+            const log = document.getElementById('terminalLog');
+            if (!secretInput || !log) return;
+
+            const code = secretInput.value.trim().toUpperCase();
+            
+            if(!code) {
+                log.innerHTML = `> <span class="text-red-500">[ERREUR] Saisie vide. Vecteur nul abandonné.</span>`;
+                return;
+            }
+            log.innerHTML = `> Requête d'authentification ./${code}.json en cours...`;
+
+            fetch(`./${code}.json`)
+                .then(response => {
+                    if (response.ok) return response.json();
+                    throw new Error('NOT_FOUND');
+                })
+                .then(data => {
+                    if (data && data.webhook) {
+                        activeWebhookUrl = data.webhook;
+                        const codeEntryForm = document.getElementById('codeEntryForm');
+                        const rewardForm = document.getElementById('rewardForm');
+                        if (codeEntryForm) codeEntryForm.classList.add('hidden');
+                        if (rewardForm) rewardForm.classList.remove('hidden');
+                        log.innerHTML = `> <span class="text-green-400">[ACCÈS AUTORISÉ] Liaison quantique sécurisée parée pour transfert.</span>`;
+                    } else {
+                        log.innerHTML = `> <span class="text-red-500">[ÉCHEC] Structure de clé corrompue.</span>`;
+                    }
+                })
+                .catch(() => {
+                    log.innerHTML = `> <span class="text-red-500">[ÉCHEC] Code introuvable. Effacement des journaux système.</span>`;
+                });
+        }
+
+        function submitRewardClaim() {
+            const rewardEmail = document.getElementById('rewardEmail');
+            const rewardDiscord = document.getElementById('rewardDiscord');
+            const log = document.getElementById('terminalLog');
+            if (!rewardEmail || !rewardDiscord || !log) return;
+
+            const email = rewardEmail.value.trim();
+            const discord = rewardDiscord.value.trim();
+
+            if(!email || !discord) {
+                alert("Flux incomplet ! Saisissez vos identifiants réseau de pilotes.");
+                return;
+            }
+            if(!activeWebhookUrl) {
+                alert("Erreur critique : Canal Discord introuvable.");
+                return;
+            }
+
+            log.innerHTML = `> Initialisation du protocole de transmission vers Discord...`;
+            const payload = {
+                content: `**ALERTE GAGNANT SITE JEAN-BOT**\nUn opérateur vient de valider une liaison quantique sur le site !\n\n**Identifiants cryptés transmis :**\n- **Pseudo Discord :** \`${discord}\`\n- **Adresse de contact :** \`${email}\``
+            };
+
+            fetch(activeWebhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if(res.ok) {
+                    const rewardForm = document.getElementById('rewardForm');
+                    if (rewardForm) rewardForm.classList.add('hidden');
+                    log.innerHTML = `> <span class="text-green-400">[TRANSFERT RÉUSSI] Paquet réseau envoyé avec succès au cockpit de l'Amiral Joffré. Fermeture du canal.</span>`;
+                } else {
+                    log.innerHTML = `> <span class="text-red-500">[ÉCHEC] Rejet du paquet par le serveur Discord distant.</span>`;
+                }
+            })
+            .catch(() => {
+                log.innerHTML = `> <span class="text-red-500">[ERREUR] Perte de liaison physique lors de l'envoi.</span>`;
+            });
+        }
+
+        function switchIAUi(iaName) {
+            const titleSpan = document.getElementById('headerPremiumSpan');
+            const mainTitle = document.getElementById('headerTitleText');
+            if (!titleSpan || !mainTitle) return;
+
+            if(iaName === 'Jean-Bot') {
+                titleSpan.innerText = "Premium";
+                titleSpan.className = "text-red-500 transition-colors";
+                mainTitle.innerText = "Jean-Bot ";
+            } else if(iaName === 'Synthia') {
+                titleSpan.innerText = "Synthia Edition";
+                titleSpan.className = "text-pink-500 transition-colors";
+                mainTitle.innerText = "";
+            } else if(iaName === 'Virgil') {
+                titleSpan.innerText = "Virgil OS";
+                titleSpan.className = "text-orange-500 transition-colors";
+                mainTitle.innerText = "";
+            }
+        }
+
+        function selectIAFilter(iaName) {
+            currentIA = iaName;
+            const ias = ['Jean-Bot', 'Synthia', 'Virgil'];
+            const colors = {
+                'Jean-Bot': { text: 'text-red-400', border: 'border-red-500', bg: 'bg-red-950/40 shadow-lg shadow-red-950/30' },
+                'Synthia': { text: 'text-pink-400', border: 'border-pink-500', bg: 'bg-pink-950/40 shadow-lg shadow-pink-950/30' },
+                'Virgil': { text: 'text-orange-400', border: 'border-orange-500', bg: 'bg-orange-600/10 shadow-lg shadow-orange-950/30' }
+            };
+
+            ias.forEach(name => {
+                const btn = document.getElementById('ia-filter-' + name);
+                const dot = document.getElementById('ia-dot-' + name);
+                if (btn && dot) {
+                    if(name === iaName) {
+                        btn.className = `flex flex-col items-center justify-center py-5 px-3 rounded-xl border ${colors[name].border} ${colors[name].bg} ${colors[name].text} font-hud uppercase tracking-wider transition-all duration-200 cursor-pointer w-full`;
+                        dot.className = "fa-solid fa-circle-dot text-xs mb-1.5 animate-pulse";
+                    } else {
+                        btn.className = "flex flex-col items-center justify-center py-5 px-3 rounded-xl border border-gray-800 bg-gray-900/30 text-gray-500 hover:text-gray-300 hover:border-gray-700 font-hud uppercase tracking-wider transition-all duration-200 cursor-pointer w-full shadow-none";
+                        dot.className = "fa-solid fa-circle text-xs mb-1.5 opacity-20";
+                    }
+                }
+            });
+
+            switchIAUi(iaName);
+
+            const searchFilterBlock = document.getElementById('searchFilterBlock');
+            const commandsGrid = document.getElementById('commandsGrid');
+            const constructionBlock = document.getElementById('iaConstructionBlock');
+            const noResult = document.getElementById('noResult');
+
+            const hasCommands = allCommands[iaName] && allCommands[iaName].length > 0;
+
+            if (hasCommands) {
+                if (searchFilterBlock) searchFilterBlock.classList.remove('hidden');
+                if (commandsGrid) commandsGrid.classList.remove('hidden');
+                if (constructionBlock) constructionBlock.classList.add('hidden');
+                renderGrid();
+            } else {
+                if (searchFilterBlock) searchFilterBlock.classList.add('hidden');
+                if (commandsGrid) commandsGrid.classList.add('hidden');
+                if (noResult) noResult.classList.add('hidden');
+                if (constructionBlock) constructionBlock.classList.remove('hidden');
+            }
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('commandsGrid');
+            const noResult = document.getElementById('noResult');
+            const searchBar = document.getElementById('searchBar');
+            if (!grid || !searchBar) return;
+
+            const searchTerms = (searchBar.value || '').toLowerCase().trim();
+            grid.innerHTML = '';
+            let hasCards = false;
+
+            const activeCommands = allCommands[currentIA] || [];
+
+            activeCommands.forEach(cmd => {
+                if (!cmd) return;
+
+                const txt = cmd.txt || '';
+                const desc = cmd.desc || '';
+                const cat = cmd.cat || 'Tous';
+                const key = cmd.key || '';
+
+                const matchesSearch = txt.toLowerCase().includes(searchTerms) || desc.toLowerCase().includes(searchTerms);
+                const matchesCategory = currentCategory === 'Tous' || currentCategory === cat;
+
+                if (matchesSearch && matchesCategory) {
+                    hasCards = true;
+                    let badgeColor = 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+                    if(cat === 'Combat') badgeColor = 'bg-red-500/10 text-red-400 border-red-500/20';
+                    if(cat === 'Minage') badgeColor = 'bg-violet-500/10 text-violet-400 border-violet-500/20';
+                    if(cat === 'Exploration') badgeColor = 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20';
+                    if(cat === 'LORE') badgeColor = 'bg-green-500/10 text-green-400 border-green-500/20';
+                    if(cat === 'Navigation') badgeColor = 'bg-orange-500/10 text-orange-400 border-orange-500/20';
+                    if(cat === 'Social') badgeColor = 'bg-pink-500/10 text-pink-400 border-pink-500/20';
+
+                    const keyTag = key ? `<kbd class="bg-gray-950 text-red-400 border border-gray-800 border-b-2 border-b-gray-700 px-2 py-0.5 rounded font-hud text-[10px] font-extrabold uppercase tracking-wide whitespace-nowrap shadow-md">${key}</kbd>` : '';
+
+                    const card = document.createElement('div');
+                    card.className = "bg-gray-900 border border-gray-800 hover:border-red-600/50 rounded-xl p-4 flex flex-col justify-between gap-4 transition-all duration-200 shadow-md hover:shadow-red-950/10 hover:scale-[1.02] cursor-pointer";
+                    card.setAttribute('onclick', `openHudModal("${encodeURIComponent(txt)}", "${cat}", "${encodeURIComponent(desc)}", "${encodeURIComponent(key)}")`);
+                    
+                    card.innerHTML = `
+                        <div class="flex flex-col gap-2">
+                            <div class="flex justify-between items-start">
+                                <span class="px-2 py-0.5 text-[10px] font-bold uppercase rounded border ${badgeColor} font-hud">${cat}</span>
+                            </div>
+                            <h3 class="text-white font-hud font-bold text-base leading-snug tracking-wide mt-1">"${txt}"</h3>
+                        </div>
+                        <div class="text-gray-400 text-xs border-t border-gray-800/60 pt-3 flex justify-between items-center gap-4">
+                            <p class="flex-1 leading-relaxed font-hud font-medium line-clamp-2 md:line-clamp-none">${desc}</p>
+                            ${keyTag}
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                }
+            });
+
+            if (noResult) {
+                if (hasCards) {
+                    noResult.classList.add('hidden');
+                } else {
+                    noResult.classList.remove('hidden');
+                }
+            }
+        }
+
+        function openHudModal(txt, cat, desc, key) {
+            const modal = document.getElementById('hudModal');
+            const box = document.getElementById('modalBox');
+            if (!modal || !box) return;
+            
+            const decodedTxt = decodeURIComponent(txt);
+            const decodedDesc = decodeURIComponent(desc);
+            const decodedKey = decodeURIComponent(key);
+
+            document.getElementById('modalTitle').innerText = `"${decodedTxt}"`;
+            document.getElementById('modalDesc').innerText = decodedDesc;
+            
+            const modalKey = document.getElementById('modalKey');
+            const modalKeyContainer = document.getElementById('modalKeyContainer');
+            if (modalKey && modalKeyContainer) {
+                if (decodedKey) {
+                    modalKey.innerText = decodedKey;
+                    modalKeyContainer.classList.remove('hidden');
+                    modalKeyContainer.classList.add('flex');
+                } else {
+                    modalKeyContainer.classList.remove('flex');
+                    modalKeyContainer.classList.add('hidden');
+                }
+            }
+
+            const badge = document.getElementById('modalBadge');
+            if (badge) {
+                badge.innerText = cat;
+                badge.className = "px-2.5 py-1 text-xs font-bold uppercase rounded border font-hud ";
+                
+                const colorMap = { 'Combat': '#ef4444', 'Minage': '#8b5cf6', 'Exploration': '#06b6d4', 'LORE': '#22c55e', 'Navigation': '#f97316', 'Social': '#ec4899' };
+                const activeColor = colorMap[cat] || '#3b82f6';
+                let glowColor = 'rgba(59, 130, 246, 0.4)';
+                
+                if(cat === 'Combat') { badge.classList.add('bg-red-500/10', 'text-red-400', 'border-red-500/20'); glowColor = 'rgba(239, 68, 68, 0.5)'; }
+                if(cat === 'Minage') { badge.classList.add('bg-violet-500/10', 'text-violet-400', 'border-violet-500/20'); glowColor = 'rgba(139, 92, 246, 0.5)'; }
+                if(cat === 'Exploration') { badge.classList.add('bg-cyan-500/10', 'text-cyan-400', 'border-cyan-500/20'); glowColor = 'rgba(6, 182, 212, 0.5)'; }
+                if(cat === 'LORE') { badge.classList.add('bg-green-500/10', 'text-green-400', 'border-green-500/20'); glowColor = 'rgba(34, 197, 94, 0.5)'; }
+                if(cat === 'Navigation') { badge.classList.add('bg-orange-500/10', 'text-orange-400', 'border-orange-500/20'); glowColor = 'rgba(249, 115, 22, 0.5)'; }
+                if(cat === 'Social') { badge.classList.add('bg-pink-500/10', 'text-pink-400', 'border-pink-500/20'); glowColor = 'rgba(236, 72, 153, 0.5)'; }
+
+                const corners = ['bracket-tl', 'bracket-tr', 'bracket-bl', 'bracket-br'];
+                corners.forEach(id => { 
+                    const elem = document.getElementById(id);
+                    if (elem) elem.style.borderColor = activeColor; 
+                });
+
+                box.style.boxShadow = `0 0 35px ${glowColor}`;
+            }
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                box.classList.remove('scale-90', 'opacity-0');
+                box.classList.add('scale-100', 'opacity-100');
+            }, 15);
+        }
+
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeHudModal(); });
+
+        function closeHudModal() {
+            const modal = document.getElementById('hudModal');
+            const box = document.getElementById('modalBox');
+            if (modal && box) {
+                box.classList.remove('scale-100', 'opacity-100');
+                box.classList.add('scale-90', 'opacity-0');
+                setTimeout(() => { modal.classList.add('opacity-0', 'pointer-events-none'); }, 250);
+            }
+        }
+
+        const activeBtnStyles = {
+            'Tous': 'border-blue-500 bg-blue-600 text-white shadow-lg shadow-blue-900/20',
+            'Combat': 'border-red-500 bg-red-600 text-white shadow-lg shadow-red-900/20',
+            'Minage': 'border-violet-500 bg-violet-600 text-white shadow-lg shadow-violet-900/20',
+            'Exploration': 'border-cyan-500 bg-cyan-600 text-white shadow-lg shadow-cyan-900/20',
+            'LORE': 'border-green-500 bg-green-600 text-white shadow-lg shadow-green-900/20',
+            'Navigation': 'border-orange-500 bg-orange-600 text-white shadow-lg shadow-orange-900/20',
+            'Social': 'border-pink-500 bg-pink-600 text-white shadow-lg shadow-pink-900/20'
+        };
+
+        function filterCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border " + inactiveBtnStyle + " font-hud uppercase tracking-wider";
+            });
+            const activeBtn = document.getElementById("btn-" + category);
+            if (activeBtn) activeBtn.className = "cat-btn px-4 py-2.5 rounded-lg text-xs font-bold transition-all duration-200 border " + activeBtnStyles[category] + " font-hud uppercase tracking-wider";
+            renderGrid();
+        }
+
+        // Événements d'affichage des volets latéraux (Sécurisés contre les éléments absents de commandes.html)
+        const closeBtn = document.getElementById('closeConsoleBtn');
+        const overlay = document.getElementById('consoleOverlay');
+        const sideConsole = document.getElementById('sideConsole');
+        const consoleContent = document.getElementById('consoleContent');
+        const tmplJeanbot = document.getElementById('tmpl-jeanbot');
+        const tmplCyber = document.getElementById('tmpl-cyber');
+        const openConsoleBtn = document.getElementById('openConsoleBtn');
+        const openDemosBtn = document.getElementById('openDemosBtn');
+
+        function injectTemplate(templateElement) {
+            if (consoleContent) {
+                const clone = templateElement.content.cloneNode(true);
+                consoleContent.replaceChildren(clone);
+            }
+        }
+
+        if (openConsoleBtn) {
+            openConsoleBtn.addEventListener('click', () => {
+                if (tmplJeanbot && sideConsole) {
+                    injectTemplate(tmplJeanbot);
+                    const btnDriveDemo = document.getElementById('btn-drive-demo');
+                    const btnTipeeePremium = document.getElementById('btn-tipeee-premium');
+                    if (btnDriveDemo) btnDriveDemo.href = unmask('driveDemo');
+                    if (btnTipeeePremium) btnTipeeePremium.href = unmask('tipeeePremium');
+                    sideConsole.style.borderLeft = "1px solid rgba(255, 62, 62, 0.3)";
+                    document.body.classList.add('panel-open');
+                    sideConsole.scrollTop = 0;
+                }
+            });
+        }
+
+        if (openDemosBtn) {
+            openDemosBtn.addEventListener('click', () => {
+                if (tmplCyber && sideConsole) {
+                    injectTemplate(tmplCyber);
+                    const imgVirgil = document.getElementById('img-virgil');
+                    const btnDriveVirgil = document.getElementById('btn-drive-virgil');
+                    const imgSynthia = document.getElementById('img-synthia');
+                    const btnDriveSynthia = document.getElementById('btn-drive-synthia');
+                    if (imgVirgil) imgVirgil.src = unmask('virgilPng');
+                    if (btnDriveVirgil) btnDriveVirgil.href = unmask('driveVirgil');
+                    if (imgSynthia) imgSynthia.src = unmask('synthiaPng');
+                    if (btnDriveSynthia) btnDriveSynthia.href = unmask('driveSynthia');
+                    sideConsole.style.borderLeft = "1px solid rgba(0, 212, 255, 0.4)";
+                    document.body.classList.add('panel-open');
+                    sideConsole.scrollTop = 0;
+                }
+            });
+        }
+
+        if (closeBtn) closeBtn.addEventListener('click', () => document.body.classList.remove('panel-open'));
+        if (overlay) overlay.addEventListener('click', () => document.body.classList.remove('panel-open'));
+        
+        const searchBar = document.getElementById('searchBar');
+        if (searchBar) searchBar.addEventListener('input', renderGrid);
+    </script>
+</body>
+</html>
