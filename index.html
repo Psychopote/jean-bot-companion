@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JEAN-BOT pour Star Citizen</title>
 	
-    
-	<link type="image/png" rel="icon" href="favicon.png">
+    <link type="image/png" rel="icon" href="favicon.png">
     <link rel="manifest" href="manifest.json">
 	<link rel="preload" as="image" href="jean-bot.jpg">
 	
@@ -404,6 +402,7 @@
         }
 
         .video-container {
+            position: relative;
             width: 100%;
             max-width: 340px;
             aspect-ratio: 9 / 16;
@@ -415,10 +414,13 @@
             border: 4px solid #1e293b;
         }
 
-        .video-container video {
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            pointer-events: none;
         }
         
         .panel-overlay {
@@ -838,9 +840,16 @@
             </div>
         </div>
 
+        <!-- ANCIEN INTÉGRATEUR REMPLACÉ PAR LE SHORT YOUTUBE (0 Mo SUR LE FTP) -->
         <div class="video-wrapper">
             <div class="video-container">
-                <video src="video-joffre.mp4" controls autoplay loop muted playsinline preload="metadata"></video>
+                <iframe 
+                    src="https://www.youtube.com/embed/xjFwtea3g0E?autoplay=1&mute=1&loop=1&playlist=xjFwtea3g0E&controls=0&modestbranding=1&rel=0" 
+                    title="Jean-Bot par Joffré"
+                    frameborder="0" 
+                    allow="autoplay; encrypted-media" 
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
 
