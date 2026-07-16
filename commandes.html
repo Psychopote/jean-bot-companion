@@ -187,11 +187,102 @@
         </div>
     </div>
 
+    <template id="tmpl-jeanbot">
+        <h3 class="console-title">PACKS JEAN-BOT</h3>
+        <p class="console-subtitle">(sans abonnement)</p>
+        
+        <div class="console-cards">
+            <div class="c-card c-card-demo">
+                <span class="c-badge cb-free">Gratuit</span>
+                <h4><u>Pack DEMO</u> : 100% GRATUIT</h4>
+                <div class="c-list c-list-unstyled">
+                    <p class="mb-10">🔹 Découvrez les commandes de base pour un test immédiat de Jean-Bot.</p>
+                    <p class="mb-10">🔹 Installation rapide en moins d'une minute.</p>
+                    <p>🔹 Toutes les instructions vous sont fournies dans un seul dossier.</p>
+                </div>
+                <a id="btn-drive-demo" href="#" target="_blank" class="c-btn-demo">Télécharger le Pack DEMO</a>
+            </div>
+
+            <div class="c-card c-card-premium">
+                <span class="c-badge cb-premium">Recommandé</span>
+                <h4><u>Pack PREMIUM</u> : 30€</h4>
+                <p class="c-promo-text">PROMO à 20€ chaque début de mois<br>(stock limité à 10 ex. en bas de page)</p>
+                <ul class="c-list">
+                    <li><strong>Achat unique :</strong> Aucun abonnement mensuel</li>
+                    <li><strong>Pack FR complet :</strong> ~500 commandes vocales</li>
+                    <li><strong>Mises à jour gratuites</strong> (nouveaux vaisseaux, planètes...)</li>
+                    <li><strong>Voix supplémentaires</strong> (prochainement)</li>
+                    <li><strong>Salon Discord réservé aux Tipeurs</strong></li>
+                </ul>
+                <a id="btn-tipeee-premium" href="#" target="_blank" class="c-btn-premium">OBTENIR JEAN-BOT PREMIUM</a>
+                <a href="https://store.steampowered.com/app/3046550/VoiceAttack_v2/" target="_blank" class="c-link-steam">Obtenir VoiceAttack sur STEAM</a>
+            </div>
+        </div>
+    </template>
+
+    <template id="tmpl-cyber">
+        <h3 class="console-title">NOS AUTRES PACKS</h3>
+        <p class="console-subtitle cyber mb-10">DEMOS GRATUITS</p>
+        <div class="h-15"></div>
+        
+        <div class="console-cards">
+            <div class="c-card c-card-virgil" id="cardVirgil">
+                <div class="c-card-layout">
+                    <div class="c-card-info">
+                        <span class="c-badge cb-virgil">VIRGIL DEMO</span>
+                        <h4><u>ASSISTANT MILITAIRE VIRGIL</u></h4>
+                        <div class="c-card-desc">
+                            Assistant Militaire précis, discipliné et efficace.
+                        </div>
+                    </div>
+                    <div class="c-card-media">
+                        <img id="img-virgil" src="" alt="Mascotte Virgil" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <a id="btn-drive-virgil" href="#" target="_blank" class="c-btn-virgil">TÉLÉCHARGER LA DEMO DE VIRGIL</a>
+            </div>
+
+            <div class="c-card c-card-synthia" id="cardSynthia">
+                <div class="c-card-layout">
+                    <div class="c-card-info">
+                        <span class="c-badge cb-synthia">SYNTHIA DEMO</span>
+                        <h4><u>ASSISTANTE SYNTHÉTIQUE SYNTHIA</u></h4>
+                        <div class="c-card-desc">
+                            Assistante synthétique élégante, claire et réactive.
+                        </div>
+                    </div>
+                    <div class="c-card-media">
+                        <img id="img-synthia" src="" alt="Mascotte Synthia" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <a id="btn-drive-synthia" href="#" target="_blank" class="c-btn-synthia">TÉLÉCHARGER LA DEMO DE SYNTHIA</a>
+            </div>
+        </div>
+    </template>
+
     <footer class="border-t border-gray-900 bg-gray-950 text-center py-4 text-xs text-gray-500 font-hud tracking-wider font-semibold">
         <p>&copy; 2026 Jean-Bot Premium</p>
     </footer>
 
     <script>
+        // ==============================================================================
+        // COFFRE-FORT NUMÉRIQUE : TOUTES LES ENDPOINTS ET URLS SONT SÉCURISÉES ICI
+        // (Chiffrement Base64 pour ne laisser aucune adresse en clair dans le HTML source)
+        // ==============================================================================
+        const COFFRE_FORT = {
+            jsonJeanbot: "Li9jb21tYW5kZXMtamVhbi1ib3QuanNvbg==",
+            jsonSynthia: "Li9jb21tYW5kZXMtc3ludGhpYS5qc29u",
+            jsonVirgil: "Li9jb21tYW5kZXMtdmlyZ2lsLmpzb24=",
+            driveDemo: "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWtBWGpQUnNMTFlVcXVhczl5MlgyV3hrclJKMk9DSEJpP3VzcD1zaGFyaW5n",
+            tipeeePremium: "aHR0cHM6Ly9mci50aXBlZWUuY29tL2pvZmZyZQ==",
+            virgilPng: "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1BzeWNob3BvdGUvamVhbi1ib3QtY29tcGFuaW9uL21haW4vVklSR0lMLnBuZw==",
+            driveVirgil: "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMU1RZWg4ZzhpQkF3ZUZFcEtTYlo5NUVxQVlnRWFibmhfP3VzcD1kcml2ZV9saW5r",
+            synthiaPng: "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1BzeWNob3BvdGUvamVhbi1ib3QtY29tcGFuaW9uL21haW4vU1lOVEhJQS5wbmc=",
+            driveSynthia: "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMTh5SGQ1d0Q1bXgyWkpneWRrSGdQN290aXpObTV0YU14P3VzcD1kcml2ZV9saW5r"
+        };
+
+        const unmask = (key) => window.atob(COFFRE_FORT[key]);
+
         // RECEPTACLE DES BASES DE DONNÉES DE CHAQUE COPILOTE
         let allCommands = {
             'Jean-Bot': [],
@@ -208,12 +299,12 @@
 
         const inactiveBtnStyle = 'border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700';
 
-        // LIAISON ET CHARGEMENT SIMULTANÉ DES 3 FICHIERS JSON DISTINCTS
+        // LIAISON ET CHARGEMENT SIMULTANÉ DES 3 FICHIERS JSON DISTINCTS CHIFBRÉS
         document.addEventListener('DOMContentLoaded', () => {
             const files = [
-                { ia: 'Jean-Bot', url: './commandes-jean-bot.json' },
-                { ia: 'Synthia', url: './commandes-synthia.json' },
-                { ia: 'Virgil', url: './commandes-virgil.json' }
+                { ia: 'Jean-Bot', url: unmask('jsonJeanbot') },
+                { ia: 'Synthia', url: unmask('jsonSynthia') },
+                { ia: 'Virgil', url: unmask('jsonVirgil') }
             ];
 
             Promise.all(files.map(file => 
@@ -489,6 +580,41 @@
             renderGrid();
         }
 
+        // Événements d'affichage des volets latéraux
+        const closeBtn = document.getElementById('closeConsoleBtn');
+        const overlay = document.getElementById('consoleOverlay');
+        const sideConsole = document.getElementById('sideConsole');
+        const consoleContent = document.getElementById('consoleContent');
+        const tmplJeanbot = document.getElementById('tmpl-jeanbot');
+        const tmplCyber = document.getElementById('tmpl-cyber');
+
+        function injectTemplate(templateElement) {
+            const clone = templateElement.content.cloneNode(true);
+            consoleContent.replaceChildren(clone);
+        }
+
+        document.getElementById('openConsoleBtn').addEventListener('click', () => {
+            injectTemplate(tmplJeanbot);
+            document.getElementById('btn-drive-demo').href = unmask('driveDemo');
+            document.getElementById('btn-tipeee-premium').href = unmask('tipeeePremium');
+            sideConsole.style.borderLeft = "1px solid rgba(255, 62, 62, 0.3)";
+            document.body.classList.add('panel-open');
+            sideConsole.scrollTop = 0;
+        });
+
+        document.getElementById('openDemosBtn').addEventListener('click', () => {
+            injectTemplate(tmplCyber);
+            document.getElementById('img-virgil').src = unmask('virgilPng');
+            document.getElementById('btn-drive-virgil').href = unmask('driveVirgil');
+            document.getElementById('img-synthia').src = unmask('synthiaPng');
+            document.getElementById('btn-drive-synthia').href = unmask('driveSynthia');
+            sideConsole.style.borderLeft = "1px solid rgba(0, 212, 255, 0.4)";
+            document.body.classList.add('panel-open');
+            sideConsole.scrollTop = 0;
+        });
+
+        closeBtn.addEventListener('click', () => document.body.classList.remove('panel-open'));
+        overlay.addEventListener('click', () => document.body.classList.remove('panel-open'));
         document.getElementById('searchBar').addEventListener('input', renderGrid);
     </script>
 </body>
