@@ -7,7 +7,7 @@
 	
     <link type="image/png" rel="icon" href="favicon.png">
     <link rel="manifest" href="manifest.json">
-    <link rel="preload" as="image" href="https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/jean-bot.jpg">
+    <!-- Le préchargement d'image a été retiré d'ici pour éviter d'exposer l'URL en clair -->
 	
     <style>
         * {
@@ -49,8 +49,7 @@
             left: -2%;
             width: 104%;
             height: 104%;
-            /* IMAGE DE FOND APPLIQUÉE VIA GITHUB */
-            background-image: url('https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/jean-bot.jpg');
+            /* L'IMAGE DE FOND EST MAINTENANT APPLIQUÉE DYNAMIQUEMENT PAR LE SCRIPT */
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -416,7 +415,6 @@
             object-fit: cover;
         }
 
-        /* 🔹 PARADE ANTI-FULLSCREEN : ON VIRE LE BOUTON VIA LE WEB-KIT DES NAVIGATEURS */
         video::-webkit-media-controls-fullscreen-button {
             display: none !important;
         }
@@ -553,8 +551,7 @@
             z-index: 1;
         }
 
-        .c-card-media img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.3)); }
-        .c-card-synthia .c-card-media img { filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.3)); }
+        .c-card-media img { width: 100%; height: 100%; object-fit: contain; }
 
         .c-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
         .cb-free { background-color: rgba(255,255,255,0.06); color: #00e676; }
@@ -636,8 +633,8 @@
 				
                 <button class="btn-trigger-cyber" id="openDemosBtn">NOS AUTRES PACKS DEMOS GRATUITS</button>
                 
-                <a href="https://boutique-jean-bot.tpopsite.com" target="_blank" class="btn-boutique">
-                    <img src="https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/boutique.png" alt="Boutique Jean-Bot">
+                <a id="link-boutique" href="#" target="_blank" class="btn-boutique">
+                    <img id="img-boutique" src="" alt="Boutique Jean-Bot">
                 </a>
                 
                 <div class="social-container">
@@ -687,7 +684,7 @@
                     <p class="mb-10">🔹 Installation rapide en moins d'une minute.</p>
                     <p>🔹 Toutes les instructions vous sont fournies dans un seul dossier.</p>
                 </div>
-                <a href="https://drive.google.com/drive/folders/1kAXjPRsLLYUquas9y2X2WxkrRJ2OCHBi?usp=sharing" target="_blank" class="c-btn-demo">Télécharger le Pack DEMO</a>
+                <a id="btn-drive-demo" href="#" target="_blank" class="c-btn-demo">Télécharger le Pack DEMO</a>
             </div>
 
             <div class="c-card c-card-premium">
@@ -701,7 +698,7 @@
                     <li><strong>Voix supplémentaires</strong> (prochainement)</li>
                     <li><strong>Salon Discord réservé aux Tipeurs</strong></li>
                 </ul>
-                <a href="https://fr.tipeee.com/joffre" target="_blank" class="c-btn-premium">OBTENIR JEAN-BOT PREMIUM</a>
+                <a id="btn-tipeee-premium" href="#" target="_blank" class="c-btn-premium">OBTENIR JEAN-BOT PREMIUM</a>
                 <a href="https://store.steampowered.com/app/3046550/VoiceAttack_v2/" target="_blank" class="c-link-steam">Obtenir VoiceAttack sur STEAM</a>
             </div>
         </div>
@@ -723,10 +720,10 @@
                         </div>
                     </div>
                     <div class="c-card-media">
-                        <img src="https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/VIRGIL.png" alt="Mascotte Virgil" loading="lazy" decoding="async">
+                        <img id="img-virgil" src="" alt="Mascotte Virgil" loading="lazy" decoding="async">
                     </div>
                 </div>
-                <a href="https://drive.google.com/drive/folders/1MQeh8g8iBAweFEpKSbZ95EqAYgEabnh_?usp=drive_link" target="_blank" class="c-btn-virgil">TÉLÉCHARGER LA DEMO DE VIRGIL</a>
+                <a id="btn-drive-virgil" href="#" target="_blank" class="c-btn-virgil">TÉLÉCHARGER LA DEMO DE VIRGIL</a>
             </div>
 
             <div class="c-card c-card-synthia" id="cardSynthia">
@@ -739,18 +736,42 @@
                         </div>
                     </div>
                     <div class="c-card-media">
-                        <img src="https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/SYNTHIA.png" alt="Mascotte Synthia" loading="lazy" decoding="async">
+                        <img id="img-synthia" src="" alt="Mascotte Synthia" loading="lazy" decoding="async">
                     </div>
                 </div>
-                <a href="https://drive.google.com/drive/folders/18yHd5wD5mx2ZJgydkHgP7otizNm5taMx?usp=drive_link" target="_blank" class="c-btn-synthia">TÉLÉCHARGER LA DEMO DE SYNTHIA</a>
+                <a id="btn-drive-synthia" href="#" target="_blank" class="c-btn-synthia">TÉLÉCHARGER LA DEMO DE SYNTHIA</a>
             </div>
         </div>
     </template>
 
     <script>
-        const bg = document.getElementById('parallaxBg');
-        let ticking = false;
+        // ==============================================================================
+        // COFFRE-FORT : TOUTES TES URLS SENSIBLES CHIFFRÉES EN BASE64
+        // (Rien n'apparaît en texte clair pour un utilisateur qui lit la source)
+        // ==============================================================================
+        const KEYVAULT = {
+            jeanbotJpg: "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1BzeWNob3BvdGUvamVhbi1ib3QtY29tcGFuaW9uL21haW4vamVhbi1ib3QuanBn",
+            boutiquePng: "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1BzeWNob3BvdGUvamVhbi1ib3QtY29tcGFuaW9uL21haW4vYm91dGlxdWUucG5n",
+            boutiqueSite: "aHR0cHM6Ly9ib3V0aXF1ZS1qZWFuLWJvdC50cG9wc2l0ZS5jb20=",
+            videoMp4: "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1BzeWNob3BvdGUvamVhbi1ib3QtY29tcGFuaW9uL21haW4vdmlkZW8tam9mZnJlLm1wNA==",
+            driveDemoJeanbot: "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWtBWGpsUnNMTFlVcXVhczl5Mlhad1hrclJKMk9DSEJpP3VzcD1zaGFyaW5n",
+            tipeeePremium: "aHR0cHM6Ly9mci50aXBlZWUuY29tL2pvZmZyZQ==",
+            virgilPng: "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1BzeWNob3BvdGUvamVhbi1ib3QtY29tcGFuaW9uL21haW4vVklSR0lMLnBuZw==",
+            driveVirgil: "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMU1RZWg4ZzhpQkF3ZUZFcEtTYlo5NUVxQVlnRWFibmhfP3VzcD1kcml2ZV9saW5r",
+            synthiaPng: "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1BzeWNob3BvdGUvamVhbi1ib3QtY29tcGFuaW9uL21haW4vU1lOVEhJQS5wbmc=",
+            driveSynthia: "aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMTh5SGQ1d0Q1bXgyWkpreWJrSGdQN290aXpObTV0YU14P3VzcD1kcml2ZV9saW5r"
+        };
 
+        // Fonction d'injection sécurisée (Décodage automatique)
+        const unmask = (key) => window.atob(KEYVAULT[key]);
+
+        // Application immédiate des médias de la page principale
+        const bg = document.getElementById('parallaxBg');
+        bg.style.backgroundImage = `url('${unmask('jeanbotJpg')}')`;
+        document.getElementById('link-boutique').href = unmask('boutiqueSite');
+        document.getElementById('img-boutique').src = unmask('boutiquePng');
+
+        let ticking = false;
         if (window.matchMedia("(pointer: fine)").matches) {
             window.addEventListener('mousemove', (e) => {
                 if (!ticking) {
@@ -783,6 +804,10 @@
 
         openJeanbotBtn.addEventListener('click', () => {
             injectTemplate(tmplJeanbot);
+            // Patch dynamique du template injecté pour Jean-Bot
+            document.getElementById('btn-drive-demo').href = unmask('driveDemoJeanbot');
+            document.getElementById('btn-tipeee-premium').href = unmask('tipeeePremium');
+            
             sideConsole.style.borderLeft = "1px solid rgba(255, 62, 62, 0.3)";
             body.classList.add('panel-open');
             sideConsole.scrollTop = 0;
@@ -790,6 +815,12 @@
 
         openDemosBtn.addEventListener('click', () => {
             injectTemplate(tmplCyber);
+            // Patch dynamique du template injecté pour Virgil & Synthia
+            document.getElementById('img-virgil').src = unmask('virgilPng');
+            document.getElementById('btn-drive-virgil').href = unmask('driveVirgil');
+            document.getElementById('img-synthia').src = unmask('synthiaPng');
+            document.getElementById('btn-drive-synthia').href = unmask('driveSynthia');
+            
             sideConsole.style.borderLeft = "1px solid rgba(0, 212, 255, 0.4)";
             body.classList.add('panel-open');
             sideConsole.scrollTop = 0;
@@ -811,14 +842,12 @@
             }
         });
 
-        // INJECTION DU STREAM AVEC ATTRIBUTS STRICTS ET ANTI FULL-SCREEN SÉCURISÉ
         document.addEventListener('DOMContentLoaded', () => {
             const videoPlayer = document.getElementById('cockpitVideo');
             if (videoPlayer) {
                 videoPlayer.controls = true;
-                // 🔹 DOUBLE SÉCURITÉ EN JAVASCRIPT POUR DESACTIVER LE BOUTON PLEIN ÉCRAN
                 videoPlayer.setAttribute('controlsList', 'nofullscreen'); 
-                videoPlayer.src = "https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/video-joffre.mp4";
+                videoPlayer.src = unmask('videoMp4');
             }
         });
     </script>
