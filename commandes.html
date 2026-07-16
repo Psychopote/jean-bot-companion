@@ -296,21 +296,19 @@
 
         const inactiveBtnStyle = 'border-gray-800 bg-gray-950 text-gray-400 hover:text-white hover:border-gray-700';
 
-        // 🔹 FONCTION DE COMPTAGE DYNAMIQUE PAR VARIANTES DE "TXT" (Option A et Option B supportées)
+        // 🔹 FONCTION DE COMPTAGE DYNAMIQUE CORRIGÉE : Plus de typo sur "liste"
         function compterCommandes(liste) {
             let total = 0;
             if (!Array.isArray(liste)) return 0;
 
-            for (const cmd of list) {
+            for (const cmd of liste) {
                 if (!cmd) continue;
 
-                // Option B : Si un champ "count" explicite est présent dans le JSON, on l'applique
                 if (typeof cmd.count === 'number') {
                     total += cmd.count;
                     continue;
                 }
 
-                // Option A : Sinon, comptage classique par découpage du caractère "/"
                 const texte = (cmd.txt || "").trim();
                 if (!texte) {
                     total++;
@@ -327,7 +325,7 @@
             return total;
         }
 
-        // 🔹 MISE À JOUR MULTI-PERSONNAGES DU COMPTEUR DE COCKPIT
+        // 🔹 MISE À JOUR MULTI-PERSONNAGES DU COMPTEUR
         function mettreAJourCompteur() {
             let total = 0;
 
