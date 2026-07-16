@@ -29,7 +29,6 @@
             overflow-x: hidden;
         }
 
-        /* Classes utilitaires pour remplacer les styles inline */
         .mb-10 { margin-bottom: 10px; }
         .h-15 { height: 15px; }
 
@@ -117,7 +116,6 @@
             justify-content: center;
         }
 
-        /* Texte tout en haut */
         .top-lead {
             font-size: 0.95rem;
             text-transform: uppercase;
@@ -128,7 +126,6 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        /* Bouton Ovale - Rouge pétant vers Rouge cendre */
         .badge {
             display: inline-block;
             background: linear-gradient(90deg, #ff003c 0%, #3f161e 100%); 
@@ -290,7 +287,6 @@
             border-color: rgba(255, 255, 255, 0.5);
         }
 
-        /* Ligne de démarcation proportionnée */
         .divider {
             width: 100%;
             max-width: 420px;
@@ -413,6 +409,7 @@
             border: 4px solid #1e293b;
         }
 
+        /* L'ATTRIBUT SRC EST VOLONTAIREMENT VIDE POUR LE CAMOUFLAGE */
         .video-container video {
             width: 100%;
             height: 100%;
@@ -432,9 +429,10 @@
             transition: opacity 0.4s ease, visibility 0.4s ease;
         }
 
-        body.panel-open .panel-overlay {
-            opacity: 1;
-            visibility: visible;
+        body.panel-open .container {
+            transform: scale(0.95) translateX(-80px);
+            filter: blur(4px) brightness(0.4);
+            pointer-events: none;
         }
 
         .side-console {
@@ -531,39 +529,13 @@
             overflow: hidden;
         }
 
-        .c-card-demo {
-            border-left: 3px solid #334155;
-        }
+        .c-card-demo { border-left: 3px solid #334155; }
+        .c-card-premium { border-left: 3px solid #ff3e3e; background: rgba(255, 62, 62, 0.01); box-shadow: 0 4px 20px rgba(255, 62, 62, 0.05); }
+        .c-card-virgil { border-left: 3px solid #0055ff; background: rgba(0, 85, 255, 0.01); box-shadow: 0 4px 20px rgba(0, 85, 255, 0.05); }
+        .c-card-synthia { border-left: 3px solid #a855f7; background: rgba(168, 85, 247, 0.01); box-shadow: 0 4px 20px rgba(168, 85, 247, 0.05); }
 
-        .c-card-premium {
-            border-left: 3px solid #ff3e3e;
-            background: rgba(255, 62, 62, 0.01);
-            box-shadow: 0 4px 20px rgba(255, 62, 62, 0.05);
-        }
-
-        .c-card-virgil {
-            border-left: 3px solid #0055ff;
-            background: rgba(0, 85, 255, 0.01);
-            box-shadow: 0 4px 20px rgba(0, 85, 255, 0.05);
-        }
-
-        .c-card-synthia {
-            border-left: 3px solid #a855f7;
-            background: rgba(168, 85, 247, 0.01);
-            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.05);
-        }
-
-        .c-card-layout {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .c-card-info {
-            flex: 1;
-            z-index: 2;
-        }
+        .c-card-layout { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+        .c-card-info { flex: 1; z-index: 2; }
 
         .c-card-media {
             width: 110px;
@@ -576,195 +548,48 @@
             z-index: 1;
         }
 
-        .c-card-media img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.3));
-        }
+        .c-card-media img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.3)); }
+        .c-card-synthia .c-card-media img { filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.3)); }
 
-        .c-card-synthia .c-card-media img {
-            filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.3));
-        }
-
-        .c-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
-
+        .c-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
         .cb-free { background-color: rgba(255,255,255,0.06); color: #00e676; }
         .cb-premium { background-color: rgba(255, 62, 62, 0.15); color: #ff3e3e; }
         .cb-virgil { background-color: rgba(0, 85, 255, 0.15); color: #3377ff; }
         .cb-synthia { background-color: rgba(168, 85, 247, 0.15); color: #c084fc; }
 
-        .c-card h4 {
-            font-size: 1.15rem;
-            color: #fff;
-            margin-bottom: 12px;
-            line-height: 1.3;
-        }
+        .c-card h4 { font-size: 1.15rem; color: #fff; margin-bottom: 12px; line-height: 1.3; }
+        .c-card h4 u { text-decoration: underline; text-underline-offset: 4px; }
+        .c-promo-text { color: #00e676; font-size: 12px; font-weight: bold; margin-bottom: 15px; line-height: 1.4; }
 
-        .c-card h4 u {
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
-
-        .c-promo-text {
-            color: #00e676;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-
-        .c-list {
-            color: #94a3b8;
-            font-size: 13px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            padding-left: 18px;
-        }
-
-        .c-list-unstyled {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .c-card-desc {
-            color: #cbd5e1;
-            font-size: 13px;
-            line-height: 1.5;
-            margin-bottom: 4px;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-        }
+        .c-list { color: #94a3b8; font-size: 13px; line-height: 1.6; margin-bottom: 20px; padding-left: 18px; }
+        .c-list-unstyled { list-style: none; padding-left: 0; }
+        .c-card-desc { color: #cbd5e1; font-size: 13px; line-height: 1.5; margin-bottom: 4px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
 
         .c-btn-demo {
-            display: block;
-            background: #00e676;
-            color: #000000;
-            text-align: center;
-            padding: 14px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 15px rgba(0, 230, 118, 0.3);
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            display: block; background: #00e676; color: #000000; text-align: center; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 4px 15px rgba(0, 230, 118, 0.3); transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .c-btn-demo:hover {
-            background: #00ff81;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 230, 118, 0.5);
-        }
+        .c-btn-demo:hover { background: #00ff81; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 230, 118, 0.5); }
 
         .c-btn-virgil {
-            display: block;
-            background: #0055ff;
-            color: #ffffff;
-            text-align: center;
-            padding: 14px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 15px rgba(0, 85, 255, 0.3);
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 15px;
+            display: block; background: #0055ff; color: #ffffff; text-align: center; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 4px 15px rgba(0, 85, 255, 0.3); transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; margin-top: 15px;
         }
-
-        .c-btn-virgil:hover {
-            background: #3377ff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 85, 255, 0.5);
-        }
+        .c-btn-virgil:hover { background: #3377ff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 85, 255, 0.5); }
 
         .c-btn-synthia {
-            display: block;
-            background: #a855f7;
-            color: #ffffff;
-            text-align: center;
-            padding: 14px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 15px;
+            display: block; background: #a855f7; color: #ffffff; text-align: center; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; margin-top: 15px;
         }
-
-        .c-btn-synthia:hover {
-            background: #b566ff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
-        }
+        .c-btn-synthia:hover { background: #b566ff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5); }
 
         .c-btn-premium {
-            display: block;
-            padding: 14px 28px;
-            background: #ff3e3e;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 800;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 20px rgba(255, 62, 62, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-            text-transform: uppercase;
-            font-size: 1.15rem;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            width: 100%;
-            text-align: center;
+            display: block; padding: 14px 28px; background: #ff3e3e; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 4px 20px rgba(255, 62, 62, 0.4); transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; text-transform: uppercase; font-size: 1.15rem; letter-spacing: 0.5px; cursor: pointer; width: 100%; text-align: center;
         }
+        .c-btn-premium:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(255, 62, 62, 0.7); background: #ff5252; border-color: rgba(255, 255, 255, 0.4); }
 
-        .c-btn-premium:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(255, 62, 62, 0.7);
-            background: #ff5252;
-            border-color: rgba(255, 255, 255, 0.4);
-        }
+        .c-grid-container { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        @media (min-width: 480px) { .c-grid-container { grid-template-columns: 1fr 1fr; } }
 
-        .c-grid-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        @media (min-width: 480px) {
-            .c-grid-container {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .c-link-steam {
-            display: block;
-            text-align: center;
-            color: #64748b;
-            text-decoration: underline;
-            font-size: 11px;
-            margin-top: 12px;
-        }
-
-        .c-link-steam:hover {
-            color: #94a3b8;
-        }
+        .c-link-steam { display: block; text-align: center; color: #64748b; text-decoration: underline; font-size: 11px; margin-top: 12px; }
+        .c-link-steam:hover { color: #94a3b8; }
     </style>
 </head>
 <body>
@@ -836,10 +661,10 @@
             </div>
         </div>
 
-        <!-- LECTEUR FLUIDE ET IMPECCABLE DE TON FLUX GOOGLE DRIVE VIA LIEN SHORTURL -->
+        <!-- BALISE VIDEO INITIALISEE SANS ATTRIBUT SRC POUR LE COUVERT SÉCURITÉ -->
         <div class="video-wrapper">
             <div class="video-container">
-                <video src="https://shorturl.at/TQRWE" autoplay loop muted playsinline preload="metadata"></video>
+                <video id="cockpitVideo" autoplay loop muted playsinline preload="metadata"></video>
             </div>
         </div>
 
@@ -979,6 +804,15 @@
         document.addEventListener('click', (e) => {
             if (!vaDropdown.contains(e.target)) {
                 vaDropdown.classList.remove('active');
+            }
+        });
+
+        // INJECTION FURTIVE DIRECTE DEPUIS LES SERVEURS SECURISES DE GITHUB
+        document.addEventListener('DOMContentLoaded', () => {
+            const videoPlayer = document.getElementById('cockpitVideo');
+            if (videoPlayer) {
+                // Lien brut direct pointant sur la branche principale (main) de ton dépôt
+                videoPlayer.src = "https://raw.githubusercontent.com/Psychopote/jean-bot-companion/main/video-joffre.mp4";
             }
         });
     </script>
