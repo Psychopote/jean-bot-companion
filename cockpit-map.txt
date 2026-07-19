@@ -1,0 +1,31 @@
+JEAN-BOT COCKPIT SVG — INTEGRATION MAP
+ViewBox: 0 0 1576 998
+
+Named slots:
+- slot-top-header
+- slot-top-center
+- slot-mfd-left
+- slot-main-viewport
+- slot-mfd-right
+- slot-module-premium
+- slot-module-virgil
+- slot-module-synthia
+- slot-left-console
+- slot-comms
+- slot-status-1
+- slot-status-2
+- slot-status-3
+- slot-status-4
+- slot-bottom-center
+- slot-bottom-right
+
+The SVG is responsive via viewBox + width/height 100%.
+All slots are transparent and have stable IDs for JS/CSS targeting.
+To inspect the placement zones, change:
+  #jb-debug-zones { display:none; }
+to:
+  #jb-debug-zones { display:inline; }
+
+Recommended web integration:
+Use the SVG as the fixed visual chassis and position HTML/PHP overlays in a wrapper
+using percentages derived from the same 1576x998 coordinate system.
