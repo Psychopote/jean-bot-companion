@@ -1,9 +1,17 @@
 <?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
- "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="1576.000000pt" height="998.000000pt" viewBox="0 0 1576.000000 998.000000"
- preserveAspectRatio="xMidYMid meet">
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 1576 998"
+     width="100%" height="100%"
+     preserveAspectRatio="xMidYMid meet"
+     role="img" aria-label="Jean-Bot cockpit skeleton">
+  <title>Jean-Bot Cockpit Skeleton</title>
+  <desc>Châssis graphique vectoriel avec zones nommées pour incrustation HTML, vidéo et modules.</desc>
+  <style>
+    .jb-slot { fill: transparent; pointer-events: all; }
+    .jb-slot-debug { fill: #00d9ff; fill-opacity: .10; stroke: #00d9ff; stroke-width: 2; vector-effect: non-scaling-stroke; }
+    #jb-debug-zones { display:none; }
+  </style>
 
 <g transform="translate(0.000000,998.000000) scale(0.100000,-0.100000)"
 fill="#000000" stroke="none">
@@ -282,4 +290,54 @@ c-26 0 -50 6 -53 11 -10 16 -160 13 -174 -4z"/>
 -8 -4 -11 -10z"/>
 <path d="M2965 1200 c4 -6 11 -8 16 -5 14 9 11 15 -7 15 -8 0 -12 -5 -9 -10z"/>
 </g>
+
+<!-- ============================================================
+     JEAN-BOT INTEGRATION MAP
+     Toutes les coordonnées utilisent le viewBox 1576 x 998.
+     Ces zones transparentes servent de repères/targets.
+     Activez #jb-debug-zones en CSS pour visualiser les emplacements.
+     ============================================================ -->
+<g id="jb-integration-zones">
+  <rect id="slot-top-header" class="jb-slot" x="18" y="14" width="1540" height="72" rx="8"/>
+  <rect id="slot-top-center" class="jb-slot" x="420" y="17" width="710" height="66" rx="10"/>
+
+  <rect id="slot-mfd-left" class="jb-slot" x="37" y="105" width="347" height="518" rx="4"/>
+  <rect id="slot-main-viewport" class="jb-slot" x="408" y="103" width="715" height="510" rx="4"/>
+  <rect id="slot-mfd-right" class="jb-slot" x="1160" y="105" width="344" height="518" rx="4"/>
+
+  <rect id="slot-module-premium" class="jb-slot" x="397" y="646" width="241" height="165" rx="3"/>
+  <rect id="slot-module-virgil" class="jb-slot" x="648" y="646" width="241" height="165" rx="3"/>
+  <rect id="slot-module-synthia" class="jb-slot" x="899" y="646" width="241" height="165" rx="3"/>
+
+  <rect id="slot-left-console" class="jb-slot" x="40" y="666" width="335" height="180" rx="5"/>
+  <rect id="slot-comms" class="jb-slot" x="1190" y="668" width="303" height="174" rx="5"/>
+
+  <rect id="slot-status-1" class="jb-slot" x="375" y="846" width="172" height="61" rx="3"/>
+  <rect id="slot-status-2" class="jb-slot" x="555" y="846" width="172" height="61" rx="3"/>
+  <rect id="slot-status-3" class="jb-slot" x="735" y="846" width="172" height="61" rx="3"/>
+  <rect id="slot-status-4" class="jb-slot" x="915" y="846" width="172" height="61" rx="3"/>
+  <rect id="slot-bottom-center" class="jb-slot" x="594" y="922" width="385" height="42" rx="8"/>
+  <rect id="slot-bottom-right" class="jb-slot" x="1320" y="858" width="224" height="118" rx="3"/>
+</g>
+
+<!-- Couche de contrôle visuel : mettre display:inline sur #jb-debug-zones -->
+<g id="jb-debug-zones" pointer-events="none">
+  <use href="#slot-top-header" class="jb-slot-debug"/>
+  <use href="#slot-top-center" class="jb-slot-debug"/>
+  <use href="#slot-mfd-left" class="jb-slot-debug"/>
+  <use href="#slot-main-viewport" class="jb-slot-debug"/>
+  <use href="#slot-mfd-right" class="jb-slot-debug"/>
+  <use href="#slot-module-premium" class="jb-slot-debug"/>
+  <use href="#slot-module-virgil" class="jb-slot-debug"/>
+  <use href="#slot-module-synthia" class="jb-slot-debug"/>
+  <use href="#slot-left-console" class="jb-slot-debug"/>
+  <use href="#slot-comms" class="jb-slot-debug"/>
+  <use href="#slot-status-1" class="jb-slot-debug"/>
+  <use href="#slot-status-2" class="jb-slot-debug"/>
+  <use href="#slot-status-3" class="jb-slot-debug"/>
+  <use href="#slot-status-4" class="jb-slot-debug"/>
+  <use href="#slot-bottom-center" class="jb-slot-debug"/>
+  <use href="#slot-bottom-right" class="jb-slot-debug"/>
+</g>
+
 </svg>
